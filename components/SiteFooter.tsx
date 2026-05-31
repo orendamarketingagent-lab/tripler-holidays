@@ -19,6 +19,8 @@ const navItems = [
 ];
 
 export default function SiteFooter() {
+  const imageBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
   return (
     <footer className="w-full border-t border-white/10 bg-footer-dark text-white shadow-2xl backdrop-blur-md">
       <div className="mx-auto max-w-7xl px-6 py-6 sm:px-8 sm:py-8">
@@ -30,7 +32,7 @@ export default function SiteFooter() {
             className="rounded-lg p-1 transition-opacity hover:opacity-90"
           >
             <Image
-              src="/images/tripler-holidays-logo-trimmed.png"
+              src={`${imageBasePath}/images/tripler-holidays-logo-trimmed.png`}
               alt="Triple R Holidays"
               width={240}
               height={116}

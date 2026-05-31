@@ -42,6 +42,7 @@ export default function SiteHeader({
   ctaLabel = "Find a Tour",
   ctaHref = "/holiday-tours"
 }: SiteHeaderProps) {
+  const imageBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [mobileToursOpen, setMobileToursOpen] = useState(false);
@@ -143,7 +144,7 @@ export default function SiteHeader({
             onClick={() => setOpen(false)}
           >
             <Image
-              src="/images/tripler-holidays-logo-trimmed.png"
+              src={`${imageBasePath}/images/tripler-holidays-logo-trimmed.png`}
               alt="Triple R Holidays"
               width={220}
               height={69}
