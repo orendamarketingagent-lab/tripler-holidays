@@ -40,39 +40,35 @@ const heroStats = [
 
 const hotTours = [
   {
-    title: "Kuala Lumpur Skyline",
-    tag: "City + Shopping",
-    nights: "4N/5D",
-    price: "From $320",
-    image:
-      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1100&q=84",
+    title: "Sigiriya Rock Fortress",
+    tag: "Heritage",
+    nights: "UNESCO Site",
+    price: "Matale District",
+    image: "/images/home/sigiriya-4k.jpg",
     offsetY: "0px"
   },
   {
-    title: "Singapore Escape",
-    tag: "Family Favourite",
-    nights: "5N/6D",
-    price: "From $480",
-    image:
-      "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1100&q=84",
+    title: "Ella Nine Arches Bridge",
+    tag: "Scenic Highlands",
+    nights: "Train Viewpoint",
+    price: "Badulla District",
+    image: "/images/home/ella-nine-arches-4k.jpg",
     offsetY: "48px"
   },
   {
-    title: "Maldives Blue Horizon",
-    tag: "Honeymoon",
-    nights: "4N/5D",
-    price: "From $980",
-    image:
-      "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1100&q=84",
+    title: "Galle Fort Coastline",
+    tag: "Colonial + Coastal",
+    nights: "UNESCO Site",
+    price: "Southern Province",
+    image: "/images/home/galle-fort-coastline-4k.jpg",
     offsetY: "-24px"
   },
   {
-    title: "Thailand Night Pulse",
-    tag: "Beach + Nightlife",
-    nights: "6N/7D",
-    price: "From $390",
-    image:
-      "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1100&q=84",
+    title: "Yala National Park",
+    tag: "Wildlife Safari",
+    nights: "Leopard Habitat",
+    price: "South-East Sri Lanka",
+    image: "/images/wildlife/yala-wildlife-adventure-4k.jpg",
     offsetY: "32px"
   }
 ];
@@ -110,8 +106,7 @@ const sriLankaTours = [
     subtitle: "Top Attraction",
     duration: "Ideal visit: 3-4 hours",
     route: "Matale District, Central Province",
-    image:
-      "https://images.unsplash.com/photo-1586185018165-0e8d0b355b65?auto=format&fit=crop&w=900&q=82",
+    image: "/images/home/sigiriya-4k.jpg",
     tags: ["#UNESCO", "#History", "#Must Visit"],
     idealFor: "Culture lovers and first-time visitors",
     href: "/holiday-tours"
@@ -121,8 +116,7 @@ const sriLankaTours = [
     subtitle: "Top Attraction",
     duration: "Ideal visit: 2-3 hours",
     route: "Kandy, Central Province",
-    image:
-      "https://images.unsplash.com/photo-1625737043828-d53c10a8bfa7?auto=format&fit=crop&w=900&q=82",
+    image: "/images/attractions/temple-of-tooth-kandy.jpg",
     tags: ["#Sacred", "#Culture", "#UNESCO"],
     idealFor: "Spiritual and heritage experiences",
     href: "/holiday-tours"
@@ -132,8 +126,7 @@ const sriLankaTours = [
     subtitle: "Top Attraction",
     duration: "Ideal visit: Half day",
     route: "Ella, Badulla District",
-    image:
-      "https://images.unsplash.com/photo-1586613835297-1feee5ee5507?auto=format&fit=crop&w=900&q=82",
+    image: "/images/home/ella-nine-arches-4k.jpg",
     tags: ["#Scenic", "#Hiking", "#Train Ride"],
     idealFor: "Nature lovers and photographers",
     href: "/holiday-tours"
@@ -143,8 +136,7 @@ const sriLankaTours = [
     subtitle: "Top Attraction",
     duration: "Ideal visit: Full day safari",
     route: "Southern & Uva Provinces",
-    image:
-      "https://images.unsplash.com/photo-1615824996195-f780bba7cfab?auto=format&fit=crop&w=900&q=82",
+    image: "/images/wildlife/yala-wildlife-adventure-4k.jpg",
     tags: ["#Wildlife", "#Safari", "#Leopards"],
     idealFor: "Wildlife and adventure travelers",
     href: "/holiday-tours"
@@ -154,8 +146,7 @@ const sriLankaTours = [
     subtitle: "Top Attraction",
     duration: "Ideal visit: 2-4 hours",
     route: "Galle, Southern Province",
-    image:
-      "https://images.unsplash.com/photo-1580976098749-1e1b3e2a1e67?auto=format&fit=crop&w=900&q=82",
+    image: "/images/home/galle-fort-coastline-4k.jpg",
     tags: ["#Colonial", "#UNESCO", "#Coastal"],
     idealFor: "Couples and cultural explorers",
     href: "/holiday-tours"
@@ -327,16 +318,6 @@ export default function TriplerHolidayLanding() {
               }}
               className="mx-auto max-w-3xl"
             >
-              <motion.span
-                variants={{
-                  hidden: { opacity: 0, y: 16 },
-                  visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } }
-                }}
-                className="inline-flex w-fit items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-[#D98928] sm:px-4 sm:py-1.5 sm:text-[11px]"
-              >
-                Triple R Holidays
-              </motion.span>
-
               <motion.h1
                 variants={{
                   hidden: { opacity: 0, y: 28 },
@@ -356,7 +337,7 @@ export default function TriplerHolidayLanding() {
                 }}
                 className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-[#F5F1E8]/95 drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)] sm:text-base"
               >
-                Discover Sri Lanka through refined travel experiences.
+                Discover Sri Lanka & Beyond through refined travel experiences.
               </motion.p>
 
               <motion.div
@@ -411,10 +392,7 @@ export default function TriplerHolidayLanding() {
           </div>
         </section>
 
-        {/* 3. SRI LANKA TOUR PACKAGES SHOWCASE */}
-        <SriLankaShowcase />
-
-        {/* 4. HOT TOURS COLLAGE GRID WITH CURVED TRAIL */}
+        {/* 3. TOP ATTRACTION COLLAGE GRID WITH CURVED TRAIL */}
         <section className="relative px-4 py-20 sm:px-6 overflow-hidden">
           
           {/* Curve route line winding behind collage cards */}
@@ -433,14 +411,14 @@ export default function TriplerHolidayLanding() {
               <div>
                 <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D98928]">
                   <span className="h-px w-9 bg-[#D98928]" />
-                  Best selling
+                  Sri Lanka
                 </span>
                 <h2 className="font-space fluid-title mt-4 font-bold uppercase text-[#111820]">
-                  Hot <span className="inline-block rounded-full bg-[#F5F1E8]/80 border border-[#111820]/12 px-6 py-1.5 shadow-sm text-[#D98928] leading-none">Tours</span>
+                  Popular <span className="inline-block rounded-full bg-[#F5F1E8]/80 border border-[#111820]/12 px-6 py-1.5 shadow-sm text-[#D98928] leading-none">Places</span>
                 </h2>
               </div>
               <p className="max-w-md text-sm leading-7 text-[#111820]/82">
-                Carefully planned, spontaneous departures to popular destinations across Asia and tropical islands.
+                Handpicked Sri Lankan highlights and signature destinations curated for unforgettable journeys.
               </p>
             </div>
 
@@ -455,7 +433,7 @@ export default function TriplerHolidayLanding() {
                   transition: { staggerChildren: 0.1 }
                 }
               }}
-              className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4"
+              className="hide-scrollbar mt-16 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-3 sm:grid sm:grid-cols-2 sm:gap-8 sm:overflow-visible sm:pb-0 lg:grid-cols-4"
             >
               {hotTours.map((tour, index) => (
                 <motion.article
@@ -464,9 +442,8 @@ export default function TriplerHolidayLanding() {
                     hidden: { opacity: 0, y: 36, scale: 0.96 },
                     visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 85, damping: 14 } }
                   }}
-                  whileHover={{ y: -6, scale: 1.02, rotate: index % 2 === 0 ? 1 : -1 }}
-                  style={{ transform: `translateY(${tour.offsetY})` }}
-                  className="group relative overflow-hidden rounded-[28px] border border-[#111820]/15 bg-[#F5F1E8] shadow-xl aspect-[3/4]"
+                  whileHover={{ y: -4, scale: 1.015 }}
+                  className="group relative aspect-[3/4] min-w-[78vw] snap-start overflow-hidden rounded-[28px] border border-[#111820]/15 bg-[#F5F1E8] shadow-xl sm:min-w-0"
                 >
                   <div className="absolute inset-0 overflow-hidden">
                     <img
@@ -501,116 +478,6 @@ export default function TriplerHolidayLanding() {
               ))}
             </motion.div>
 
-          </div>
-        </section>
-
-        {/* 6. COOPERATE WITH US */}
-        <section className="relative overflow-hidden px-4 py-20 sm:px-6 lg:py-24">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#F5F1E8]/50 via-[#F5F1E8]/80 to-[#F5F1E8]/50" />
-          <div className="relative mx-auto max-w-5xl">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ type: "spring", stiffness: 80, damping: 15 }}
-              className="text-center"
-            >
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#D98928]">
-                B2B Cooperation
-              </span>
-              <h2 className="font-space fluid-title font-bold uppercase mt-3 text-[#111820]">
-                Cooperate with Us
-              </h2>
-              <p className="mx-auto mt-5 max-w-3xl text-sm leading-7 text-[#111820]/78 sm:text-base">
-                Triple R Holidays is your trusted inbound tourism partner. We collaborate with travel agencies, cooperations, and global partners to deliver authentic Sri Lankan travel experiences with competitive rates and reliable support.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={{
-                hidden: {},
-                visible: { transition: { staggerChildren: 0.08 } }
-              }}
-              className="mt-12 grid gap-6 md:grid-cols-3"
-            >
-              <motion.article
-                variants={{
-                  hidden: { opacity: 0, y: 24 },
-                  visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 95, damping: 15 } }
-                }}
-                whileHover={{ y: -6, scale: 1.02 }}
-                className="scandi-soft-card border border-[#111820]/14 p-7 text-center"
-              >
-                <span className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-[#D98928]/18 text-[#D98928]">
-                  <Handshake className="h-7 w-7" />
-                </span>
-                <h3 className="mt-5 font-space text-xl font-extrabold uppercase text-[#111820]">
-                  Cooperations
-                </h3>
-                <p className="mt-3 text-sm leading-7 text-[#111820]/75">
-                  We build long-term relationships based on trust and mutual success.
-                </p>
-              </motion.article>
-
-              <motion.article
-                variants={{
-                  hidden: { opacity: 0, y: 24 },
-                  visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 95, damping: 15 } }
-                }}
-                whileHover={{ y: -6, scale: 1.02 }}
-                className="scandi-soft-card border border-[#111820]/14 p-7 text-center"
-              >
-                <span className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-[#D98928]/18 text-[#D98928]">
-                  <ShieldCheck className="h-7 w-7" />
-                </span>
-                <h3 className="mt-5 font-space text-xl font-extrabold uppercase text-[#111820]">
-                  Reliability
-                </h3>
-                <p className="mt-3 text-sm leading-7 text-[#111820]/75">
-                  Count on us for consistent service quality and dependable support.
-                </p>
-              </motion.article>
-
-              <motion.article
-                variants={{
-                  hidden: { opacity: 0, y: 24 },
-                  visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 95, damping: 15 } }
-                }}
-                whileHover={{ y: -6, scale: 1.02 }}
-                className="scandi-soft-card border border-[#111820]/14 p-7 text-center"
-              >
-                <span className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-[#D98928]/18 text-[#D98928]">
-                  <CreditCard className="h-7 w-7" />
-                </span>
-                <h3 className="mt-5 font-space text-xl font-extrabold uppercase text-[#111820]">
-                  Competitive Rates
-                </h3>
-                <p className="mt-3 text-sm leading-7 text-[#111820]/75">
-                  Access exclusive pricing that gives your business an edge in the market.
-                </p>
-              </motion.article>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="mt-12 text-center"
-            >
-              <a
-                href="/cooperate"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#D98928] px-8 text-sm font-bold uppercase tracking-[0.16em] text-white transition duration-300 hover:bg-[#F2B24D] shadow-lg shadow-[#D98928]/20"
-              >
-                Cooperate with Us
-                <ArrowRight className="h-4 w-4" />
-              </a>
-            </motion.div>
           </div>
         </section>
 

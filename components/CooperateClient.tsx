@@ -2,12 +2,17 @@
 
 import { motion } from "framer-motion";
 import {
+  ArrowRight,
   BriefcaseBusiness,
   CalendarRange,
   CheckCircle2,
   Clock3,
   Compass,
   Hotel,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Phone,
   ShieldCheck,
   Star,
   Users
@@ -22,7 +27,7 @@ const cooperationOptions = [
     icon: Compass
   },
   {
-    title: "Travel Agency Cooperation",
+    title: "Travel Agency Partnerships",
     description:
       "Collaborate with local and global agencies to sell curated Sri Lanka tour products confidently.",
     icon: Users
@@ -40,7 +45,7 @@ const cooperationOptions = [
     icon: Hotel
   },
   {
-    title: "Affiliate Cooperations",
+    title: "Affiliate Partnerships",
     description:
       "Work with creators and digital partners to promote Sri Lanka experiences to targeted audiences.",
     icon: Star
@@ -65,7 +70,7 @@ const benefits = [
     icon: CalendarRange
   },
   {
-    title: "Wide Cooperation Network",
+    title: "Wide Partner Network",
     description: "Established collaboration across transport, stays, activities, and local support.",
     icon: Users
   },
@@ -89,7 +94,7 @@ const benefits = [
 const partnershipSteps = [
   {
     title: "Submit Inquiry",
-    description: "Fill out our partnership form with your company details and cooperation goals."
+    description: "Fill out our partnership form with your company details and partnership goals."
   },
   {
     title: "Receive Proposal",
@@ -101,30 +106,38 @@ const partnershipSteps = [
   }
 ];
 
+const contact = {
+  phone: "(011) 293 4924",
+  phoneHref: "tel:+94112934924",
+  whatsappHref: "https://wa.me/94767161937",
+  email: "hello@triplerholidays.com",
+  address: "128/7 A.S.P Liyanage Mawatha, Royal Pearl Garden, Wattala"
+};
+
 export default function CooperateClient() {
   return (
     <main className="scandi-page min-h-screen text-[#111820] font-manrope">
-      <SiteHeader variant="transparent" ctaLabel="Cooperate With Us" ctaHref="/about#contact" />
+      <SiteHeader variant="transparent" ctaLabel="Partner With Us" ctaHref="/cooperate#contact" />
 
       <section className="photo-text-hero hero-screen relative h-[100svh] w-full overflow-hidden text-white">
         <img
           src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=2200&q=84"
-          alt="Corporate cooperation background"
+          alt="Corporate partnership background"
           className="absolute inset-0 h-full w-full object-cover"
+          data-hero-media
         />
         <div className="absolute inset-0 bg-[#082B49]/55" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#082B49]/36 via-[#082B49]/44 to-[#082B49]/64" />
+        <div className="grain-overlay" />
         <div className="absolute inset-0 z-10 mx-auto flex w-full max-w-7xl items-end justify-center px-6 pb-14 sm:px-8 sm:pb-16 lg:pb-20">
-          <div className="max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D98928]">
-              Cooperate With Us
-            </span>
-            <h1 className="font-space mt-5 text-4xl font-extrabold uppercase leading-tight sm:text-5xl lg:text-6xl">
-              Cooperation & Grow
+          <div className="max-w-3xl text-center" data-hero-content>
+            <h1 className="font-space text-4xl font-extrabold uppercase leading-tight sm:text-5xl lg:text-6xl">
+              Partnership & Growth
               <br />
               <span className="text-[#D98928]">Programs</span>
             </h1>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[#F5F1E8]/92">
-              Cooperation solutions designed for travel professionals, agencies, and corporate teams.
+              Partnership solutions designed for travel professionals, agencies, and corporate teams.
             </p>
           </div>
         </div>
@@ -132,56 +145,12 @@ export default function CooperateClient() {
 
       <section className="px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-20 rounded-[24px] border border-[#111820]/12 bg-white/62 px-6 py-12 shadow-[0_20px_48px_rgba(17,24,32,0.08)] backdrop-blur-sm sm:px-10">
-            <div className="text-center">
-              <h2 className="font-space text-4xl font-black uppercase text-[#111820] sm:text-5xl">
-                <span className="text-[#D98928]">How</span> It Works
-              </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-[#111820]/72 sm:text-base">
-                Simple steps to start a successful partnership with us
-              </p>
-            </div>
-
-            <div className="relative mt-14">
-              <div className="absolute left-12 right-12 top-7 hidden h-[3px] bg-gradient-to-r from-[#D98928]/30 via-[#D98928] to-[#D98928]/30 md:block" />
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-80px" }}
-                variants={{
-                  hidden: {},
-                  visible: { transition: { staggerChildren: 0.1 } }
-                }}
-                className="grid gap-10 md:grid-cols-3"
-              >
-                {partnershipSteps.map((step, index) => (
-                  <motion.article
-                    key={step.title}
-                    variants={{
-                      hidden: { opacity: 0, y: 20 },
-                      visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 95, damping: 15 } }
-                    }}
-                    className="relative text-center"
-                  >
-                    <span className="mx-auto grid h-14 w-14 place-items-center rounded-full border border-[#D98928]/55 bg-[#D98928] text-2xl font-black text-white shadow-[0_12px_30px_rgba(217,137,40,0.32)]">
-                      {index + 1}
-                    </span>
-                    <h3 className="mt-5 text-3xl font-extrabold leading-tight text-[#111820]">{step.title}</h3>
-                    <p className="mx-auto mt-3 max-w-[220px] text-sm leading-7 text-[#111820]/72 sm:text-base">
-                      {step.description}
-                    </p>
-                  </motion.article>
-                ))}
-              </motion.div>
-            </div>
-          </div>
-
           <div className="text-center">
             <h2 className="font-space fluid-title font-bold uppercase text-[#111820]">
-              Cooperation Options
+              Partnership Options
             </h2>
             <p className="mx-auto mt-4 max-w-3xl text-sm leading-7 text-[#111820]/78 sm:text-base">
-              Explore our range of cooperation opportunities tailored to travel professionals.
+              Explore our range of partnership opportunities tailored to travel professionals.
             </p>
           </div>
 
@@ -218,11 +187,172 @@ export default function CooperateClient() {
         </div>
       </section>
 
+      <section id="contact" className="px-4 pb-20 sm:px-6 lg:pb-24">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: { staggerChildren: 0.08 }
+              }
+            }}
+            className="grid gap-4"
+          >
+            <motion.article
+              variants={{
+                hidden: { opacity: 0, y: 16 },
+                visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 15 } }
+              }}
+              whileHover={{ y: -4, scale: 1.02 }}
+              className="scandi-soft-card p-5"
+            >
+              <a href={contact.phoneHref} className="flex items-center gap-4">
+                <span className="grid h-12 w-12 place-items-center rounded-[10px] bg-[#D98928]/12 text-[#D98928]">
+                  <Phone className="h-5 w-5" />
+                </span>
+                <span>
+                  <span className="block text-xs font-bold uppercase tracking-[0.18em] text-[#111820]/58">Hotline</span>
+                  <span className="block text-base font-bold">{contact.phone}</span>
+                </span>
+              </a>
+            </motion.article>
+
+            <motion.article
+              variants={{
+                hidden: { opacity: 0, y: 16 },
+                visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 15 } }
+              }}
+              whileHover={{ y: -4, scale: 1.02 }}
+              className="scandi-soft-card p-5"
+            >
+              <a href={`mailto:${contact.email}`} className="flex items-center gap-4">
+                <span className="grid h-12 w-12 place-items-center rounded-[10px] bg-[#D98928]/12 text-[#D98928]">
+                  <Mail className="h-5 w-5" />
+                </span>
+                <span>
+                  <span className="block text-xs font-bold uppercase tracking-[0.18em] text-[#111820]/58">Email</span>
+                  <span className="block text-base font-bold break-all">{contact.email}</span>
+                </span>
+              </a>
+            </motion.article>
+
+            <motion.article
+              variants={{
+                hidden: { opacity: 0, y: 16 },
+                visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 15 } }
+              }}
+              whileHover={{ y: -4, scale: 1.02 }}
+              className="scandi-soft-card p-5"
+            >
+              <div className="flex items-start gap-4">
+                <span className="grid h-12 w-12 place-items-center rounded-[10px] bg-[#D98928]/12 text-[#D98928]">
+                  <MapPin className="h-5 w-5" />
+                </span>
+                <span>
+                  <span className="block text-xs font-bold uppercase tracking-[0.18em] text-[#111820]/58">Office</span>
+                  <span className="block text-base font-bold leading-7">{contact.address}</span>
+                </span>
+              </div>
+            </motion.article>
+
+            <motion.article
+              variants={{
+                hidden: { opacity: 0, y: 16 },
+                visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 15 } }
+              }}
+              whileHover={{ y: -4, scale: 1.02 }}
+              className="scandi-soft-card p-5"
+            >
+              <a href={contact.whatsappHref} className="flex items-center gap-4">
+                <span className="grid h-12 w-12 place-items-center rounded-[10px] bg-[#D98928]/12 text-[#D98928]">
+                  <MessageCircle className="h-5 w-5" />
+                </span>
+                <span>
+                  <span className="block text-xs font-bold uppercase tracking-[0.18em] text-[#111820]/58">Fast support</span>
+                  <span className="block text-base font-bold">WhatsApp priority response</span>
+                </span>
+              </a>
+            </motion.article>
+          </motion.div>
+
+          <motion.form
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ type: "spring", stiffness: 80, damping: 15 }}
+            action={`mailto:${contact.email}`}
+            method="post"
+            encType="text/plain"
+            className="scandi-soft-card p-6 sm:p-8"
+          >
+            <h2 className="font-space fluid-title font-bold uppercase">Partner With Us Form</h2>
+            <p className="mt-3 text-sm leading-7 scandi-text-muted">
+              Share your company and partnership goals. We will send the next step quickly.
+            </p>
+
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              <label className="text-sm font-bold text-[#111820]">
+                Full name
+                <input
+                  name="Full name"
+                  className="mt-2 min-h-12 w-full rounded-[10px] border border-[#111820]/22 bg-[#F5F1E8]/70 px-4 text-sm text-[#111820] outline-none placeholder:text-[#111820]/46 focus:border-[#D98928]"
+                  placeholder="Your name"
+                />
+              </label>
+              <label className="text-sm font-bold text-[#111820]">
+                Phone / WhatsApp
+                <input
+                  name="Phone"
+                  className="mt-2 min-h-12 w-full rounded-[10px] border border-[#111820]/22 bg-[#F5F1E8]/70 px-4 text-sm text-[#111820] outline-none placeholder:text-[#111820]/46 focus:border-[#D98928]"
+                  placeholder="Contact number"
+                />
+              </label>
+              <label className="text-sm font-bold text-[#111820] sm:col-span-2">
+                Company name
+                <input
+                  name="Company name"
+                  className="mt-2 min-h-12 w-full rounded-[10px] border border-[#111820]/22 bg-[#F5F1E8]/70 px-4 text-sm text-[#111820] outline-none placeholder:text-[#111820]/46 focus:border-[#D98928]"
+                  placeholder="Company or agency name"
+                />
+              </label>
+              <label className="text-sm font-bold text-[#111820] sm:col-span-2">
+                Partnership type
+                <input
+                  name="Partnership type"
+                  className="mt-2 min-h-12 w-full rounded-[10px] border border-[#111820]/22 bg-[#F5F1E8]/70 px-4 text-sm text-[#111820] outline-none placeholder:text-[#111820]/46 focus:border-[#D98928]"
+                  placeholder="DMC / agency / partner / hotel / affiliate"
+                />
+              </label>
+              <label className="text-sm font-bold text-[#111820] sm:col-span-2">
+                Message
+                <textarea
+                  name="Message"
+                  className="mt-2 min-h-36 w-full rounded-[10px] border border-[#111820]/22 bg-[#F5F1E8]/70 px-4 py-3 text-sm text-[#111820] outline-none placeholder:text-[#111820]/46 focus:border-[#D98928]"
+                  placeholder="Tell us your goals, preferred services and timelines."
+                />
+              </label>
+            </div>
+
+            <button
+              type="submit"
+              className="premium-cta mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 px-6 text-sm font-bold uppercase tracking-wide transition"
+              data-cursor-magnetic
+            >
+              Send Partnership Inquiry
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          </motion.form>
+        </div>
+      </section>
+
       <section className="px-4 pb-24 sm:px-6 lg:pb-28">
         <div className="mx-auto max-w-7xl">
           <div className="text-center">
             <h2 className="font-space fluid-title font-bold uppercase text-[#111820]">
-              Why Cooperate With Triple R Holidays
+              Why Partner With Triple R Holidays
             </h2>
             <p className="mx-auto mt-4 max-w-3xl text-sm leading-7 text-[#111820]/78 sm:text-base">
               Discover the advantages of collaborating with a dependable Sri Lanka travel partner.
@@ -259,6 +389,52 @@ export default function CooperateClient() {
               );
             })}
           </motion.div>
+        </div>
+      </section>
+
+      <section className="px-4 pb-24 sm:px-6 lg:pb-28">
+        <div className="mx-auto max-w-7xl rounded-[24px] border border-[#111820]/12 bg-white/62 px-6 py-12 shadow-[0_20px_48px_rgba(17,24,32,0.08)] backdrop-blur-sm sm:px-10">
+          <div className="text-center">
+            <h2 className="font-space text-4xl font-black uppercase text-[#111820] sm:text-5xl">
+              <span className="text-[#D98928]">How</span> It Works
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-[#111820]/72 sm:text-base">
+              Simple steps to start a successful partnership with us
+            </p>
+          </div>
+
+          <div className="relative mt-14">
+            <div className="absolute left-12 right-12 top-7 hidden h-[3px] bg-gradient-to-r from-[#D98928]/30 via-[#D98928] to-[#D98928]/30 md:block" />
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              variants={{
+                hidden: {},
+                visible: { transition: { staggerChildren: 0.1 } }
+              }}
+              className="grid gap-10 md:grid-cols-3"
+            >
+              {partnershipSteps.map((step, index) => (
+                <motion.article
+                  key={step.title}
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 95, damping: 15 } }
+                  }}
+                  className="relative text-center"
+                >
+                  <span className="mx-auto grid h-14 w-14 place-items-center rounded-full border border-[#D98928]/55 bg-[#D98928] text-2xl font-black text-white shadow-[0_12px_30px_rgba(217,137,40,0.32)]">
+                    {index + 1}
+                  </span>
+                  <h3 className="mt-5 text-3xl font-extrabold leading-tight text-[#111820]">{step.title}</h3>
+                  <p className="mx-auto mt-3 max-w-[220px] text-sm leading-7 text-[#111820]/72 sm:text-base">
+                    {step.description}
+                  </p>
+                </motion.article>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </section>
     </main>

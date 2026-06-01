@@ -5,14 +5,9 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
-  CalendarDays,
-  Hotel,
   ShieldCheck,
   Sparkles,
   Star,
-  X,
-  MapPin,
-  Plane
 } from "lucide-react";
 import { destinations } from "@/lib/content";
 import SiteHeader from "@/components/SiteHeader";
@@ -86,13 +81,6 @@ const internationalPackages = destinations.map(destination => ({
   badge: destination.accent,
   href: contact.whatsappHref
 }));
-
-const outboundInclusions = [
-  { title: "Flight + stay coordination", icon: Plane },
-  { title: "City-center hotel options", icon: Hotel },
-  { title: "Visa-ready date planning", icon: CalendarDays },
-  { title: "Support until return", icon: ShieldCheck }
-];
 
 const outboundCategories = [
   {
@@ -320,7 +308,6 @@ const outboundFaqs = [
 ];
 
 export default function OutboundToursClient() {
-  const [selectedPkg, setSelectedPkg] = useState<typeof internationalPackages[0] | null>(null);
   const [inquiryForm, setInquiryForm] = useState({
     fullName: "",
     email: "",
@@ -339,266 +326,61 @@ export default function OutboundToursClient() {
       <SiteHeader variant="transparent" ctaLabel="Enquire Now" />
       <HolidayToursHeroShowcase />
 
-      {/* Outbound Inclusions Block */}
-      <section className="bg-transparent px-4 py-14 sm:px-6">
-        <div className="mx-auto max-w-4xl">
+      {/* Travel Styles */}
+      <section className="bg-transparent px-4 py-20 sm:px-6 lg:py-24">
+        <div className="mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.5 }}
-            className="scandi-soft-card p-6 sm:p-7"
+            viewport={{ once: true, margin: "-100px" }}
+            className="flex flex-col justify-between gap-6 md:flex-row md:items-end"
           >
-            <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D98928]">
-              <span className="h-px w-9 bg-[#D98928]" />
-              Outbound Tour Inclusions
-            </span>
-            <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {outboundInclusions.map(item => {
-                const Icon = item.icon;
-                return (
-                  <div key={item.title} className="holiday-card-soft p-5 text-center flex flex-col items-center">
-                    <Icon className="h-6 w-6 text-[#D98928]" />
-                    <p className="mt-3 text-xs font-bold uppercase tracking-[0.12em] text-[#111820]/90">
-                      {item.title}
-                    </p>
-                  </div>
-                );
-              })}
+            <div>
+              <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D98928]">
+                <span className="h-px w-9 bg-[#D98928]" />
+                Outbound categories
+              </span>
+              <h2 className="font-space fluid-title mt-4 font-bold uppercase">
+                Outbound Travel Styles
+              </h2>
             </div>
           </motion.div>
-        </div>
-      </section>
 
-      {/* Interactive Map Section */}
-      <section id="international" className="scroll-mt-24 relative w-full overflow-hidden text-white">
-        {/* Deep navy background */}
-        <div className="absolute inset-0 bg-[#111820]" />
-
-        <div className="relative z-10">
-          {/* Header */}
-          <div className="mx-auto max-w-7xl px-6 sm:px-8 pt-16 lg:pt-20 pb-4">
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-20"
-            >
-              <div className="flex-shrink-0">
-                <h2 className="font-space text-4xl sm:text-5xl lg:text-7xl font-black uppercase leading-none text-white">
-                  Popular<br />Destinations
-                </h2>
-              </div>
-              <div className="lg:pt-4 max-w-md">
-                <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-[#D98928] mb-3">
-                  <span className="h-px w-6 bg-[#1E7C8A] flex-shrink-0" />
-                  Outbound Holiday Packages
-                </span>
-                <p className="text-sm sm:text-base leading-relaxed text-white/60">
-                  Kuala Lumpur, Singapore, Maldives and Thailand — each destination crafted for comfort, value and unforgettable memories.
-                </p>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* DESKTOP: Real world map SVG + overlaid cards */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.15 }}
-            className="relative w-full hidden lg:block"
-            style={{ height: '660px' }}
-          >
-            {/* World map SVG as teal-tinted background */}
-            <img
-              src="/images/world-map.svg"
-              alt=""
-              aria-hidden="true"
-              className="absolute inset-0 w-full h-full object-fill pointer-events-none select-none"
-              style={{
-                opacity: 0.12,
-                filter: 'brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(155deg)',
-              }}
-            />
-
-            {/* Ambient glow around the destination region */}
-            <div className="absolute pointer-events-none" style={{left:'55%',top:'45%',width:'40%',height:'45%',borderRadius:'50%',background:'radial-gradient(ellipse,rgba(30,124,138,0.10) 0%,transparent 65%)'}} />
-
-            {/* SVG overlay: pins + leader lines */}
-            <svg
-              viewBox="0 0 1000 660"
-              preserveAspectRatio="none"
-              className="absolute inset-0 w-full h-full pointer-events-none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <filter id="glow-pin" x="-100%" y="-100%" width="300%" height="300%">
-                  <feGaussianBlur stdDeviation="5" result="blur" />
-                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-              </defs>
-
-              {/* Leader lines */}
-              <line x1="674" y1="448" x2="150" y2="343" stroke="rgba(217,137,40,0.30)" strokeWidth="1.2" strokeDasharray="6 5" />
-              <line x1="753" y1="422" x2="420" y2="79" stroke="rgba(217,137,40,0.30)" strokeWidth="1.2" strokeDasharray="6 5" />
-              <line x1="776" y1="447" x2="580" y2="541" stroke="rgba(217,137,40,0.30)" strokeWidth="1.2" strokeDasharray="6 5" />
-              <line x1="759" y1="455" x2="880" y2="251" stroke="rgba(217,137,40,0.30)" strokeWidth="1.2" strokeDasharray="6 5" />
-
-              {/* Sri Lanka origin beacon */}
-              <circle cx="688" cy="437" r="14" fill="rgba(242,178,77,0.08)" filter="url(#glow-pin)">
-                <animate attributeName="r" values="14;22;14" dur="3s" repeatCount="indefinite" />
-              </circle>
-              <circle cx="688" cy="437" r="6" fill="rgba(242,178,77,0.45)"/>
-              <circle cx="688" cy="437" r="3" fill="#D98928"/>
-
-              {/* Destination geo pins */}
-              {/* Maldives */}
-              <circle cx="674" cy="448" r="10" fill="rgba(217,137,40,0.08)" filter="url(#glow-pin)">
-                <animate attributeName="r" values="10;17;10" dur="2.5s" repeatCount="indefinite" />
-              </circle>
-              <circle cx="674" cy="448" r="4.5" fill="rgba(217,137,40,0.55)"/>
-              <circle cx="674" cy="448" r="2.2" fill="#D98928"/>
-
-              {/* Thailand */}
-              <circle cx="753" cy="422" r="10" fill="rgba(217,137,40,0.08)" filter="url(#glow-pin)">
-                <animate attributeName="r" values="10;17;10" dur="2.8s" repeatCount="indefinite" />
-              </circle>
-              <circle cx="753" cy="422" r="4.5" fill="rgba(217,137,40,0.55)"/>
-              <circle cx="753" cy="422" r="2.2" fill="#D98928"/>
-
-              {/* Kuala Lumpur */}
-              <circle cx="776" cy="447" r="10" fill="rgba(217,137,40,0.08)" filter="url(#glow-pin)">
-                <animate attributeName="r" values="10;17;10" dur="3.1s" repeatCount="indefinite" />
-              </circle>
-              <circle cx="776" cy="447" r="4.5" fill="rgba(217,137,40,0.55)"/>
-              <circle cx="776" cy="447" r="2.2" fill="#D98928"/>
-
-              {/* Singapore */}
-              <circle cx="759" cy="455" r="10" fill="rgba(217,137,40,0.08)" filter="url(#glow-pin)">
-                <animate attributeName="r" values="10;17;10" dur="2.3s" repeatCount="indefinite" />
-              </circle>
-              <circle cx="759" cy="455" r="4.5" fill="rgba(217,137,40,0.55)"/>
-              <circle cx="759" cy="455" r="2.2" fill="#D98928"/>
-            </svg>
-
-            {/* Maldives card */}
-            <motion.div className="absolute group"
-              style={{ left: '15%', top: '52%', transform: 'translate(-50%,-50%)' }}
-              initial={{ opacity: 0, scale: 0.82, y: 20 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.6, ease: [0.25,0.46,0.45,0.94] }}
-            >
-              <button onClick={() => setSelectedPkg(internationalPackages[2])} className="block w-48 text-left cursor-pointer">
-                <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-[#082B49] shadow-[0_16px_50px_rgba(0,0,0,0.7)] transition-all duration-300 group-hover:border-[#D98928]/40 group-hover:shadow-[0_16px_56px_rgba(217,137,40,0.22)] group-hover:scale-[1.04]">
-                  <span className="absolute left-3 top-3 z-10 rounded-full bg-[#D98928] px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.12em] text-[#111820]">
-                    {internationalPackages[2].duration}
-                  </span>
-                  <img src={internationalPackages[2].image} alt="Maldives" className="w-full h-32 object-cover transition duration-500 group-hover:scale-105" />
-                </div>
-                <div className="mt-2.5 text-center">
-                  <p className="text-sm font-extrabold uppercase text-white tracking-wider">{internationalPackages[2].title}</p>
-                  <p className="text-[10px] text-white/45 mt-0.5">{internationalPackages[2].location}</p>
-                </div>
-              </button>
-            </motion.div>
-
-            {/* Thailand card */}
-            <motion.div className="absolute group"
-              style={{ left: '42%', top: '12%', transform: 'translate(-50%,-50%)' }}
-              initial={{ opacity: 0, scale: 0.82, y: 20 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.45, duration: 0.6, ease: [0.25,0.46,0.45,0.94] }}
-            >
-              <button onClick={() => setSelectedPkg(internationalPackages[3])} className="block w-48 text-left cursor-pointer">
-                <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-[#082B49] shadow-[0_16px_50px_rgba(0,0,0,0.7)] transition-all duration-300 group-hover:border-[#D98928]/40 group-hover:shadow-[0_16px_56px_rgba(217,137,40,0.22)] group-hover:scale-[1.04]">
-                  <span className="absolute left-3 top-3 z-10 rounded-full bg-[#D98928] px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.12em] text-[#111820]">
-                    {internationalPackages[3].duration}
-                  </span>
-                  <img src={internationalPackages[3].image} alt="Thailand" className="w-full h-32 object-cover transition duration-500 group-hover:scale-105" />
-                </div>
-                <div className="mt-2.5 text-center">
-                  <p className="text-sm font-extrabold uppercase text-white tracking-wider">{internationalPackages[3].title}</p>
-                  <p className="text-[10px] text-white/45 mt-0.5">{internationalPackages[3].location}</p>
-                </div>
-              </button>
-            </motion.div>
-
-            {/* Kuala Lumpur card */}
-            <motion.div className="absolute group"
-              style={{ left: '58%', top: '82%', transform: 'translate(-50%,-50%)' }}
-              initial={{ opacity: 0, scale: 0.82, y: 20 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.6, duration: 0.6, ease: [0.25,0.46,0.45,0.94] }}
-            >
-              <button onClick={() => setSelectedPkg(internationalPackages[0])} className="block w-48 text-left cursor-pointer">
-                <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-[#082B49] shadow-[0_16px_50px_rgba(0,0,0,0.7)] transition-all duration-300 group-hover:border-[#D98928]/40 group-hover:shadow-[0_16px_56px_rgba(217,137,40,0.22)] group-hover:scale-[1.04]">
-                  <span className="absolute left-3 top-3 z-10 rounded-full bg-[#D98928] px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.12em] text-[#111820]">
-                    {internationalPackages[0].duration}
-                  </span>
-                  <img src={internationalPackages[0].image} alt="Kuala Lumpur" className="w-full h-32 object-cover transition duration-500 group-hover:scale-105" />
-                </div>
-                <div className="mt-2.5 text-center">
-                  <p className="text-sm font-extrabold uppercase text-white tracking-wider">{internationalPackages[0].title}</p>
-                  <p className="text-[10px] text-white/45 mt-0.5">{internationalPackages[0].location}</p>
-                </div>
-              </button>
-            </motion.div>
-
-            {/* Singapore card */}
-            <motion.div className="absolute group"
-              style={{ left: '88%', top: '38%', transform: 'translate(-50%,-50%)' }}
-              initial={{ opacity: 0, scale: 0.82, y: 20 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.75, duration: 0.6, ease: [0.25,0.46,0.45,0.94] }}
-            >
-              <button onClick={() => setSelectedPkg(internationalPackages[1])} className="block w-48 text-left cursor-pointer">
-                <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-[#082B49] shadow-[0_16px_50px_rgba(0,0,0,0.7)] transition-all duration-300 group-hover:border-[#D98928]/40 group-hover:shadow-[0_16px_56px_rgba(217,137,40,0.22)] group-hover:scale-[1.04]">
-                  <span className="absolute left-3 top-3 z-10 rounded-full bg-[#D98928] px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.12em] text-[#111820]">
-                    {internationalPackages[1].duration}
-                  </span>
-                  <img src={internationalPackages[1].image} alt="Singapore" className="w-full h-32 object-cover transition duration-500 group-hover:scale-105" />
-                </div>
-                <div className="mt-2.5 text-center">
-                  <p className="text-sm font-extrabold uppercase text-white tracking-wider">{internationalPackages[1].title}</p>
-                  <p className="text-[10px] text-white/45 mt-0.5">{internationalPackages[1].location}</p>
-                </div>
-              </button>
-            </motion.div>
-          </motion.div>
-
-          <div className="hidden lg:block h-16" />
-
-          {/* MOBILE: 2x2 grid fallback */}
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
-            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }}
-            className="lg:hidden mx-auto max-w-7xl px-6 sm:px-8 pb-14 mt-6 grid grid-cols-2 gap-4"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: { staggerChildren: 0.08 }
+              }
+            }}
+            className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
           >
-            {internationalPackages.map(pkg => (
-              <motion.button
-                key={pkg.title}
-                onClick={() => setSelectedPkg(pkg)}
-                variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-                className="group relative overflow-hidden rounded-2xl border border-white/15 aspect-[4/5] cursor-pointer text-left"
+            {outboundCategories.map(item => (
+              <motion.article
+                key={item.title}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 15 } }
+                }}
+                whileHover={{ y: -4, scale: 1.02 }}
+                className="scandi-soft-card group overflow-hidden"
               >
-                <img src={pkg.image} alt={pkg.title} className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <span className="absolute left-3 top-3 rounded-full bg-[#D98928] px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.12em] text-[#111820]">
-                  {pkg.duration}
-                </span>
-                <div className="absolute bottom-4 left-4 right-4">
-                  <p className="font-space text-sm font-extrabold uppercase text-white leading-tight">{pkg.title}</p>
-                  <p className="text-[10px] text-white/60 mt-0.5">{pkg.location}</p>
+                <div className="expand-image relative h-52 overflow-hidden" data-expand-image>
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#111820]/92 via-[#111820]/20 to-transparent" />
                 </div>
-              </motion.button>
+                <div className="p-5">
+                  <h3 className="font-space text-2xl font-bold uppercase">{item.title}</h3>
+                  <p className="mt-2 text-sm scandi-text-muted">{item.note}</p>
+                </div>
+              </motion.article>
             ))}
           </motion.div>
         </div>
@@ -619,7 +401,7 @@ export default function OutboundToursClient() {
               Malaysia Tours
             </span>
             <h2 className="font-space fluid-title mt-4 font-bold uppercase text-[#111820]">
-              Malaysia Inbound Packages
+              Malaysia Packages
             </h2>
             <p className="mt-5 text-sm leading-8 text-[#111820]/76 sm:text-base">
               Curated Malaysia journeys that blend city energy, mountain escapes and family-friendly attractions into one smooth travel flow.
@@ -966,66 +748,6 @@ export default function OutboundToursClient() {
         </div>
       </section>
 
-      {/* Outbound Travel Styles */}
-      <section className="bg-transparent px-4 py-20 sm:px-6 lg:py-24">
-        <div className="mx-auto max-w-7xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="flex flex-col justify-between gap-6 md:flex-row md:items-end"
-          >
-            <div>
-              <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D98928]">
-                <span className="h-px w-9 bg-[#D98928]" />
-                Outbound categories
-              </span>
-              <h2 className="font-space fluid-title mt-4 font-bold uppercase">
-                Outbound Travel Styles
-              </h2>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={{
-              hidden: {},
-              visible: {
-                transition: { staggerChildren: 0.08 }
-              }
-            }}
-            className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
-          >
-            {outboundCategories.map(item => (
-              <motion.article
-                key={item.title}
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 15 } }
-                }}
-                whileHover={{ y: -4, scale: 1.02 }}
-                className="scandi-soft-card group overflow-hidden"
-              >
-                <div className="expand-image relative h-52 overflow-hidden" data-expand-image>
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#111820]/92 via-[#111820]/20 to-transparent" />
-                </div>
-                <div className="p-5">
-                  <h3 className="font-space text-2xl font-bold uppercase">{item.title}</h3>
-                  <p className="mt-2 text-sm scandi-text-muted">{item.note}</p>
-                </div>
-              </motion.article>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
       {/* Expertise & Gallery */}
       <section className="bg-transparent px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-7xl">
@@ -1092,10 +814,10 @@ export default function OutboundToursClient() {
             <div>
               <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D98928]">
                 <span className="h-px w-9 bg-[#D98928]" />
-                Outbound reviews
+                Reviews
               </span>
               <h2 className="font-space fluid-title mt-4 font-bold uppercase">
-                What Outbound Travellers Say
+                What Travellers Say
               </h2>
             </div>
           </motion.div>
@@ -1415,121 +1137,6 @@ export default function OutboundToursClient() {
           </AnimatePresence>
         </motion.div>
       </section>
-
-      {/* Destination Popup Modal */}
-      <AnimatePresence>
-        {selectedPkg && (
-          <motion.div
-            className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-          >
-            {/* Backdrop */}
-            <motion.div
-              className="absolute inset-0 bg-black/70 backdrop-blur-md"
-              onClick={() => setSelectedPkg(null)}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            />
-
-            {/* Modal card */}
-            <motion.div
-              className="relative z-10 w-full max-w-lg overflow-hidden rounded-3xl border border-white/15 bg-[#082B49]/95 backdrop-blur-xl shadow-[0_32px_80px_rgba(0,0,0,0.8)]"
-              initial={{ opacity: 0, scale: 0.85, y: 40 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ type: "spring", stiffness: 300, damping: 28 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Close button */}
-              <button
-                onClick={() => setSelectedPkg(null)}
-                className="absolute right-4 top-4 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-black/40 border border-white/20 text-white/80 backdrop-blur-sm transition hover:bg-white/15 hover:text-white cursor-pointer"
-                aria-label="Close"
-              >
-                <X className="h-4 w-4" />
-              </button>
-
-              {/* Hero image */}
-              <div className="relative aspect-[16/9] w-full overflow-hidden">
-                <motion.img
-                  src={selectedPkg.image}
-                  alt={selectedPkg.title}
-                  className="h-full w-full object-cover"
-                  initial={{ scale: 1.1 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#082B49] via-transparent to-transparent" />
-                {/* Badge */}
-                <span className="absolute left-5 top-5 inline-flex items-center gap-1.5 rounded-full border border-[#D98928]/40 bg-[#082B49]/70 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[#D98928] backdrop-blur-sm">
-                  <Sparkles className="h-3 w-3" />
-                  {selectedPkg.badge}
-                </span>
-              </div>
-
-              {/* Content */}
-              <div className="px-6 pb-7 pt-4">
-                <h3 className="font-space text-3xl font-black uppercase text-white tracking-tight">
-                  {selectedPkg.title}
-                </h3>
-                <div className="mt-2 flex items-center gap-2 text-white/50">
-                  <MapPin className="h-3.5 w-3.5 text-[#D98928]" />
-                  <span className="text-sm">{selectedPkg.location}</span>
-                </div>
-
-                <div className="mt-4 flex flex-wrap items-center gap-2">
-                  <span className="rounded-full bg-[#D98928] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[#111820]">
-                    {selectedPkg.duration}
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-white/14 bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.11em] text-white/75">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={`pkg-star-${i}`} className="h-3 w-3 fill-current text-[#D98928]" />
-                    ))}
-                    All Travellers
-                  </span>
-                </div>
-                <p className="mt-4 text-sm leading-7 text-white/72">
-                  {selectedPkg.teaser}
-                </p>
-                <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.13em] text-[#D98928]/90">
-                  {selectedPkg.quoteStart}
-                </p>
-
-                <div className="mt-5 flex items-center gap-3">
-                  <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5">
-                    <Plane className="h-4 w-4 text-[#D98928]" />
-                    <span className="text-xs font-semibold text-white/70">Flight + Hotel</span>
-                  </div>
-                  <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5">
-                    <ShieldCheck className="h-4 w-4 text-[#D98928]" />
-                    <span className="text-xs font-semibold text-white/70">Trip Support</span>
-                  </div>
-                </div>
-
-                <p className="mt-4 text-xs text-white/58">
-                  {selectedPkg.audience}
-                </p>
-
-                <div className="mt-6 flex gap-3">
-                  <a
-                    href={contact.whatsappHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#D98928] to-[#D98928] px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-[0_8px_32px_rgba(217,137,40,0.32)] transition-all duration-300 hover:shadow-[0_12px_40px_rgba(217,137,40,0.42)] hover:scale-[1.02]"
-                  >
-                    <ArrowRight className="h-4 w-4" />
-                    Get Quote on WhatsApp
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </main>
   );
 }

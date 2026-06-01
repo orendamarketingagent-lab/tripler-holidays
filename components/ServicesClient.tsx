@@ -24,8 +24,7 @@ const services = [
     description:
       "Private and group programs across Sri Lanka with heritage, wildlife, hill country and coastal highlights.",
     icon: Compass,
-    image:
-      "https://images.unsplash.com/photo-1539650116574-75c0c6d73f0e?auto=format&fit=crop&w=1200&q=84",
+    image: "/images/services/inbound-tours-sri-lanka.jpg",
     points: ["Islandwide route planning", "Comfortable pacing", "On-tour support"]
   },
   {
@@ -33,8 +32,7 @@ const services = [
     description:
       "International holiday planning to Kuala Lumpur, Singapore, Maldives and Thailand with practical execution.",
     icon: PlaneTakeoff,
-    image:
-      "https://images.unsplash.com/photo-1528164344705-47542687000d?auto=format&fit=crop&w=1200&q=84",
+    image: "/images/services/core/outbound-asia.jpg",
     points: ["Destination combinations", "Flight + transfer flow", "Family and group support"]
   },
   {
@@ -42,8 +40,7 @@ const services = [
     description:
       "Hotel recommendations matched to route, comfort level and travel style for consistent journey quality.",
     icon: Hotel,
-    image:
-      "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1200&q=84",
+    image: "/images/services/core/hotel-bookings.jpg",
     points: ["City and resort options", "Flexible room categories", "Route-aware suggestions"]
   },
   {
@@ -51,8 +48,7 @@ const services = [
     description:
       "Travel logistics for meetings, conferences and business gatherings with reliable guest movement.",
     icon: BriefcaseBusiness,
-    image:
-      "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=84",
+    image: "/images/services/core/conference-events.jpg",
     points: ["Venue travel coordination", "Group transport flow", "Clear timeline planning"]
   },
   {
@@ -60,8 +56,7 @@ const services = [
     description:
       "Travel execution for wedding celebrations including guest stays, transfer schedules and trip comfort.",
     icon: Heart,
-    image:
-      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=84",
+    image: "/images/services/core/destination-weddings.jpg",
     points: ["Guest travel setup", "Hotel room blocks", "Celebration logistics"]
   },
   {
@@ -69,8 +64,7 @@ const services = [
     description:
       "Cars, vans and coaches for airport transfers, tours and events from arrival to departure.",
     icon: Car,
-    image:
-      "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=84",
+    image: "/images/services-hero-fleet.jpg",
     points: ["Airport pickup", "Private vehicles", "Islandwide transfers"]
   }
 ];
@@ -89,7 +83,7 @@ const serviceHighlights = [
 
 const heroHookSentence = "One Team. Every Detail. Zero Stress.";
 const servicesHeroImage =
-  "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=2600&q=90";
+  "/images/services-hero-fleet.jpg";
 
 const serviceOverviewParagraph =
   "With strong local travel experience in Sri Lanka, Triple R Holidays delivers professionally curated, tailor-made services for travelers from around the world. Our service range covers bespoke tour planning, handpicked stays, guided cultural and wildlife excursions, reliable transport, and practical support for business and event travel. Whether you travel solo, as a couple, with family, or in a larger group, each journey is designed to showcase Sri Lanka's rich heritage and landscapes with comfort, clarity, and responsible travel practices.";
@@ -107,7 +101,7 @@ export default function ServicesClient() {
       >
         <img
           src={servicesHeroImage}
-          alt="Luxury travel view"
+          alt="Triple R Holidays transport fleet"
           className="absolute inset-0 h-full w-full object-cover"
           data-parallax="12"
           data-hero-media
@@ -124,10 +118,7 @@ export default function ServicesClient() {
             className="max-w-3xl text-center"
             data-hero-content
           >
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D98928]">
-              Premium Services
-            </span>
-            <h1 className="font-space mt-5 text-4xl font-extrabold uppercase leading-tight sm:text-5xl lg:text-6xl">
+            <h1 className="font-space text-4xl font-extrabold uppercase leading-tight sm:text-5xl lg:text-6xl">
               Travel Services,
               <br />
               <span className="text-[#D98928]">Built Around You</span>

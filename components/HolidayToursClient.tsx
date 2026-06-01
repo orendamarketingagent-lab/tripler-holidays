@@ -24,7 +24,7 @@ const contact = {
 };
 
 const sriLankaHeroImage =
-  "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=2600&q=90";
+  "/images/holiday-tours-hero-4k-v2.jpg";
 
 const inCountryPackages = [
   {
@@ -65,7 +65,7 @@ const inCountryPackages = [
     title: "South Coast Beach Trail",
     duration: "5 nights / 6 days",
     route: "Mirissa, Weligama, Galle, Hikkaduwa, Bentota",
-    image: "/images/tours/south-coast-beach-trail.jpg",
+    image: "/images/holiday-tours/south-coast-beach-trail-4k.jpg",
     badge: "Beach",
     idealFor: "Beach breaks, friends and leisure groups",
     highlights: ["Whale watching", "Surfing", "Galle Fort", "Madu River safari"],
@@ -91,7 +91,7 @@ const sriLankaGallery = [
   "/images/tours/sri-lanka-grand-multi-city-tour.jpg",
   "/images/tours/cultural-triangle-kandy.jpg",
   "/images/tours/hill-country-scenic-escape.jpg",
-  "/images/tours/south-coast-beach-trail.jpg"
+  "/images/holiday-tours/south-coast-beach-trail-4k.jpg"
 ];
 
 const sriLankaReviews = [
@@ -149,7 +149,7 @@ export default function HolidayToursClient() {
       >
         <img
           src={sriLankaHeroImage}
-          alt="Sri Lanka holiday tour landscape"
+          alt="Sri Lanka highland train journey"
           className="absolute inset-0 h-full w-full object-cover"
           data-parallax="12"
           data-hero-media
@@ -164,11 +164,9 @@ export default function HolidayToursClient() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65 }}
             className="max-w-3xl text-center"
+            data-hero-content
           >
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D98928]">
-              Sri Lanka Tours
-            </span>
-            <h1 className="font-space mt-5 text-4xl font-extrabold uppercase leading-tight sm:text-5xl lg:text-6xl">
+            <h1 className="font-space text-4xl font-extrabold uppercase leading-tight sm:text-5xl lg:text-6xl">
               Discover <span className="text-[#D98928]">Sri Lanka</span>
             </h1>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[#F5F1E8]/92">
@@ -177,70 +175,31 @@ export default function HolidayToursClient() {
             <p className="mt-4 text-sm font-semibold tracking-[0.08em] text-white/90 sm:text-base">
               Culture, Wildlife, Highlands, Beaches.
             </p>
+            <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+              <a
+                href="#tour-quote"
+                className="inline-flex items-center gap-3 rounded-full bg-[#D98928] py-2 pl-6 pr-2 text-[11px] font-bold uppercase tracking-wider text-[#111820] shadow-lg transition-all duration-300 hover:bg-[#F2B24D] group"
+              >
+                Get a Quote
+                <span className="grid h-8 w-8 place-items-center rounded-full bg-white text-[#111820] transition-transform duration-300 group-hover:rotate-45">
+                  <ArrowRight className="h-4 w-4" />
+                </span>
+              </a>
+              <a
+                href={contact.whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/25 bg-white/10 px-5 text-[11px] font-bold uppercase tracking-wider text-white transition hover:bg-white hover:text-[#082B49]"
+              >
+                WhatsApp Quote
+              </a>
+            </div>
           </motion.div>
         </div>
       </section>
 
       <section id="in-country" className="scroll-mt-24 bg-transparent px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-7xl">
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.5 }}
-            className="mb-12 rounded-[30px] border border-[#111820]/14 bg-[#F5F1E8]/72 p-6 shadow-xl backdrop-blur-sm sm:p-8 lg:p-10"
-          >
-            <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D98928]">
-              <span className="h-px w-9 bg-[#D98928]" />
-              Sri Lanka Tours
-            </span>
-            <h2 className="font-space mt-4 text-2xl font-black uppercase leading-tight text-[#111820] sm:text-4xl">
-              Curated Island Journeys, Planned End-to-End
-            </h2>
-            <p className="mt-5 text-sm leading-8 text-[#111820]/78 sm:text-base">
-              We design Sri Lanka tours for solo travellers, couples, families, groups and corporate departures with route planning built around your pace and interests.
-              From airport meet-and-assist to final departure transfers, our team coordinates transport, hotels, activities and daily logistics in one seamless flow.
-            </p>
-            <p className="mt-4 text-sm leading-8 text-[#111820]/78 sm:text-base">
-              Choose from culture, wildlife, hill country, beach and wellness-focused experiences with private chauffeur guidance and flexible stay options ranging from
-              boutique properties to premium resorts. Pricing is shared on request based on your dates, hotel category and traveller count.
-            </p>
-            <div className="mt-6 grid gap-3 sm:grid-cols-3">
-              {[
-                "Private chauffeur-led routes",
-                "Flexible hotel categories",
-                "24/7 on-ground support"
-              ].map(item => (
-                <div
-                  key={item}
-                  className="rounded-full border border-[#111820]/14 bg-white/70 px-4 py-2 text-center text-[11px] font-bold uppercase tracking-[0.14em] text-[#111820]/82"
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
-            <div className="mt-7 flex flex-wrap items-center gap-3">
-              <a
-                href="#tour-quote"
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#111820] px-6 text-xs font-bold uppercase tracking-[0.16em] text-white transition hover:bg-[#D98928]"
-              >
-                Get a Quote
-                <ArrowRight className="h-4 w-4" />
-              </a>
-              <a
-                href={contact.whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center justify-center rounded-full border border-[#111820]/20 bg-white/70 px-6 text-xs font-bold uppercase tracking-[0.16em] text-[#111820] transition hover:border-[#D98928] hover:text-[#D98928]"
-              >
-                WhatsApp Quote
-              </a>
-            </div>
-            <p className="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#111820]/55">
-              Share your dates and traveller count. We will send your first quote draft within 24 hours.
-            </p>
-          </motion.section>
-
           {/* Travel Themes Section */}
           <div id="travel-themes" className="scroll-mt-28 py-10">
             <div className="text-center mb-10">
@@ -263,12 +222,12 @@ export default function HolidayToursClient() {
                 {
                   title: "Cultural Exploration",
                   desc: "Immerse yourself in Sri Lanka's rich heritage, ancient temples, and traditional villages.",
-                  image: "https://images.unsplash.com/photo-1625737043828-d53c10a8bfa7?auto=format&fit=crop&w=900&q=82"
+                  image: "/images/holiday-tours/cultural-exploration-kandy.jpg"
                 },
                 {
                   title: "Wildlife Adventures",
                   desc: "Discover exotic wildlife in national parks and experience thrilling safari adventures.",
-                  image: "https://images.unsplash.com/photo-1581888227599-779811939961?auto=format&fit=crop&w=900&q=82"
+                  image: "/images/wildlife/yala-wildlife-adventure-4k.jpg"
                 },
                 {
                   title: "Beach Getaways",

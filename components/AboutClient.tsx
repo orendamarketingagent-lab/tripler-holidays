@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import {
   BadgeCheck,
-  ArrowRight,
   CalendarDays,
   Car,
   CheckCircle2,
@@ -198,15 +197,6 @@ export default function AboutClient() {
             className="max-w-3xl text-center"
             data-hero-content
           >
-            <motion.span
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.45 }}
-              className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D98928]"
-            >
-              <Sparkles className="h-4 w-4 text-[#D98928]" />
-              About Triple R
-            </motion.span>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -585,7 +575,7 @@ export default function AboutClient() {
       </section>
 
       <section id="contact" className="px-4 py-10 sm:px-6 lg:py-12">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+        <div className="mx-auto max-w-7xl">
           <motion.div 
             initial="hidden"
             whileInView="visible"
@@ -674,66 +664,6 @@ export default function AboutClient() {
               </a>
             </motion.article>
           </motion.div>
-
-          <motion.form
-            initial={{ opacity: 0, x: 24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ type: "spring", stiffness: 80, damping: 15 }}
-            action={`mailto:${contact.email}`}
-            method="post"
-            encType="text/plain"
-            className="scandi-soft-card p-6 sm:p-8"
-          >
-            <h2 className="font-space fluid-title font-bold uppercase">Inquiry Form</h2>
-            <p className="mt-3 text-sm leading-7 scandi-text-muted">
-              Send your travel details and we will revert with a practical next step.
-            </p>
-
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              <label className="text-sm font-bold text-[#111820]">
-                Full name
-                <input
-                  name="Full name"
-                  className="mt-2 min-h-12 w-full rounded-[10px] border border-[#111820]/22 bg-[#F5F1E8]/70 px-4 text-sm text-[#111820] outline-none placeholder:text-[#111820]/46 focus:border-[#D98928]"
-                  placeholder="Your name"
-                />
-              </label>
-              <label className="text-sm font-bold text-[#111820]">
-                Phone / WhatsApp
-                <input
-                  name="Phone"
-                  className="mt-2 min-h-12 w-full rounded-[10px] border border-[#111820]/22 bg-[#F5F1E8]/70 px-4 text-sm text-[#111820] outline-none placeholder:text-[#111820]/46 focus:border-[#D98928]"
-                  placeholder="Contact number"
-                />
-              </label>
-              <label className="text-sm font-bold text-[#111820] sm:col-span-2">
-                Travel service
-                <input
-                  name="Travel service"
-                  className="mt-2 min-h-12 w-full rounded-[10px] border border-[#111820]/22 bg-[#F5F1E8]/70 px-4 text-sm text-[#111820] outline-none placeholder:text-[#111820]/46 focus:border-[#D98928]"
-                  placeholder="Inbound / outbound / hotel / event / transport"
-                />
-              </label>
-              <label className="text-sm font-bold text-[#111820] sm:col-span-2">
-                Message
-                <textarea
-                  name="Message"
-                  className="mt-2 min-h-36 w-full rounded-[10px] border border-[#111820]/22 bg-[#F5F1E8]/70 px-4 py-3 text-sm text-[#111820] outline-none placeholder:text-[#111820]/46 focus:border-[#D98928]"
-                  placeholder="Destination, dates, traveller count and any preferences."
-                />
-              </label>
-            </div>
-
-            <button
-              type="submit"
-              className="premium-cta mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 px-6 text-sm font-bold uppercase tracking-wide transition"
-              data-cursor-magnetic
-            >
-              Send Inquiry
-              <ArrowRight className="h-4 w-4" />
-            </button>
-          </motion.form>
         </div>
       </section>
 

@@ -50,10 +50,22 @@ export default function SiteHeader({
   const headerShellRef = useRef<HTMLDivElement>(null);
   const headerBarRef = useRef<HTMLDivElement>(null);
   const transparent = variant === "transparent";
+  const normalizePath = (value: string | null | undefined) => {
+    if (!value) return "/";
+    const base = imageBasePath.replace(/\/+$/, "");
+    let normalized = value;
+    if (base && normalized.startsWith(base)) {
+      normalized = normalized.slice(base.length) || "/";
+    }
+    if (!normalized.startsWith("/")) normalized = `/${normalized}`;
+    if (normalized !== "/") normalized = normalized.replace(/\/+$/, "");
+    return normalized || "/";
+  };
+  const normalizedPathname = normalizePath(pathname);
   const isToursRoute =
-    pathname === "/holiday-tours" ||
-    pathname === "/outbound-tours" ||
-    pathname.startsWith("/package/");
+    normalizedPathname === "/holiday-tours" ||
+    normalizedPathname === "/outbound-tours" ||
+    normalizedPathname.startsWith("/package/");
 
   useEffect(() => {
     if (!transparent) {
@@ -80,7 +92,7 @@ export default function SiteHeader({
 
   const isItemActive = (item: NavItem) => {
     if (item.key === "tours") return isToursRoute;
-    return pathname === item.href;
+    return normalizedPathname === normalizePath(item.href);
   };
 
   useEffect(() => {
@@ -163,12 +175,13 @@ export default function SiteHeader({
                   <Link
                     key={item.href}
                     href={item.href}
+                    aria-current={active ? "page" : undefined}
                     className={`relative pb-1 text-sm font-normal uppercase tracking-[0.18em] transition-colors duration-200 ${
-                      active ? "text-white" : "text-white/90 hover:text-white"
+                      active ? "text-[#F2B24D]" : "text-white/90 hover:text-white"
                     }`}
                   >
                     {active && (
-                      <span className="absolute -bottom-1 left-0 h-[2px] w-full bg-white/90" />
+                      <span className="absolute -bottom-1 left-0 h-[2px] w-full bg-[#F2B24D]" />
                     )}
                     {item.label}
                   </Link>
@@ -182,11 +195,11 @@ export default function SiteHeader({
                     aria-haspopup="menu"
                     aria-label={`${item.label} menu`}
                     className={`relative inline-flex items-center gap-1.5 pb-1 text-sm font-normal uppercase tracking-[0.18em] transition-colors duration-200 ${
-                      active ? "text-white" : "text-white/90 hover:text-white"
+                      active ? "text-[#F2B24D]" : "text-white/90 hover:text-white"
                     }`}
                   >
                     {active && (
-                      <span className="absolute -bottom-1 left-0 h-[2px] w-full bg-white/90" />
+                      <span className="absolute -bottom-1 left-0 h-[2px] w-full bg-[#F2B24D]" />
                     )}
                     {item.label}
                     <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180" />
@@ -196,8 +209,8 @@ export default function SiteHeader({
                     <div className="rounded-2xl border border-white/22 bg-[linear-gradient(155deg,rgba(8,43,73,0.94),rgba(17,24,32,0.92))] p-2 shadow-[0_18px_36px_rgba(8,43,73,0.45)] backdrop-blur-xl">
                       {item.children.map(child => {
                         const childActive =
-                          pathname === child.href ||
-                          (child.href === "/holiday-tours" && pathname.startsWith("/package/"));
+                          normalizedPathname === normalizePath(child.href) ||
+                          (child.href === "/holiday-tours" && normalizedPathname.startsWith("/package/"));
                         return (
                         <Link
                           key={child.href}

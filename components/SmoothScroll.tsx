@@ -11,20 +11,20 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
     gsap.registerPlugin(ScrollTrigger);
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
 
     const lenis = new Lenis({
-      // Use lerp-based smoothing for steadier frame-to-frame motion during heavy scroll scenes.
       duration: prefersReducedMotion ? 0.01 : undefined,
       easing: undefined,
-      lerp: prefersReducedMotion ? 1 : 0.1,
+      lerp: prefersReducedMotion ? 1 : 0.09,
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: !prefersReducedMotion,
-      syncTouch: !prefersReducedMotion,
-      syncTouchLerp: 0.08,
+      syncTouch: !prefersReducedMotion && !isCoarsePointer,
+      syncTouchLerp: 0.07,
       touchInertiaExponent: 1.5,
-      wheelMultiplier: 0.78,
-      touchMultiplier: 0.95,
+      wheelMultiplier: 0.9,
+      touchMultiplier: 1,
       anchors: true
     });
 
@@ -35,8 +35,6 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       lenis.raf(time * 1000);
     };
     gsap.ticker.add(raf);
-
-    gsap.ticker.lagSmoothing(0);
 
     return () => {
       gsap.ticker.remove(raf);

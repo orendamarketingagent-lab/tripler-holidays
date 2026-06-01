@@ -57,9 +57,9 @@ const testimonials = [
 ];
 
 const stats = [
-  { value: "5.0", label: "Average Rating" },
+  { value: "5/5", label: "Five-Star Rating" },
   { value: "100%", label: "Satisfaction Rate" },
-  { value: "50+", label: "Happy Travellers" }
+  { value: "50+", label: "Happy Travelers" }
 ];
 
 /* ── Animation variants ── */
@@ -122,13 +122,9 @@ export default function TestimonialsClient() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65 }}
             className="max-w-3xl text-center"
+            data-hero-content
           >
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D98928]">
-              <Sparkles className="h-3.5 w-3.5" />
-              Client Reviews
-            </span>
-
-            <h1 className="font-space mt-5 text-4xl font-extrabold uppercase leading-tight sm:text-5xl lg:text-6xl">
+            <h1 className="font-space text-4xl font-extrabold uppercase leading-tight sm:text-5xl lg:text-6xl">
               Testimonials
               <br />
               <span className="text-[#D98928]">From Real Travelers</span>
@@ -138,14 +134,14 @@ export default function TestimonialsClient() {
               They trusted us with their journeys across Sri Lanka and beyond. Here is what they shared after traveling with Triple R Holidays.
             </p>
 
-            <div className="mx-auto mt-8 flex max-w-xl flex-wrap items-center justify-center gap-6 rounded-full border border-white/18 bg-white/8 px-6 py-4 backdrop-blur-sm sm:gap-10">
+            <div className="mx-auto mt-8 flex w-full max-w-3xl flex-nowrap items-center justify-center gap-4 overflow-x-auto rounded-full border border-white/18 bg-white/8 px-4 py-4 backdrop-blur-sm sm:gap-10 sm:px-6">
               {stats.map((stat, i) => (
-                <div key={stat.label} className="flex items-center gap-6 sm:gap-10">
+                <div key={stat.label} className="flex shrink-0 items-center gap-4 sm:gap-10">
                   <div className="text-center">
                     <p className="font-space text-2xl font-bold text-[#D98928] sm:text-3xl">
                       {stat.value}
                     </p>
-                    <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.16em] text-white/72">
+                    <p className="mt-1 whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.16em] text-white/72">
                       {stat.label}
                     </p>
                   </div>

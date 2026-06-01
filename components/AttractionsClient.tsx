@@ -18,8 +18,7 @@ type Attraction = {
 const attractions: Attraction[] = [
   {
     title: "Sigiriya (Lion Rock)",
-    image:
-      "https://images.unsplash.com/photo-1586185018165-0e8d0b355b65?auto=format&fit=crop&w=900&q=82",
+    image: "/images/home/sigiriya-4k.jpg",
     location: "Matale District, Central Province",
     description:
       "Ancient rock fortress rising 200m above the jungle, featuring stunning frescoes, mirror wall, and landscaped gardens. A UNESCO World Heritage Site and one of Asia's best-preserved ancient cities.",
@@ -27,8 +26,7 @@ const attractions: Attraction[] = [
   },
   {
     title: "Temple of the Tooth (Kandy)",
-    image:
-      "https://images.unsplash.com/photo-1625737043828-d53c10a8bfa7?auto=format&fit=crop&w=900&q=82",
+    image: "/images/attractions/temple-of-tooth-kandy.jpg",
     location: "Kandy, Central Province",
     description:
       "Sacred Buddhist temple housing the relic of the tooth of Buddha. Set beside the beautiful Kandy Lake, this UNESCO site hosts the spectacular Esala Perahera festival annually.",
@@ -36,8 +34,7 @@ const attractions: Attraction[] = [
   },
   {
     title: "Nine Arches Bridge & Ella",
-    image:
-      "https://images.unsplash.com/photo-1586613835297-1feee5ee5507?auto=format&fit=crop&w=900&q=82",
+    image: "/images/home/ella-nine-arches-4k.jpg",
     location: "Ella, Badulla District",
     description:
       "Iconic colonial-era railway bridge surrounded by lush tea plantations and misty mountains. Ella offers breathtaking hikes, stunning viewpoints, and one of the world's most scenic train rides.",
@@ -54,8 +51,7 @@ const attractions: Attraction[] = [
   },
   {
     title: "Galle Fort",
-    image:
-      "https://images.unsplash.com/photo-1580976098749-1e1b3e2a1e67?auto=format&fit=crop&w=900&q=82",
+    image: "/images/home/galle-fort-coastline-4k.jpg",
     location: "Galle, Southern Province",
     description:
       "A UNESCO World Heritage fortification built by the Portuguese in 1588 and extensively fortified by the Dutch. Today it's a vibrant mix of colonial architecture, boutique shops, cafés, and ocean views.",
@@ -72,8 +68,7 @@ const attractions: Attraction[] = [
   },
   {
     title: "Nuwara Eliya (Little England)",
-    image:
-      "https://images.unsplash.com/photo-1573225935973-40b81e7bb454?auto=format&fit=crop&w=900&q=82",
+    image: "/images/attractions/nuwara-eliya-tea-plantations.jpg",
     location: "Central Province",
     description:
       "A charming hill station at 1,868m elevation, known as 'Little England' for its colonial-era bungalows and cool climate. Visit tea factories, Gregory Lake, and Horton Plains National Park.",
@@ -81,8 +76,7 @@ const attractions: Attraction[] = [
   },
   {
     title: "Dambulla Cave Temple",
-    image:
-      "https://images.unsplash.com/photo-1588598198215-d875d8ce2a90?auto=format&fit=crop&w=900&q=82",
+    image: "/images/attractions/dambulla-cave-temple.jpg",
     location: "Matale District, Central Province",
     description:
       "A spectacular complex of five caves containing over 150 Buddha statues and ancient paintings dating back to the 1st century BC. The largest and best-preserved cave temple in Sri Lanka.",
@@ -90,8 +84,7 @@ const attractions: Attraction[] = [
   },
   {
     title: "Adam's Peak (Sri Pada)",
-    image:
-      "https://images.unsplash.com/photo-1590071089561-7eb75274e3e0?auto=format&fit=crop&w=900&q=82",
+    image: "/images/attractions/adams-peak-sri-pada.jpg",
     location: "Sabaragamuwa Province",
     description:
       "A sacred mountain at 2,243m revered by multiple religions. The pilgrimage climb through the night rewards you with one of the most spectacular sunrises on Earth and the famous 'sacred footprint' at the summit.",
@@ -99,8 +92,7 @@ const attractions: Attraction[] = [
   },
   {
     title: "Trincomalee",
-    image:
-      "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7c?auto=format&fit=crop&w=900&q=82",
+    image: "/images/attractions/trincomalee-uppveli-beach.jpg",
     location: "Eastern Province",
     description:
       "Home to one of the world's finest natural harbors, pristine Nilaveli and Uppuveli beaches, ancient Koneswaram temple, and natural hot springs. A hidden gem on the east coast.",
@@ -108,8 +100,7 @@ const attractions: Attraction[] = [
   },
   {
     title: "Arugam Bay",
-    image:
-      "https://images.unsplash.com/photo-1455729552457-5c322b382017?auto=format&fit=crop&w=900&q=82",
+    image: "/images/attractions/arugam-bay-beach.jpg",
     location: "Eastern Province",
     description:
       "World-renowned surf destination with consistent point breaks. Beyond surfing, explore lagoons, spot elephants, and experience the laid-back beach culture and fresh seafood.",

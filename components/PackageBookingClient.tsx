@@ -103,7 +103,7 @@ const timelineShots = [
   "/images/tours/sri-lanka-grand-multi-city-tour.jpg",
   "/images/tours/cultural-triangle-kandy.jpg",
   "/images/tours/hill-country-scenic-escape.jpg",
-  "/images/tours/south-coast-beach-trail.jpg"
+  "/images/holiday-tours/south-coast-beach-trail-4k.jpg"
 ];
 
 export default function PackageBookingClient() {
