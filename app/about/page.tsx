@@ -4,7 +4,7 @@ import AboutClient from "@/components/AboutClient";
 export const metadata: Metadata = {
   title: "About | Triple R Holidays",
   description:
-    "Triple R Holidays is a Sri Lankan travel startup backed by 20+ years of combined tourism, hospitality and customer service experience. Contact our team for curated travel planning."
+    "Dedicated to creating unforgettable travel experiences, we combine local expertise with exceptional service to help you explore Sri Lanka and beyond."
 };
 
 export default function AboutPage() {

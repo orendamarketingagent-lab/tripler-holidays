@@ -16,6 +16,7 @@ import {
   MapPin
 } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
+import AccordionFAQ from "@/components/AccordionFAQ";
 
 const contact = {
   phone: "(011) 293 4924",
@@ -143,7 +144,7 @@ export default function HolidayToursClient() {
       <SiteHeader variant="transparent" ctaLabel="Get Quote" ctaHref="/holiday-tours#tour-quote" />
 
       <section
-        className="photo-text-hero hero-screen relative h-[100svh] w-full overflow-hidden text-white"
+        className="photo-text-hero hero-mobile relative w-full overflow-hidden text-white"
         data-hero-pin
         data-hero-pin-distance="108"
       >
@@ -166,10 +167,10 @@ export default function HolidayToursClient() {
             className="max-w-3xl text-center"
             data-hero-content
           >
-            <h1 className="font-space text-4xl font-extrabold uppercase leading-tight sm:text-5xl lg:text-6xl">
+            <h1 className="font-space text-3xl font-extrabold uppercase leading-tight sm:text-4xl lg:text-5xl text-white drop-shadow-[0_4px_12px_rgba(8,43,73,0.5)]">
               Discover <span className="text-[#D98928]">Sri Lanka</span>
             </h1>
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[#F5F1E8]/92">
+            <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-[#F5F1E8]/90 sm:text-base sm:leading-8">
               Explore our curated collection of unforgettable experiences in the heart of the Indian Ocean.
             </p>
             <p className="mt-4 text-sm font-semibold tracking-[0.08em] text-white/90 sm:text-base">
@@ -198,7 +199,7 @@ export default function HolidayToursClient() {
         </div>
       </section>
 
-      <section id="in-country" className="scroll-mt-24 bg-transparent px-4 py-20 sm:px-6 lg:py-24">
+      <section id="in-country" className="scroll-mt-24 bg-transparent px-4 py-12 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-7xl">
           {/* Travel Themes Section */}
           <div id="travel-themes" className="scroll-mt-28 py-10">
@@ -216,7 +217,7 @@ export default function HolidayToursClient() {
                 hidden: {},
                 visible: { transition: { staggerChildren: 0.08 } }
               }}
-              className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+              className="hide-scrollbar snap-carousel flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:pb-0 lg:grid-cols-4"
             >
               {[
                 {
@@ -247,7 +248,7 @@ export default function HolidayToursClient() {
                     visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 90, damping: 15 } }
                   }}
                   whileHover={{ y: -6, scale: 1.02 }}
-                  className="scandi-soft-card overflow-hidden group border border-[#111820]/10 bg-white/40"
+                  className="scandi-soft-card group min-w-[82vw] snap-start overflow-hidden border border-[#111820]/10 bg-white/40 sm:min-w-0"
                 >
                   <div className="relative h-48 w-full overflow-hidden">
                     <img
@@ -270,7 +271,7 @@ export default function HolidayToursClient() {
             </motion.div>
           </div>
 
-          <section className="bg-transparent px-0 py-14">
+          <section className="bg-transparent px-0 py-8">
             <div className="mx-auto max-w-4xl">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -313,6 +314,50 @@ export default function HolidayToursClient() {
             </h3>
           </div>
 
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: { staggerChildren: 0.08 }
+              }
+            }}
+            className="hide-scrollbar snap-carousel mt-10 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 md:hidden"
+          >
+            {inCountryPackages.map(pkg => (
+              <motion.article
+                key={`mobile-${pkg.id}`}
+                variants={{
+                  hidden: { opacity: 0, y: 18 },
+                  visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 95, damping: 15 } }
+                }}
+                className="min-w-[82vw] snap-start"
+              >
+                <Link
+                  href={pkg.href}
+                  className="group relative block min-h-[290px] overflow-hidden rounded-[22px] border border-[#111820]/15 bg-[#082B49] p-4"
+                >
+                  <img
+                    src={pkg.image}
+                    alt={pkg.title}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 [filter:saturate(1.08)_contrast(1.04)]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+                  <span className="absolute left-3 top-3 rounded-full border border-white/30 bg-[#082B49]/75 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.14em] text-[#D98928] backdrop-blur-sm">
+                    {pkg.badge}
+                  </span>
+                  <div className="relative z-10 mt-auto flex h-full flex-col justify-end text-white">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-[#D98928]">{pkg.duration}</p>
+                    <h3 className="font-space mt-1 text-base font-extrabold uppercase leading-tight">{pkg.title}</h3>
+                    <p className="mt-2 line-clamp-3 text-[10px] leading-5 text-white/75">{pkg.route}</p>
+                  </div>
+                </Link>
+              </motion.article>
+            ))}
+          </motion.div>
+
           {/* Dynamic 3-Column Mosaic Grid Layout */}
           <motion.div 
             initial="hidden"
@@ -324,7 +369,7 @@ export default function HolidayToursClient() {
                 transition: { staggerChildren: 0.1 }
               }
             }}
-            className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch"
+            className="mt-12 hidden grid-cols-1 gap-6 items-stretch md:grid md:grid-cols-2 lg:grid-cols-3"
           >
             
             {/* Column 1: Package 1 (Tall Card) */}
@@ -488,7 +533,7 @@ export default function HolidayToursClient() {
 
 
 
-      <section className="bg-transparent px-4 py-20 sm:px-6 lg:py-24">
+      <section className="bg-transparent px-4 py-12 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
             <motion.article
@@ -541,7 +586,7 @@ export default function HolidayToursClient() {
         </div>
       </section>
 
-      <section className="bg-transparent px-4 py-20 sm:px-6 lg:py-24">
+      <section className="bg-transparent px-4 py-12 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -570,7 +615,7 @@ export default function HolidayToursClient() {
                 transition: { staggerChildren: 0.1 }
               }
             }}
-            className="mt-10 grid gap-5 md:grid-cols-3"
+            className="hide-scrollbar snap-carousel mt-10 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:pb-0"
           >
             {sriLankaReviews.map(item => (
               <motion.article
@@ -580,7 +625,7 @@ export default function HolidayToursClient() {
                   visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 15 } }
                 }}
                 whileHover={{ y: -6, scale: 1.02 }}
-                className="scandi-soft-card p-6"
+                className="scandi-soft-card min-w-[82vw] snap-start p-4 sm:min-w-0 sm:p-6"
               >
                 <div className="flex items-center gap-1 text-[#D98928]">
                   {Array.from({ length: 5 }).map((_, i) => (
@@ -610,32 +655,11 @@ export default function HolidayToursClient() {
           <h2 className="font-space fluid-title mt-4 font-bold uppercase">
             Before Your Sri Lanka Trip
           </h2>
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={{
-              hidden: {},
-              visible: {
-                transition: { staggerChildren: 0.08, delayChildren: 0.1 }
-              }
-            }}
-            className="mt-8 grid gap-4 md:grid-cols-3"
-          >
-            {sriLankaFaqs.map(item => (
-              <motion.article
-                key={item.q}
-                variants={{
-                  hidden: { opacity: 0, y: 20, scale: 0.97 },
-                  visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 100, damping: 15 } }
-                }}
-                className="scandi-soft-card p-5 text-[#111820]"
-              >
-                <h3 className="font-space text-xl font-bold uppercase leading-tight">{item.q}</h3>
-                <p className="mt-3 text-sm leading-7 scandi-text-muted">{item.a}</p>
-              </motion.article>
-            ))}
-          </motion.div>
+          <AccordionFAQ
+            items={sriLankaFaqs}
+            theme="dark"
+            className="mt-8"
+          />
         </motion.div>
       </section>
 
@@ -856,11 +880,11 @@ export default function HolidayToursClient() {
                   ></textarea>
                 </div>
 
-                <div className="flex justify-end">
+                <div className="flex flex-col sm:flex-row sm:justify-end">
                   <button
                     type="submit"
                     disabled={isInquirySubmitting}
-                    className="min-h-12 rounded-full bg-[#111820] text-white px-8 font-bold uppercase tracking-wider text-xs flex items-center justify-center gap-2 hover:bg-[#D98928] disabled:opacity-50 transition duration-300 shadow-md shadow-[#111820]/10 cursor-pointer"
+                    className="w-full sm:w-auto min-h-[52px] rounded-full bg-[#111820] text-white px-8 font-bold uppercase tracking-wider text-xs flex items-center justify-center gap-2 hover:bg-[#D98928] disabled:opacity-50 transition duration-300 shadow-md shadow-[#111820]/10 cursor-pointer"
                   >
                     {isInquirySubmitting ? "Submitting..." : (
                       <>

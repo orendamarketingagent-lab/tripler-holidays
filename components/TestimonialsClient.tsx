@@ -101,7 +101,7 @@ export default function TestimonialsClient() {
 
       {/* ── Hero Section ── */}
       <section
-        className="photo-text-hero hero-screen relative h-[100svh] w-full overflow-hidden text-white"
+        className="photo-text-hero hero-mobile relative w-full overflow-hidden text-white"
         data-hero-pin
         data-hero-pin-distance="108"
       >
@@ -124,39 +124,49 @@ export default function TestimonialsClient() {
             className="max-w-3xl text-center"
             data-hero-content
           >
-            <h1 className="font-space text-4xl font-extrabold uppercase leading-tight sm:text-5xl lg:text-6xl">
+            <h1 className="font-space text-3xl font-extrabold uppercase leading-tight sm:text-4xl lg:text-5xl text-white drop-shadow-[0_4px_12px_rgba(8,43,73,0.5)]">
               Testimonials
               <br />
               <span className="text-[#D98928]">From Real Travelers</span>
             </h1>
 
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[#F5F1E8]/92">
+            <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-[#F5F1E8]/90 sm:text-base sm:leading-8">
               They trusted us with their journeys across Sri Lanka and beyond. Here is what they shared after traveling with Triple R Holidays.
             </p>
-
-            <div className="mx-auto mt-8 flex w-full max-w-3xl flex-nowrap items-center justify-center gap-4 overflow-x-auto rounded-full border border-white/18 bg-white/8 px-4 py-4 backdrop-blur-sm sm:gap-10 sm:px-6">
-              {stats.map((stat, i) => (
-                <div key={stat.label} className="flex shrink-0 items-center gap-4 sm:gap-10">
-                  <div className="text-center">
-                    <p className="font-space text-2xl font-bold text-[#D98928] sm:text-3xl">
-                      {stat.value}
-                    </p>
-                    <p className="mt-1 whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.16em] text-white/72">
-                      {stat.label}
-                    </p>
-                  </div>
-                  {i < stats.length - 1 && (
-                    <div className="h-10 w-px bg-white/20" />
-                  )}
-                </div>
-              ))}
-            </div>
           </motion.div>
         </div>
       </section>
 
+      {/* ── Stats Section (below hero on all screens) ── */}
+      <section className="relative overflow-hidden border-b border-[#111820]/8 bg-[#F5F1E8]/50 px-4 py-6 sm:px-6">
+        <div className="mx-auto grid grid-cols-3 gap-2 sm:hidden">
+          {stats.map((stat) => (
+            <div key={stat.label} className="flex flex-col items-center justify-center px-1 text-center">
+              <p className="font-space text-xl font-bold text-[#D98928]">{stat.value}</p>
+              <p className="mt-1 text-[9px] font-bold uppercase tracking-wider text-[#111820]/60 leading-tight">
+                {stat.label}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mx-auto hidden w-full max-w-3xl flex-nowrap items-center justify-center gap-4 overflow-x-auto rounded-full border border-[#111820]/18 bg-white/45 px-4 py-4 backdrop-blur-sm sm:flex sm:gap-10 sm:px-6">
+          {stats.map((stat, i) => (
+            <div key={stat.label} className="flex shrink-0 items-center gap-4 sm:gap-10">
+              <div className="text-center">
+                <p className="font-space text-2xl font-bold text-[#D98928] sm:text-3xl">{stat.value}</p>
+                <p className="mt-1 whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.16em] text-[#111820]/68">
+                  {stat.label}
+                </p>
+              </div>
+              {i < stats.length - 1 && <div className="h-10 w-px bg-[#111820]/18" />}
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ── Testimonial Cards Grid ── */}
-      <section className="relative px-4 py-16 sm:px-6 lg:py-24">
+      <section className="relative px-4 py-12 sm:px-6 lg:py-24">
         {/* Background accent */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-[#D98928]/[0.03] blur-3xl" />
@@ -168,7 +178,7 @@ export default function TestimonialsClient() {
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={containerVariants}
-            className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3"
+            className="hide-scrollbar snap-carousel flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 sm:grid sm:gap-8 sm:overflow-visible sm:pb-0 md:grid-cols-2 lg:grid-cols-3"
           >
             {testimonials.map((testimonial, index) => {
               const isExpanded = expandedCards.has(index);
@@ -189,7 +199,7 @@ export default function TestimonialsClient() {
                     stiffness: 200,
                     damping: 20
                   }}
-                  className="scandi-soft-card group relative flex flex-col overflow-hidden p-6 sm:p-7"
+                  className="scandi-soft-card group relative flex min-w-[88vw] snap-start flex-col overflow-hidden p-5 sm:min-w-0 sm:p-7"
                 >
                   {/* Decorative corner accent */}
                   <div className="absolute -top-12 -right-12 h-24 w-24 rounded-full bg-[#D98928]/[0.06] transition-all duration-500 group-hover:scale-150 group-hover:bg-[#D98928]/[0.1]" />
@@ -297,10 +307,10 @@ export default function TestimonialsClient() {
               perfect Sri Lanka experience with the care and attention
               you deserve.
             </p>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
               <a
                 href="https://wa.me/94767161937"
-                className="premium-cta inline-flex min-h-12 items-center justify-center gap-2 px-7 text-sm font-bold uppercase tracking-wide transition"
+                className="premium-cta inline-flex min-h-[52px] w-full items-center justify-center gap-2 px-7 text-sm font-bold uppercase tracking-wide transition sm:w-auto"
                 data-cursor-magnetic
               >
                 Plan My Trip
@@ -308,7 +318,7 @@ export default function TestimonialsClient() {
               </a>
               <a
                 href="/about"
-                className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/20 bg-white/8 px-7 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-white hover:text-[#111820]"
+                className="inline-flex min-h-[52px] w-full items-center justify-center rounded-full border border-white/20 bg-white/8 px-7 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-white hover:text-[#111820] sm:w-auto"
                 data-cursor-magnetic
               >
                 Learn About Us

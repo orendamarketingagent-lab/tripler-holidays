@@ -4,7 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, ChevronDown, Menu, User, X } from "lucide-react";
+import { createPortal } from "react-dom";
+import { ArrowUpRight, ChevronDown, ChevronRight, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 type NavItem = {
@@ -47,9 +48,17 @@ export default function SiteHeader({
   const [open, setOpen] = useState(false);
   const [mobileToursOpen, setMobileToursOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const headerShellRef = useRef<HTMLDivElement>(null);
-  const headerBarRef = useRef<HTMLDivElement>(null);
+  const [hidden, setHidden] = useState(false);
+  // Portal can only render on the client, track mount state
+  const [mounted, setMounted] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const lastScrollY = useRef(0);
   const transparent = variant === "transparent";
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const normalizePath = (value: string | null | undefined) => {
     if (!value) return "/";
     const base = imageBasePath.replace(/\/+$/, "");
@@ -61,168 +70,335 @@ export default function SiteHeader({
     if (normalized !== "/") normalized = normalized.replace(/\/+$/, "");
     return normalized || "/";
   };
+
   const normalizedPathname = normalizePath(pathname);
   const isToursRoute =
     normalizedPathname === "/holiday-tours" ||
     normalizedPathname === "/outbound-tours" ||
     normalizedPathname.startsWith("/package/");
 
+  // Scroll detection
   useEffect(() => {
-    if (!transparent) {
-      setScrolled(false);
-      return;
-    }
-
     const onScroll = () => {
-      setScrolled(window.scrollY > 20);
+      const currentY = window.scrollY;
+      if (transparent) {
+        setScrolled(currentY > 20);
+      }
+      if (currentY > 80 && currentY > lastScrollY.current + 6) {
+        setHidden(true);
+      } else if (currentY < lastScrollY.current - 4) {
+        setHidden(false);
+      }
+      lastScrollY.current = currentY;
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, [transparent]);
 
+  // Close mobile menu on route change
   useEffect(() => {
-    if (!open) {
-      setMobileToursOpen(false);
-    }
+    setOpen(false);
+    setMobileToursOpen(false);
+  }, [pathname]);
+
+  // Body scroll lock
+  useEffect(() => {
+    if (!open) setMobileToursOpen(false);
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
   }, [open]);
 
-  const transparentHeader = transparent && !scrolled && !open;
-  const blurredHeader = transparent && (scrolled || open);
+  // Sync header height CSS variable
+  useEffect(() => {
+    const syncHeight = () => {
+      if (!headerRef.current) return;
+      const h = Math.ceil(headerRef.current.getBoundingClientRect().height);
+      if (h > 0) {
+        document.documentElement.style.setProperty("--site-header-height", `${h}px`);
+        document.documentElement.style.setProperty("--site-header-offset", `${h}px`);
+      }
+    };
+    syncHeight();
+    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(syncHeight) : null;
+    if (headerRef.current) ro?.observe(headerRef.current);
+    window.addEventListener("resize", syncHeight, { passive: true });
+    return () => { ro?.disconnect(); window.removeEventListener("resize", syncHeight); };
+  }, [pathname, transparent, ctaLabel]);
 
   const isItemActive = (item: NavItem) => {
     if (item.key === "tours") return isToursRoute;
     return normalizedPathname === normalizePath(item.href);
   };
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
+  const headerBg =
+    transparent && !scrolled && !open
+      ? "bg-transparent shadow-none"
+      : "bg-[rgba(8,43,73,0.92)] backdrop-blur-xl shadow-[0_4px_24px_rgba(8,43,73,0.35)]";
 
-    const syncHeaderHeight = () => {
-      const shell = headerShellRef.current;
-      const bar = headerBarRef.current;
-      if (!shell || !bar) return;
+  // Mobile overlay rendered via portal to avoid React DOM insertion errors
+  const mobileOverlay = (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          key="mobile-nav-overlay"
+          className="fixed inset-0 z-[70] md:hidden"
+        >
+          {/* Backdrop */}
+          <motion.button
+            type="button"
+            aria-label="Close menu overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="absolute inset-0 bg-[#020B16]/75 backdrop-blur-[3px] w-full h-full text-left"
+            onClick={() => setOpen(false)}
+          />
 
-      const shellStyles = window.getComputedStyle(shell);
-      const topPadding = parseFloat(shellStyles.paddingTop || "0");
-      const barHeight = bar.getBoundingClientRect().height;
-      const measuredHeight = Math.ceil(topPadding + barHeight + 2);
-      if (measuredHeight === 0) return;
+          {/* Right slide-in drawer */}
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", stiffness: 260, damping: 28 }}
+            className="absolute right-0 top-0 bottom-0 w-[min(85vw,360px)] h-full overflow-hidden border-l border-white/10 bg-[#082B49]/98 shadow-[-10px_0_40px_rgba(2,8,23,0.45)] backdrop-blur-2xl flex flex-col justify-between"
+          >
+            {/* Ambient glows inside drawer */}
+            <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#D98928]/14 blur-[80px]" />
+            <div className="pointer-events-none absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-[#1E7C8A]/14 blur-[80px]" />
+            <div className="grain-overlay opacity-30" />
 
-      const root = document.documentElement;
-      root.style.setProperty("--site-header-height", `${measuredHeight}px`);
-      root.style.setProperty("--site-header-offset", `${measuredHeight}px`);
-    };
+            {/* Header part */}
+            <div className="relative flex items-center justify-between border-b border-white/10 px-6 py-5">
+              <div className="flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#D98928]" />
+                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#F5F1E8]/75">TRIPLE R HOLIDAYS</p>
+              </div>
+              <button
+                type="button"
+                aria-label="Close mobile menu"
+                onClick={() => setOpen(false)}
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white transition hover:bg-white/15"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
 
-    syncHeaderHeight();
+            {/* Nav content */}
+            <motion.nav
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: {},
+                visible: { transition: { staggerChildren: 0.05, delayChildren: 0.05 } }
+              }}
+              className="relative flex-1 overflow-y-auto px-6 py-8"
+            >
+              {navItems.map(item => {
+                const active = isItemActive(item);
+                if (!item.children) {
+                  return (
+                    <motion.div
+                      key={item.href}
+                      variants={{
+                        hidden: { opacity: 0, x: 16 },
+                        visible: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 120, damping: 20 } }
+                      }}
+                      className="mb-5"
+                    >
+                      <Link
+                        href={item.href}
+                        className="group flex items-center justify-between py-2 text-xl font-bold uppercase tracking-[0.08em] transition-colors duration-300"
+                        onClick={() => setOpen(false)}
+                      >
+                        <span className={`transition-colors duration-300 ${active ? "text-[#F2B24D]" : "text-white/90 group-hover:text-[#D98928]"}`}>
+                          {item.label}
+                        </span>
+                        {active ? (
+                          <span className="h-2 w-2 rounded-full bg-[#D98928]" />
+                        ) : (
+                          <ChevronRight className="h-4 w-4 text-white/30 group-hover:text-[#D98928] group-hover:translate-x-1 transition duration-300" />
+                        )}
+                      </Link>
+                    </motion.div>
+                  );
+                }
 
-    const shell = headerShellRef.current;
-    if (!shell) return;
+                return (
+                  <motion.div
+                    key={item.key}
+                    variants={{
+                      hidden: { opacity: 0, x: 16 },
+                      visible: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 120, damping: 20 } }
+                    }}
+                    className="mb-5"
+                  >
+                    <button
+                      type="button"
+                      className="flex w-full items-center justify-between py-2 text-xl font-bold uppercase tracking-[0.08em] transition-colors duration-300 text-left"
+                      onClick={() => setMobileToursOpen(c => !c)}
+                    >
+                      <span className={`${active || mobileToursOpen ? "text-[#F2B24D]" : "text-white/90 hover:text-[#D98928]"}`}>
+                        {item.label}
+                      </span>
+                      <motion.span
+                        animate={{ rotate: mobileToursOpen ? 90 : 0 }}
+                        transition={{ duration: 0.18 }}
+                      >
+                        <ChevronRight className="h-4 w-4 text-white/30" />
+                      </motion.span>
+                    </button>
 
-    const resizeObserver = typeof ResizeObserver !== "undefined" ? new ResizeObserver(syncHeaderHeight) : null;
-    resizeObserver?.observe(shell);
-    if (headerBarRef.current) {
-      resizeObserver?.observe(headerBarRef.current);
-    }
-    window.addEventListener("resize", syncHeaderHeight, { passive: true });
+                    <AnimatePresence initial={false}>
+                      {mobileToursOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.25, ease: "easeOut" }}
+                          className="overflow-hidden mt-1 pl-4 border-l border-[#D98928]/30 space-y-2.5"
+                        >
+                          {item.children?.map(child => {
+                            const childActive = normalizedPathname === normalizePath(child.href);
+                            return (
+                              <Link
+                                key={child.href}
+                                href={child.href}
+                                className={`flex items-center gap-3 py-1.5 text-xs font-bold uppercase tracking-[0.12em] transition-colors duration-300 ${
+                                  childActive ? "text-[#F2B24D]" : "text-white/70 hover:text-[#D98928]"
+                                }`}
+                                onClick={() => setOpen(false)}
+                              >
+                                <span className={`h-1.5 w-1.5 shrink-0 rounded-full transition ${childActive ? "bg-[#F2B24D]" : "bg-white/20"}`} />
+                                {child.label}
+                              </Link>
+                            );
+                          })}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                );
+              })}
+            </motion.nav>
 
-    return () => {
-      resizeObserver?.disconnect();
-      window.removeEventListener("resize", syncHeaderHeight);
-    };
-  }, [pathname, transparent, ctaLabel]);
+            {/* Bottom Actions section */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15, duration: 0.25 }}
+              className="relative border-t border-white/10 px-6 py-6 space-y-3 bg-[#061F35]/45"
+              style={{ paddingBottom: "calc(1.5rem + env(safe-area-inset-bottom, 0px))" }}
+            >
+              <Link
+                href={ctaHref}
+                className="flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-[#D98928] px-6 text-xs font-bold uppercase tracking-[0.16em] text-[#111820] shadow-lg transition duration-300 hover:bg-[#F2B24D]"
+                onClick={() => setOpen(false)}
+              >
+                {ctaLabel}
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
+              
+              <Link
+                href="/about#contact"
+                className="flex min-h-[46px] w-full items-center justify-center rounded-full border border-white/20 bg-white/5 px-6 text-xs font-bold uppercase tracking-[0.16em] text-white transition duration-300 hover:bg-white/10"
+                onClick={() => setOpen(false)}
+              >
+                Contact Us
+              </Link>
+
+              <div className="pt-4 flex items-center justify-center gap-1.5 text-[9px] font-bold uppercase tracking-widest text-white/40">
+                <span>Hotline:</span>
+                <span className="text-white/60">(011) 293 4924</span>
+              </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
 
   return (
-    <div
-      ref={headerShellRef}
-      className="fixed inset-x-0 top-0 z-50 w-full pointer-events-none"
-      style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
-    >
+    // Single root element — no fragments — avoids React DOM insertBefore errors
+    <div>
+      {/* Fixed header bar */}
       <header
-        className={`relative w-full pointer-events-auto transition-[background-color,backdrop-filter] duration-300 ${
-          transparentHeader
-            ? "bg-transparent shadow-none"
-            : blurredHeader
-              ? "bg-[rgba(8,43,73,0.36)] backdrop-blur-xl shadow-[0_10px_24px_rgba(8,43,73,0.22)]"
-              : "bg-[rgba(8,43,73,0.48)] backdrop-blur-lg shadow-[0_8px_20px_rgba(8,43,73,0.2)]"
+        ref={headerRef}
+        className={`fixed inset-x-0 top-0 z-50 w-full transition-all duration-300 ${headerBg} ${
+          hidden && !open ? "-translate-y-full" : "translate-y-0"
         }`}
+        style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
       >
-        <div ref={headerBarRef} className="relative z-10 mx-auto flex min-h-[72px] w-full max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
-          
-          {/* Brand Logo */}
-          <Link
-            href="/"
-            className="inline-flex"
-            onClick={() => setOpen(false)}
-          >
+        <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:h-[72px] sm:px-6 lg:px-8">
+
+          {/* Logo */}
+          <Link href="/" className="inline-flex shrink-0" onClick={() => setOpen(false)}>
             <Image
               src={`${imageBasePath}/images/tripler-holidays-logo-trimmed.png`}
               alt="Triple R Holidays"
               width={220}
               height={69}
-              className="h-8 w-auto opacity-95 [filter:brightness(0)_invert(1)] sm:h-9"
+              className="h-8 w-auto brightness-0 invert sm:h-9"
               priority
             />
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-7 lg:gap-9">
+          <nav className="hidden md:flex items-center gap-6 lg:gap-9">
             {navItems.map(item => {
               const active = isItemActive(item);
-
               if (!item.children) {
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
                     aria-current={active ? "page" : undefined}
-                    className={`relative pb-1 text-sm font-normal uppercase tracking-[0.18em] transition-colors duration-200 ${
+                    className={`relative pb-0.5 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors duration-200 ${
                       active ? "text-[#F2B24D]" : "text-white/90 hover:text-white"
                     }`}
                   >
                     {active && (
-                      <span className="absolute -bottom-1 left-0 h-[2px] w-full bg-[#F2B24D]" />
+                      <span className="absolute -bottom-1 left-0 h-[2px] w-full rounded-full bg-[#F2B24D]" />
                     )}
                     {item.label}
                   </Link>
                 );
               }
-
               return (
                 <div key={item.key} className="group relative pb-2">
                   <button
                     type="button"
                     aria-haspopup="menu"
                     aria-label={`${item.label} menu`}
-                    className={`relative inline-flex items-center gap-1.5 pb-1 text-sm font-normal uppercase tracking-[0.18em] transition-colors duration-200 ${
+                    className={`relative inline-flex items-center gap-1 pb-0.5 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors duration-200 ${
                       active ? "text-[#F2B24D]" : "text-white/90 hover:text-white"
                     }`}
                   >
                     {active && (
-                      <span className="absolute -bottom-1 left-0 h-[2px] w-full bg-[#F2B24D]" />
+                      <span className="absolute -bottom-1 left-0 h-[calc(100%-14px)] w-[2px] rounded-full bg-[#F2B24D]" />
                     )}
                     {item.label}
-                    <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180" />
+                    <ChevronDown className="h-3 w-3 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180" />
                   </button>
-
-                  <div className="pointer-events-none invisible absolute left-1/2 top-[calc(100%+4px)] z-50 w-64 -translate-x-1/2 translate-y-2 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
-                    <div className="rounded-2xl border border-white/22 bg-[linear-gradient(155deg,rgba(8,43,73,0.94),rgba(17,24,32,0.92))] p-2 shadow-[0_18px_36px_rgba(8,43,73,0.45)] backdrop-blur-xl">
+                  <div className="pointer-events-none invisible absolute left-1/2 top-[calc(100%+4px)] z-50 w-56 -translate-x-1/2 translate-y-2 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                    <div className="rounded-2xl border border-white/20 bg-[rgba(8,43,73,0.96)] p-2 shadow-xl backdrop-blur-xl">
                       {item.children.map(child => {
                         const childActive =
                           normalizedPathname === normalizePath(child.href) ||
                           (child.href === "/holiday-tours" && normalizedPathname.startsWith("/package/"));
                         return (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          className={`block rounded-xl px-3.5 py-3 text-xs font-semibold uppercase tracking-[0.14em] transition ${
-                            childActive
-                              ? "bg-white/16 text-white"
-                              : "text-white/90 hover:bg-white/12 hover:text-white"
-                          }`}
-                        >
-                          {child.label}
-                        </Link>
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            className={`block rounded-xl px-3.5 py-3 text-[11px] font-semibold uppercase tracking-[0.14em] transition ${
+                              childActive
+                                ? "bg-white/16 text-white"
+                                : "text-white/85 hover:bg-white/12 hover:text-white"
+                            }`}
+                          >
+                            {child.label}
+                          </Link>
                         );
                       })}
                     </div>
@@ -232,119 +408,57 @@ export default function SiteHeader({
             })}
           </nav>
 
-          {/* Right CTA Actions */}
-          <div className="flex items-center gap-3">
+          {/* Right side actions */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Desktop CTA */}
             <Link
               href={ctaHref}
-              className="hidden sm:inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-white/40 bg-white/10 px-6 text-xs font-normal uppercase tracking-[0.16em] text-white transition duration-300 hover:bg-white hover:text-[#082B49]"
+              className="hidden md:inline-flex min-h-9 items-center justify-center gap-1.5 rounded-full border border-white/35 bg-white/10 px-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-white transition duration-300 hover:bg-white hover:text-[#082B49] lg:px-5"
             >
               {ctaLabel}
-              <ArrowUpRight className="h-3.5 w-3.5" />
+              <ArrowUpRight className="h-3 w-3" />
             </Link>
 
-            <Link
-              href="/about#contact"
-              className="grid h-10 w-10 place-items-center rounded-full text-white/90 transition duration-300 hover:text-white"
-            >
-              <User className="h-4 w-4" />
-            </Link>
-
-            {/* Mobile Menu Button */}
+            {/* Mobile hamburger */}
             <button
               type="button"
-              className="grid h-10 w-10 place-items-center text-white transition-all duration-300 md:hidden"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-white/15 text-white backdrop-blur-sm transition-all duration-200 hover:bg-white/25 active:scale-95 md:hidden"
               aria-label={open ? "Close menu" : "Open menu"}
-              onClick={() => setOpen(current => !current)}
+              aria-expanded={open}
+              onClick={() => setOpen(c => !c)}
             >
-              {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+              <AnimatePresence mode="wait" initial={false}>
+                {open ? (
+                  <motion.span
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.16 }}
+                    className="flex"
+                  >
+                    <X className="h-5 w-5" />
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.16 }}
+                    className="flex"
+                  >
+                    <Menu className="h-5 w-5" />
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </button>
           </div>
         </div>
-
-        {/* Mobile Expandable Menu Dropdown */}
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              initial={{ opacity: 0, height: 0, y: -10 }}
-              animate={{ opacity: 1, height: "auto", y: 0 }}
-              exit={{ opacity: 0, height: 0, y: -10 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="overflow-hidden md:hidden"
-            >
-              <div className="border-t border-white/15 bg-[rgba(8,43,73,0.82)] px-5 py-4">
-                {navItems.map(item => {
-                  const active = isItemActive(item);
-
-                  if (!item.children) {
-                    return (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        className={`block rounded-md px-2 py-3 text-sm font-normal uppercase tracking-[0.14em] transition ${
-                          active
-                            ? "bg-white/12 text-white"
-                            : "text-white/90 hover:bg-white/8 hover:text-white"
-                        }`}
-                        onClick={() => setOpen(false)}
-                      >
-                        {item.label}
-                      </Link>
-                    );
-                  }
-
-                  return (
-                    <div key={item.key} className="rounded-md">
-                      <button
-                        type="button"
-                        className={`flex w-full items-center justify-between rounded-md px-2 py-3 text-sm font-normal uppercase tracking-[0.14em] transition ${
-                          active || mobileToursOpen
-                            ? "bg-white/12 text-white"
-                            : "text-white/90 hover:bg-white/8 hover:text-white"
-                        }`}
-                        onClick={() => setMobileToursOpen(current => !current)}
-                      >
-                        {item.label}
-                        <ChevronDown className={`h-4 w-4 transition-transform ${mobileToursOpen ? "rotate-180" : ""}`} />
-                      </button>
-
-                      <AnimatePresence initial={false}>
-                        {mobileToursOpen && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.2, ease: "easeOut" }}
-                            className="overflow-hidden pl-3"
-                          >
-                            {item.children.map(child => (
-                              <Link
-                                key={child.href}
-                                href={child.href}
-                                className="block rounded-md px-2 py-2.5 text-xs font-normal uppercase tracking-[0.12em] text-white/90 transition hover:bg-white/10 hover:text-white"
-                                onClick={() => setOpen(false)}
-                              >
-                                {child.label}
-                              </Link>
-                            ))}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  );
-                })}
-                <Link
-                  href={ctaHref}
-                  className="mt-3 flex min-h-11 items-center justify-center gap-2 rounded-full border border-white/40 bg-white/10 px-4 text-sm font-normal uppercase tracking-[0.16em] text-white transition duration-300 hover:bg-white hover:text-[#082B49]"
-                  onClick={() => setOpen(false)}
-                >
-                  {ctaLabel}
-                  <ArrowUpRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </header>
+
+      {/* Mobile overlay — portalled to document.body to avoid insertBefore DOM errors */}
+      {mounted && createPortal(mobileOverlay, document.body)}
     </div>
   );
 }

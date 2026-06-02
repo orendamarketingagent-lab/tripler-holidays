@@ -151,78 +151,80 @@ const fadeUp = {
 export default function AttractionsClient() {
   return (
     <main className="scandi-page min-h-screen text-[#111820]">
-      <SiteHeader variant="solid" />
+      <SiteHeader variant="transparent" />
 
       {/* ── Hero Section ── */}
-      <section className="header-safe-top relative overflow-hidden px-4 pb-6 pt-16 sm:px-6 sm:pt-20 lg:pt-24">
-        {/* Decorative circles */}
-        <div
-          className="pointer-events-none absolute -right-32 -top-32 h-[420px] w-[420px] rounded-full opacity-20"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(217,137,40,0.4) 0%, transparent 70%)"
-          }}
+      <section
+        className="photo-text-hero hero-mobile relative w-full overflow-hidden text-white"
+        data-hero-pin
+        data-hero-pin-distance="108"
+      >
+        <img
+          src="/images/home/sigiriya-4k.jpg"
+          alt="Sigiriya Rock Fortress"
+          className="absolute inset-0 h-full w-full object-cover"
+          data-parallax="12"
+          data-hero-media
         />
-        <div
-          className="pointer-events-none absolute -left-24 bottom-0 h-[300px] w-[300px] rounded-full opacity-15"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(8,43,73,0.3) 0%, transparent 70%)"
-          }}
-        />
+        <div className="absolute inset-0 bg-[#082B49]/55" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#082B49]/34 via-[#082B49]/42 to-[#082B49]/64" />
+        <div className="grain-overlay" />
 
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: { staggerChildren: 0.1, delayChildren: 0.1 }
-            }
-          }}
-          className="relative z-10 mx-auto max-w-7xl text-center"
-        >
-          <motion.span
-            variants={fadeUp}
-            className="premium-pill mx-auto inline-flex w-fit items-center gap-2 px-5 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#D98928]"
-          >
-            <Camera className="h-3.5 w-3.5" />
-            Explore Sri Lanka
-          </motion.span>
-
-          <motion.h1
-            variants={fadeUp}
-            className="font-space fluid-display mx-auto mt-7 max-w-4xl font-bold uppercase text-[#111820]"
-          >
-            Top Attractions{" "}
-            <span className="text-[#D98928]">in Sri Lanka</span>
-          </motion.h1>
-
-          <motion.p
-            variants={fadeUp}
-            className="fluid-body mx-auto mt-5 max-w-2xl text-[#111820]/72"
-          >
-            From ancient rock fortresses and sacred temples to pristine beaches
-            and misty highlands — discover the destinations that make Sri Lanka
-            one of the world&apos;s most extraordinary islands.
-          </motion.p>
-
+        <div className="absolute inset-0 z-10 mx-auto flex w-full max-w-7xl items-end justify-center px-6 pb-14 sm:px-8 sm:pb-16 lg:pb-20">
           <motion.div
-            variants={fadeUp}
-            className="mx-auto mt-6 flex items-center justify-center gap-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#111820]/56"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: { staggerChildren: 0.1, delayChildren: 0.1 }
+              }
+            }}
+            className="max-w-3xl text-center"
+            data-hero-content
           >
-            <span className="flex items-center gap-1.5">
-              <Clock3 className="h-3.5 w-3.5 text-[#D98928]" />
-              {attractions.length} Destinations
-            </span>
-            <span className="h-3 w-px bg-[#111820]/20" />
-            <span className="flex items-center gap-1.5">
-              <Sparkles className="h-3.5 w-3.5 text-[#D98928]" />
-              Curated Collection
-            </span>
+            <motion.span
+              variants={fadeUp}
+              className="inline-flex items-center gap-2 rounded-[6px] border border-white/20 bg-white/12 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-[#D98928]"
+            >
+              <Camera className="h-3.5 w-3.5" />
+              Explore Sri Lanka
+            </motion.span>
+
+            <motion.h1
+              variants={fadeUp}
+              className="font-space text-3xl font-extrabold uppercase leading-tight sm:text-4xl lg:text-5xl text-white drop-shadow-[0_4px_12px_rgba(8,43,73,0.5)] mt-5"
+            >
+              Top Attractions{" "}
+              <span className="text-[#D98928]">in Sri Lanka</span>
+            </motion.h1>
+
+            <motion.p
+              variants={fadeUp}
+              className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-[#F5F1E8]/90 sm:text-base sm:leading-8"
+            >
+              From ancient rock fortresses and sacred temples to pristine beaches
+              and misty highlands — discover the destinations that make Sri Lanka
+              one of the world&apos;s most extraordinary islands.
+            </motion.p>
+
+            <motion.div
+              variants={fadeUp}
+              className="mx-auto mt-6 flex items-center justify-center gap-4 text-xs font-semibold uppercase tracking-[0.16em] text-white/80"
+            >
+              <span className="flex items-center gap-1.5">
+                <Clock3 className="h-3.5 w-3.5 text-[#D98928]" />
+                {attractions.length} Destinations
+              </span>
+              <span className="h-3 w-px bg-white/20" />
+              <span className="flex items-center gap-1.5">
+                <Sparkles className="h-3.5 w-3.5 text-[#D98928]" />
+                Curated Collection
+              </span>
+            </motion.div>
           </motion.div>
-        </motion.div>
+        </div>
       </section>
 
       {/* ── Attractions Grid ── */}

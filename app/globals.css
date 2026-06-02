@@ -66,6 +66,12 @@ h6 {
   min-height: 100svh;
 }
 
+/* Full-screen hero at all breakpoints */
+.hero-mobile {
+  min-height: 100svh;
+  min-height: 100vh; /* fallback */
+}
+
 .header-safe-top {
   padding-top: var(--site-header-offset);
 }
@@ -352,6 +358,81 @@ html.lenis body {
 button,
 a {
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* WhatsApp FAB safe area */
+.fab-safe {
+  bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+  right: calc(1.25rem + env(safe-area-inset-right, 0px));
+}
+
+/* WhatsApp pulse ring */
+@keyframes wa-ping {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.85); opacity: 0; }
+}
+
+.wa-pulse::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: #25D366;
+  animation: wa-ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+/* Footer accordion mobile */
+.footer-accordion-btn {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  transition: color 0.2s;
+  min-height: 48px;
+}
+
+.footer-accordion-btn:hover {
+  color: #D98928;
+}
+
+/* Scroll snap improvements */
+.snap-carousel {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
+.snap-carousel > * {
+  scroll-snap-align: start;
+}
+
+/* Mobile section spacing helpers */
+.section-mobile {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+@media (min-width: 640px) {
+  .section-mobile {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-mobile {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
 }
 
 ::selection {

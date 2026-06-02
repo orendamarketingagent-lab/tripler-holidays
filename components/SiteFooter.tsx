@@ -1,5 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const contact = {
   phone: "(011) 293 4924",
@@ -9,7 +14,33 @@ const contact = {
   instagramHref: "https://www.instagram.com/triplerholidays.lk?igsh=MXFpcWt4ZTliYjdwbw=="
 };
 
-const navItems = [
+const footerSections = [
+  {
+    title: "Tours",
+    links: [
+      { label: "Sri Lanka Tours", href: "/holiday-tours" },
+      { label: "Outbound Tours", href: "/outbound-tours" }
+    ]
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About Us", href: "/about" },
+      { label: "Testimonials", href: "/testimonials" },
+      { label: "Cooperate", href: "/cooperate" }
+    ]
+  },
+  {
+    title: "Services & Contact",
+    links: [
+      { label: "Services", href: "/services" },
+      { label: "Contact", href: "/about#contact" }
+    ]
+  }
+];
+
+// All links for desktop layout
+const allNavLinks = [
   { label: "Sri Lanka Tours", href: "/holiday-tours" },
   { label: "Outbound Tours", href: "/outbound-tours" },
   { label: "Testimonials", href: "/testimonials" },
@@ -18,13 +49,63 @@ const navItems = [
   { label: "Contact", href: "/about#contact" }
 ];
 
+function MobileFooterAccordion() {
+  const [openSection, setOpenSection] = useState<number | null>(null);
+
+  return (
+    <div className="sm:hidden border-b border-white/10 py-2">
+      {footerSections.map((section, i) => (
+        <div key={section.title}>
+          <button
+            type="button"
+            aria-expanded={openSection === i}
+            onClick={() => setOpenSection(prev => prev === i ? null : i)}
+            className="footer-accordion-btn"
+          >
+            {section.title}
+            <motion.span
+              animate={{ rotate: openSection === i ? 180 : 0 }}
+              transition={{ duration: 0.22 }}
+            >
+              <ChevronDown className="h-4 w-4 text-white/50" />
+            </motion.span>
+          </button>
+          <AnimatePresence initial={false}>
+            {openSection === i && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.24, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="overflow-hidden"
+              >
+                <div className="pb-3 pt-1">
+                  {section.links.map(link => (
+                    <Link
+                      key={link.label}
+                      href={link.href}
+                      className="block py-2.5 text-xs font-semibold uppercase tracking-wider text-white/65 transition hover:text-[#D98928] min-h-[44px] flex items-center"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function SiteFooter() {
   const imageBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
   return (
     <footer className="w-full border-t border-white/10 bg-footer-dark text-white shadow-2xl backdrop-blur-md">
       <div className="mx-auto max-w-7xl px-6 py-6 sm:px-8 sm:py-8">
-        
+
         {/* Top Section */}
         <div className="flex flex-col items-center border-b border-white/10 pb-6 text-center">
           <Link
@@ -45,9 +126,12 @@ export default function SiteFooter() {
           </p>
         </div>
 
-        {/* Center Menu Links (centered pill style matching screenshot footer) */}
-        <div className="flex flex-wrap justify-center gap-4 py-6 sm:gap-8 sm:py-7">
-          {navItems.map(item => (
+        {/* Mobile Accordion Navigation */}
+        <MobileFooterAccordion />
+
+        {/* Desktop Nav Links — hidden on mobile */}
+        <div className="hidden flex-wrap justify-center gap-4 py-6 sm:flex sm:gap-8 sm:py-7">
+          {allNavLinks.map(item => (
             <Link
               key={item.label}
               href={item.href}

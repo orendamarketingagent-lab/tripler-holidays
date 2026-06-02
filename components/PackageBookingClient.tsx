@@ -113,20 +113,21 @@ export default function PackageBookingClient() {
         <SiteHeader variant="transparent" ctaLabel="Book Now" />
 
         <section
-          className="photo-text-hero hero-screen header-safe-top relative w-full min-h-[750px] overflow-hidden text-white"
+          className="photo-text-hero hero-mobile relative w-full overflow-hidden text-white"
           data-hero-pin
-          data-hero-pin-distance="118"
+          data-hero-pin-distance="108"
         >
           <div
-            className="absolute -inset-y-[20%] inset-x-0 bg-cover bg-center"
+            className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: "url(/images/tours/sri-lanka-grand-multi-city-tour.jpg)" }}
             data-hero-media
           />
-          <div className="cinematic-dark-overlay absolute inset-0" />
+          <div className="absolute inset-0 bg-[#082B49]/55" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#082B49]/34 via-[#082B49]/42 to-[#082B49]/64" />
           <div className="grain-overlay" />
           
           <div
-            className="relative mx-auto grid h-full max-w-7xl items-center gap-10 px-6 py-20 sm:px-8 lg:grid-cols-[1.05fr_0.95fr]"
+            className="relative mx-auto grid h-full max-w-7xl items-end justify-center px-6 pb-14 sm:px-8 sm:pb-16 lg:pb-20 lg:grid-cols-[1.05fr_0.95fr] gap-10"
             data-hero-content
           >
             <motion.div
@@ -154,7 +155,7 @@ export default function PackageBookingClient() {
                   hidden: { opacity: 0, y: 24 },
                   visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 85, damping: 15 } }
                 }}
-                className="font-space fluid-display mt-6 max-w-4xl font-bold uppercase tracking-normal text-white"
+                className="font-space text-3xl font-extrabold uppercase leading-tight sm:text-4xl lg:text-5xl text-white drop-shadow-[0_4px_12px_rgba(8,43,73,0.5)] mt-5"
               >
                 <span className="block">
                   Sri Lanka Grand Multi-City Tour
@@ -165,7 +166,7 @@ export default function PackageBookingClient() {
                   hidden: { opacity: 0, y: 16 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
                 }}
-                className="fluid-body mt-6 max-w-2xl text-[#F5F1E8]/90"
+                className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-[#F5F1E8]/90 sm:text-base sm:leading-8"
               >
                 A complete inbound journey across culture, east coast beaches, Kandy,
                 hill country, wildlife, south coast leisure, Bentota and Colombo.

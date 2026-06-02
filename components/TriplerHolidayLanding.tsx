@@ -76,27 +76,23 @@ const hotTours = [
 const aboutHighlights = [
   {
     icon: Compass,
-    label: "Custom Route Design",
-    image:
-      "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=900&q=82"
+    label: "Tailored Journey Design",
+    detail: "Every route is custom-planned around your travel style, pace and preferences."
   },
   {
     icon: ShieldCheck,
     label: "Reliable Coordination",
-    image:
-      "https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=900&q=82"
+    detail: "From airport arrival to return transfer, each detail is professionally managed."
   },
   {
     icon: Users,
     label: "Group + Family Friendly",
-    image:
-      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=82"
+    detail: "Flexible planning for couples, families, private groups and corporate teams."
   },
   {
     icon: CheckCircle2,
     label: "End-to-End Support",
-    image:
-      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=900&q=82"
+    detail: "Single-point support throughout your journey for smoother decisions and comfort."
   }
 ];
 
@@ -287,7 +283,7 @@ export default function TriplerHolidayLanding() {
         <SiteHeader variant="transparent" ctaLabel="Find a Tour" ctaHref="/holiday-tours" />
 
         {/* 1. HERO SECTION */}
-        <section className="hero-screen header-safe-top relative w-full overflow-hidden text-white bg-[#082B49]">
+        <section className="hero-mobile header-safe-top relative w-full overflow-hidden text-white bg-[#082B49]">
           <video
             className="parallax-layer absolute -top-[15%] left-0 h-[130%] w-full object-cover brightness-90 contrast-110 saturate-110"
             data-depth="12"
@@ -304,8 +300,8 @@ export default function TriplerHolidayLanding() {
           <div className="absolute inset-0 bg-gradient-to-b from-[#082B49]/66 via-[#082B49]/50 to-[#082B49]/86" />
           <div className="absolute inset-x-0 bottom-0 h-72 bg-gradient-to-t from-[#082B49]/95 via-[#082B49]/70 to-transparent" />
 
-          <div className="absolute inset-0 z-20 flex items-end justify-center pb-[12vh] text-center sm:pb-[14vh] lg:pb-[16vh]">
-            <div className="w-full px-6 sm:px-8">
+          <div className="absolute inset-0 z-20 flex items-end justify-center pb-10 text-center sm:pb-[14vh] lg:pb-[16vh]">
+            <div className="w-full px-4 sm:px-6 lg:px-8">
             <motion.div
               initial="hidden"
               animate="visible"
@@ -316,14 +312,14 @@ export default function TriplerHolidayLanding() {
                   transition: { staggerChildren: 0.12 }
                 }
               }}
-              className="mx-auto max-w-3xl"
+              className="mx-auto max-w-md sm:max-w-3xl lg:max-w-4xl"
             >
               <motion.h1
                 variants={{
                   hidden: { opacity: 0, y: 28 },
                   visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 15 } }
                 }}
-                className="mt-4 font-space text-2xl font-bold uppercase tracking-[0.08em] text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.9)] sm:text-3xl lg:text-4xl"
+                className="font-space text-3xl font-extrabold uppercase leading-tight sm:text-4xl lg:text-5xl text-white drop-shadow-[0_4px_12px_rgba(8,43,73,0.5)]"
               >
                 Escape Into
                 <br />
@@ -335,7 +331,7 @@ export default function TriplerHolidayLanding() {
                   hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
                 }}
-                className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-[#F5F1E8]/95 drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)] sm:text-base"
+                className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-[#F5F1E8]/90 sm:text-base sm:leading-8 drop-shadow-[0_2px_10px_rgba(8,43,73,0.5)]"
               >
                 Discover Sri Lanka & Beyond through refined travel experiences.
               </motion.p>
@@ -345,21 +341,21 @@ export default function TriplerHolidayLanding() {
                   hidden: { opacity: 0, y: 16 },
                   visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } }
                 }}
-                className="mt-7 flex flex-wrap items-center justify-center gap-3"
+                className="mt-5 flex flex-wrap items-center justify-center gap-2.5 sm:mt-7 sm:gap-3"
               >
                 <a
                   href="/holiday-tours"
-                  className="inline-flex items-center gap-3 rounded-full bg-[#D98928] py-2 pl-6 pr-2 text-[11px] font-bold uppercase tracking-wider text-[#111820] shadow-lg transition-all duration-300 hover:bg-[#D98928] group"
+                  className="inline-flex min-h-[48px] items-center gap-2.5 rounded-full bg-[#D98928] py-2 pl-5 pr-2 text-[11px] font-bold uppercase tracking-wider text-[#111820] shadow-lg transition-all duration-300 hover:bg-[#D98928] group sm:gap-3 sm:pl-6 sm:text-[11px]"
                 >
                   Choose Tour
-                  <span className="grid h-8 w-8 place-items-center rounded-full bg-white text-[#111820] transition-transform duration-300 group-hover:rotate-45">
-                    <ArrowUpRight className="h-4 w-4" />
+                  <span className="grid h-7 w-7 place-items-center rounded-full bg-white text-[#111820] transition-transform duration-300 group-hover:rotate-45 sm:h-8 sm:w-8">
+                    <ArrowUpRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   </span>
                 </a>
 
                 <a
                   href="/about#contact"
-                  className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/25 bg-white/10 px-5 text-[11px] font-bold uppercase tracking-wider text-white transition hover:bg-white hover:text-[#082B49]"
+                  className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-white/25 bg-white/10 px-4 text-[11px] font-bold uppercase tracking-wider text-white transition hover:bg-white hover:text-[#082B49] sm:min-h-11 sm:px-5 sm:text-[11px]"
                 >
                   Plan My Trip
                 </a>
@@ -370,10 +366,10 @@ export default function TriplerHolidayLanding() {
         </section>
 
         {/* 2. STATS SECTION */}
-        <section className="relative overflow-hidden px-4 py-16 sm:px-6">
+        <section className="relative overflow-hidden px-4 py-8 sm:px-6 sm:py-16">
           <div className="absolute inset-0 bg-[#F5F1E8]/54" />
           <div className="relative mx-auto max-w-7xl">
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
               {heroStats.map(stat => (
                 <motion.article
                   key={stat.label}
@@ -382,10 +378,10 @@ export default function TriplerHolidayLanding() {
                   viewport={{ once: true }}
                   transition={{ type: "spring", stiffness: 100, damping: 15 }}
                   whileHover={{ y: -4 }}
-                  className="scandi-soft-card p-6 border border-[#111820]/14"
+                  className="scandi-soft-card border border-[#111820]/14 p-4 sm:p-6"
                 >
-                  <p className="font-space text-4xl font-bold text-[#D98928]">{stat.value}</p>
-                  <p className="mt-2 text-xs font-bold uppercase tracking-wider text-[#111820]/60">{stat.label}</p>
+                  <p className="font-space text-2xl font-bold text-[#D98928] sm:text-4xl">{stat.value}</p>
+                  <p className="mt-2 text-[10px] font-bold uppercase tracking-wider text-[#111820]/60 sm:text-xs">{stat.label}</p>
                 </motion.article>
               ))}
             </div>
@@ -393,7 +389,7 @@ export default function TriplerHolidayLanding() {
         </section>
 
         {/* 3. TOP ATTRACTION COLLAGE GRID WITH CURVED TRAIL */}
-        <section className="relative px-4 py-20 sm:px-6 overflow-hidden">
+        <section className="relative px-4 py-12 sm:px-6 sm:py-20 overflow-hidden">
           
           {/* Curve route line winding behind collage cards */}
           <svg className="absolute inset-x-0 top-1/4 w-full h-[60%] pointer-events-none opacity-30 hidden md:block" viewBox="0 0 1440 600" fill="none">
@@ -414,7 +410,7 @@ export default function TriplerHolidayLanding() {
                   Sri Lanka
                 </span>
                 <h2 className="font-space fluid-title mt-4 font-bold uppercase text-[#111820]">
-                  Popular <span className="inline-block rounded-full bg-[#F5F1E8]/80 border border-[#111820]/12 px-6 py-1.5 shadow-sm text-[#D98928] leading-none">Places</span>
+                  Top <span className="inline-block rounded-full bg-[#F5F1E8]/80 border border-[#111820]/12 px-6 py-1.5 shadow-sm text-[#D98928] leading-none">Attractions</span>
                 </h2>
               </div>
               <p className="max-w-md text-sm leading-7 text-[#111820]/82">
@@ -433,7 +429,7 @@ export default function TriplerHolidayLanding() {
                   transition: { staggerChildren: 0.1 }
                 }
               }}
-              className="hide-scrollbar mt-16 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-3 sm:grid sm:grid-cols-2 sm:gap-8 sm:overflow-visible sm:pb-0 lg:grid-cols-4"
+              className="hide-scrollbar snap-carousel mt-16 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-3 sm:grid sm:grid-cols-2 sm:gap-8 sm:overflow-visible sm:pb-0 lg:grid-cols-4"
             >
               {hotTours.map((tour, index) => (
                 <motion.article
@@ -443,7 +439,7 @@ export default function TriplerHolidayLanding() {
                     visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 85, damping: 14 } }
                   }}
                   whileHover={{ y: -4, scale: 1.015 }}
-                  className="group relative aspect-[3/4] min-w-[78vw] snap-start overflow-hidden rounded-[28px] border border-[#111820]/15 bg-[#F5F1E8] shadow-xl sm:min-w-0"
+                  className="group relative aspect-[3/4] min-w-[80vw] snap-start overflow-hidden rounded-[28px] border border-[#111820]/15 bg-[#F5F1E8] shadow-xl sm:min-w-0"
                 >
                   <div className="absolute inset-0 overflow-hidden">
                     <img
@@ -482,8 +478,17 @@ export default function TriplerHolidayLanding() {
         </section>
 
         {/* 7. ABOUT & HIGHLIGHTS GRID */}
-        <section className="px-4 pb-20 sm:px-6 lg:pb-24">
-          <div className="mx-auto grid max-w-7xl gap-8 rounded-[32px] border border-[#111820]/14 bg-[#F5F1E8]/80 p-7 shadow-xl backdrop-blur-sm lg:grid-cols-[0.9fr_1.1fr] lg:p-12">
+        <section className="relative overflow-hidden bg-[#082B49] px-4 py-14 text-[#F5F1E8] sm:px-6 lg:py-24">
+          <img
+            src="/images/home/ella-nine-arches-4k.jpg"
+            alt="Sri Lanka scenic travel experience"
+            className="absolute inset-y-0 right-0 hidden h-full w-[46%] object-cover opacity-28 lg:block"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,#082B49_0%,rgba(8,43,73,0.96)_48%,rgba(8,43,73,0.78)_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(217,137,40,0.18),transparent_34%),radial-gradient(circle_at_78%_80%,rgba(245,241,232,0.08),transparent_32%)]" />
+          <div className="grain-overlay opacity-35" />
+
+          <div className="relative mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -492,19 +497,30 @@ export default function TriplerHolidayLanding() {
                 hidden: { opacity: 0, x: -30 },
                 visible: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 80, damping: 15 } }
               }}
+              className="max-w-2xl"
             >
               <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D98928]">
                 <span className="h-px w-9 bg-[#D98928]" />
                 About Us
               </span>
-              <h2 className="font-space fluid-title mt-4 font-bold uppercase text-[#111820]">
-                Premium planning for travel that feels effortless.
+              <h2 className="mt-5 font-space text-4xl font-bold uppercase leading-[0.98] text-white sm:text-5xl lg:text-6xl">
+                Crafting Exceptional Travel Experiences
               </h2>
-              <p className="mt-6 text-sm leading-7 text-[#111820]/82">
-                We are a startup driven by passion for travel, backed by a professional
-                team with deep tourism and hospitality experience. Every itinerary is
-                designed to feel elegant, practical and memorable.
+              <p className="mt-6 max-w-xl text-sm leading-8 text-[#F5F1E8]/82 sm:text-base">
+                At Triple R Holidays, we transform travel ideas into unforgettable experiences. Backed by expertise in tourism and hospitality, we create personalized journeys that are seamless, memorable, and tailored to your needs.
               </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <div className="inline-flex items-center gap-2 rounded-full border border-[#F5F1E8]/18 bg-white/10 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-[#F5F1E8]/88 backdrop-blur-md">
+                  Premium Service Standards
+                </div>
+                <a
+                  href="/about"
+                  className="inline-flex items-center gap-2 rounded-full border border-[#D98928]/55 bg-[#D98928] px-4 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-[#111820] transition hover:bg-[#F5F1E8]"
+                >
+                  Our Story
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
+              </div>
             </motion.div>
 
             <motion.div 
@@ -520,9 +536,9 @@ export default function TriplerHolidayLanding() {
                   }
                 }
               }}
-              className="grid gap-4 sm:grid-cols-2"
+              className="border-y border-[#F5F1E8]/18 bg-[#061F35]/42 backdrop-blur-md"
             >
-              {aboutHighlights.map(item => {
+              {aboutHighlights.map((item, index) => {
                 const Icon = item.icon;
                 return (
                   <motion.div 
@@ -531,21 +547,23 @@ export default function TriplerHolidayLanding() {
                       hidden: { opacity: 0, y: 20, scale: 0.96 },
                       visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 100, damping: 15 } }
                     }}
-                    whileHover={{ y: -4, scale: 1.02 }}
-                    className="scandi-soft-card overflow-hidden p-4 border border-[#111820]/14"
+                    className="group grid gap-4 border-b border-[#F5F1E8]/14 px-4 py-6 last:border-b-0 sm:grid-cols-[72px_1fr_42px] sm:items-start sm:px-6 lg:px-8"
                   >
-                    <div className="expand-image relative h-24 overflow-hidden rounded-[10px] border border-[#111820]/18" data-expand-image>
-                      <img
-                        src={item.image}
-                        alt={item.label}
-                        className="h-full w-full object-cover [filter:saturate(1.05)_contrast(1.04)]"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#F5F1E8]/70 via-transparent to-transparent" />
+                    <div className="flex items-center justify-between sm:block">
+                      <span className="grid h-12 w-12 place-items-center rounded-full border border-[#D98928]/45 bg-[#D98928]/12 text-[#D98928] transition group-hover:bg-[#D98928] group-hover:text-[#111820]">
+                        <Icon className="h-5 w-5" />
+                      </span>
+                      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#F5F1E8]/42 sm:hidden">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
                     </div>
-                    <span className="mt-3 grid h-10 w-10 place-items-center rounded-[9px] bg-[#D98928]/34 text-[#D98928]">
-                      <Icon className="h-5 w-5" />
+                    <div>
+                      <p className="text-sm font-black uppercase tracking-[0.12em] text-white">{item.label}</p>
+                      <p className="mt-2 max-w-lg text-sm leading-7 text-[#F5F1E8]/72">{item.detail}</p>
+                    </div>
+                    <span className="hidden text-right text-[11px] font-bold uppercase tracking-[0.22em] text-[#F5F1E8]/42 sm:block">
+                      {String(index + 1).padStart(2, "0")}
                     </span>
-                    <p className="mt-2 text-xs font-bold uppercase tracking-wider text-[#111820]">{item.label}</p>
                   </motion.div>
                 );
               })}
@@ -554,7 +572,7 @@ export default function TriplerHolidayLanding() {
         </section>
 
         {/* 9. WHY TRAVELERS TRUST US */}
-        <section className="relative overflow-hidden px-4 py-20 sm:px-6 lg:py-24">
+        <section className="relative overflow-hidden px-4 py-12 sm:px-6 lg:py-24">
           <div className="absolute inset-0 bg-gradient-to-b from-[#F5F1E8]/60 via-[#F5F1E8]/80 to-[#F5F1E8]/60" />
           <div className="absolute -left-32 top-1/4 h-72 w-72 rounded-full bg-[#D98928]/8 blur-[100px] pointer-events-none" />
           <div className="absolute -right-24 bottom-1/4 h-56 w-56 rounded-full bg-[#082B49]/6 blur-[80px] pointer-events-none" />
@@ -615,7 +633,7 @@ export default function TriplerHolidayLanding() {
         </section>
 
         {/* 10. PAYMENT SECURITY */}
-        <section className="relative overflow-hidden px-4 py-16 sm:px-6 lg:py-20">
+        <section className="relative overflow-hidden px-4 py-10 sm:px-6 lg:py-20">
           <div className="relative mx-auto max-w-5xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -708,7 +726,7 @@ export default function TriplerHolidayLanding() {
         </section>
 
         {/* 11. MEMBERSHIPS & PARTNERSHIPS */}
-        <section className="relative overflow-hidden px-4 py-20 sm:px-6 lg:py-24">
+        <section className="relative overflow-hidden px-4 py-12 sm:px-6 lg:py-24">
           <div className="absolute inset-0 bg-gradient-to-b from-[#F5F1E8]/50 via-[#F5F1E8]/75 to-[#F5F1E8]/50" />
           <div className="relative mx-auto max-w-6xl">
             <motion.div
@@ -819,7 +837,7 @@ export default function TriplerHolidayLanding() {
         </section>
 
         {/* 12. EXCLUSIVE CUSTOMIZED TOUR */}
-        <section id="custom-tour" className="relative overflow-hidden px-4 py-20 sm:px-6 lg:py-24 border-t border-[#111820]/10 bg-gradient-to-b from-[#F5F1E8]/30 to-[#F5F1E8]/70">
+        <section id="custom-tour" className="relative overflow-hidden px-4 py-12 sm:px-6 lg:py-24 border-t border-[#111820]/10 bg-gradient-to-b from-[#F5F1E8]/30 to-[#F5F1E8]/70">
           <div className="relative mx-auto max-w-6xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -831,7 +849,7 @@ export default function TriplerHolidayLanding() {
               <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#D98928]">
                 Looking for an
               </span>
-              <h2 className="font-space text-3xl sm:text-5xl font-black uppercase mt-3 text-[#111820]">
+              <h2 className="font-space text-2xl sm:text-5xl font-black uppercase mt-3 text-[#111820]">
                 Exclusive Customized Tour?
               </h2>
             </motion.div>

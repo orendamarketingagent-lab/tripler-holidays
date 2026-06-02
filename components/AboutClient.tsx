@@ -19,11 +19,14 @@ import {
 } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import CountUpStat from "@/components/CountUpStat";
+import AccordionFAQ from "@/components/AccordionFAQ";
 
 const heroImage =
-  "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=2600&q=90";
+  "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=2600&q=90";
 const storyImage =
   "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=84";
+const approachImage =
+  "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1400&q=84";
 
 const contact = {
   phone: "(011) 293 4924",
@@ -174,13 +177,13 @@ export default function AboutClient() {
       <SiteHeader variant="transparent" ctaLabel="Enquire Now" />
 
       <section
-        className="photo-text-hero hero-screen relative h-[100svh] w-full overflow-hidden text-white"
+        className="photo-text-hero hero-mobile relative w-full overflow-hidden text-white"
         data-hero-pin
         data-hero-pin-distance="108"
       >
         <img
           src={heroImage}
-          alt="Luxury destination landscape"
+          alt="Professional travel planning team"
           className="absolute inset-0 h-full w-full object-cover"
           data-parallax="12"
           data-hero-media
@@ -201,7 +204,7 @@ export default function AboutClient() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.18, duration: 0.55 }}
-              className="font-space mt-5 text-4xl font-extrabold uppercase leading-tight sm:text-5xl lg:text-6xl"
+              className="font-space mt-5 text-3xl font-extrabold uppercase leading-tight sm:text-4xl lg:text-5xl text-white drop-shadow-[0_4px_12px_rgba(8,43,73,0.5)]"
             >
               A Travel Brand Built On
               <br />
@@ -211,16 +214,15 @@ export default function AboutClient() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.26, duration: 0.55 }}
-              className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[#F5F1E8]/92"
+              className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-[#F5F1E8]/90 sm:text-base sm:leading-8"
             >
-              Triple R Holidays creates seamless and memorable travel experiences across Sri Lanka
-              and beyond, combining startup energy with experienced execution.
+              Dedicated to creating unforgettable travel experiences, we combine local expertise with exceptional service to help you explore Sri Lanka and beyond.
             </motion.p>
           </motion.div>
         </div>
       </section>
 
-      <section className="px-4 py-10 sm:px-6 lg:py-12">
+      <section className="px-4 py-8 sm:px-6 lg:py-12">
         <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="grid gap-6">
             <motion.div
@@ -230,74 +232,40 @@ export default function AboutClient() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="font-['Playfair_Display'] fluid-title font-bold text-[#111820]">
-                A Team Of Real Experts And Travelers
+                Who We Are
               </h2>
               <div className="mt-4 max-w-3xl space-y-4 text-sm leading-8 text-[#111820]/76 sm:text-base">
                 <p>
-                  A team of real experts and travelers with a passion for Sri Lanka for over a decade in the tourism
-                  business, Triple R Holidays has representatives in all major destinations across the country and
-                  represents some of the most esteemed travel agencies in Europe and other parts of the world.
+                  Triple R Holidays is a team with over 20 years of expertise in the travel industry, specializing in Sri Lanka and key destinations across Asia. Built on strong destination knowledge and hands-on experience, we are committed to delivering reliable and well-crafted travel solutions.
                 </p>
                 <p>
-                  We offer an extensive list of tour programs and hotels all over Sri Lanka, an experienced team to
-                  assist and accommodate your travel needs the best we can, a one-stop service for easy travel
-                  arrangements, trusted partner agencies in Southeast Asian countries, and the best holiday experience
-                  of a lifetime.
+                  We operate across all major destinations in Sri Lanka, offering carefully curated tour packages, quality hotel selections, and reliable transport services.
+                </p>
+                <p>
+                  From planning to execution, we focus on making every journey smooth, simple, and memorable with end-to-end travel support you can trust.
                 </p>
               </div>
             </motion.div>
 
             <motion.div 
-              initial="hidden"
-              whileInView="visible"
+              initial={{ opacity: 0, scale: 0.96, y: 20 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              variants={{
-                hidden: {},
-                visible: {
-                  transition: { staggerChildren: 0.12 }
-                }
-              }}
-              className="grid gap-4 sm:grid-cols-[0.62fr_1fr]"
+              transition={{ type: "spring", stiffness: 90, damping: 15 }}
+              whileHover={{ y: -4, scale: 1.015 }}
+              className="overflow-hidden rounded-[20px] border border-[#111820]/16 bg-[#F5F1E8]/90"
             >
-              <motion.article 
-                variants={{
-                  hidden: { opacity: 0, scale: 0.94, y: 20 },
-                  visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", stiffness: 90, damping: 15 } }
-                }}
-                whileHover={{ y: -4, scale: 1.02 }}
-                className="overflow-hidden rounded-[20px] border border-[#111820]/16 bg-[#F5F1E8]/90"
-              >
-                <div className="expand-image relative h-[290px]" data-expand-image>
-                  <img src={storyImage} alt="Travel team experience" className="h-full w-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#F5F1E8]/74 via-[#F5F1E8]/14 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#D98928]">Our story</p>
-                    <p className="mt-1 font-['Playfair_Display'] text-2xl font-semibold leading-tight">
-                      Fresh Startup
-                    </p>
-                  </div>
+              <div className="expand-image relative h-[250px] sm:h-[300px]" data-expand-image>
+                <img
+                  src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&w=1400&q=84"
+                  alt="Happy travelers exploring together"
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#F5F1E8]/74 via-[#F5F1E8]/10 to-transparent" />
+                <div className="absolute bottom-5 left-5 right-5">
+               
                 </div>
-              </motion.article>
-
-              <motion.article 
-                variants={{
-                  hidden: { opacity: 0, scale: 0.94, y: 20 },
-                  visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", stiffness: 90, damping: 15 } }
-                }}
-                whileHover={{ y: -4, scale: 1.02 }}
-                className="overflow-hidden rounded-[20px] border border-[#111820]/16 bg-[#F5F1E8]/90"
-              >
-                <div className="expand-image relative h-[290px]" data-expand-image>
-                  <img src={heroImage} alt="Luxury destination landscape detail" className="h-full w-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#F5F1E8]/74 via-[#F5F1E8]/8 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#D98928]">Our approach</p>
-                    <p className="mt-1 font-['Playfair_Display'] text-2xl font-semibold leading-tight">
-                      Seasoned Delivery
-                    </p>
-                  </div>
-                </div>
-              </motion.article>
+              </div>
             </motion.div>
           </div>
 
@@ -331,7 +299,7 @@ export default function AboutClient() {
         </div>
       </section>
 
-      <section className="px-4 py-10 sm:px-6 lg:py-12">
+      <section className="px-4 py-8 sm:px-6 lg:py-12">
         <div className="mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -356,7 +324,7 @@ export default function AboutClient() {
               hidden: {},
               visible: { transition: { staggerChildren: 0.08 } }
             }}
-            className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3"
+            className="hide-scrollbar mt-12 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:pb-0 xl:grid-cols-3"
           >
             {whatWeDoCards.map(item => {
               const Icon = item.icon;
@@ -367,7 +335,7 @@ export default function AboutClient() {
                     hidden: { opacity: 0, y: 18 },
                     visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 95, damping: 15 } }
                   }}
-                  className="scandi-soft-card relative overflow-hidden border border-[#111820]/12 p-6"
+                  className="scandi-soft-card relative min-w-[88vw] snap-start overflow-hidden border border-[#111820]/12 p-4 md:min-w-0 md:p-6"
                 >
                   <div className="pointer-events-none absolute -right-12 -top-12 h-28 w-28 rounded-full bg-[#D98928]/12 blur-2xl" />
                   <span className="relative z-10 grid h-11 w-11 place-items-center rounded-[10px] bg-[#D98928]/20 text-[#D98928]">
@@ -382,7 +350,7 @@ export default function AboutClient() {
         </div>
       </section>
 
-      <section className="px-4 py-10 sm:px-6 lg:py-12">
+      <section className="px-4 py-8 sm:px-6 lg:py-12">
         <div className="mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -407,7 +375,7 @@ export default function AboutClient() {
               hidden: {},
               visible: { transition: { staggerChildren: 0.08 } }
             }}
-            className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3"
+            className="hide-scrollbar mt-12 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:pb-0 xl:grid-cols-3"
           >
             {whyTravelersChooseUsCards.map(item => {
               const Icon = item.icon;
@@ -418,7 +386,7 @@ export default function AboutClient() {
                     hidden: { opacity: 0, y: 18 },
                     visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 95, damping: 15 } }
                   }}
-                  className="scandi-soft-card border border-[#111820]/12 p-6 text-center"
+                  className="scandi-soft-card min-w-[88vw] snap-start border border-[#111820]/12 p-4 text-center md:min-w-0 md:p-6"
                 >
                   <span className="mx-auto grid h-11 w-11 place-items-center rounded-full bg-[#D98928]/18 text-[#D98928]">
                     <Icon className="h-5 w-5" />
@@ -432,7 +400,7 @@ export default function AboutClient() {
         </div>
       </section>
 
-      <section className="px-4 py-10 sm:px-6 lg:py-12">
+      <section className="px-4 py-8 sm:px-6 lg:py-12">
         <div className="mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -501,7 +469,7 @@ export default function AboutClient() {
               hidden: {},
               visible: { transition: { staggerChildren: 0.1 } }
             }}
-            className="mt-12 grid gap-6 lg:grid-cols-3"
+            className="hide-scrollbar mt-12 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:pb-0 lg:grid-cols-3"
           >
             {travelerReviewCards.map(card => (
               <motion.article
@@ -510,7 +478,7 @@ export default function AboutClient() {
                   hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 90, damping: 15 } }
                 }}
-                className="scandi-soft-card border border-[#111820]/12 p-6"
+                className="scandi-soft-card min-w-[88vw] snap-start border border-[#111820]/12 p-4 md:min-w-0 md:p-6"
               >
                 <div className="flex items-start gap-4">
                   <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#D98928]/16 text-lg font-black text-[#D98928]">
@@ -574,7 +542,7 @@ export default function AboutClient() {
         </motion.div>
       </section>
 
-      <section id="contact" className="px-4 py-10 sm:px-6 lg:py-12">
+      <section id="contact" className="px-4 py-8 sm:px-6 lg:py-12">
         <div className="mx-auto max-w-7xl">
           <motion.div 
             initial="hidden"
@@ -586,7 +554,7 @@ export default function AboutClient() {
                 transition: { staggerChildren: 0.08 }
               }
             }}
-            className="grid gap-4"
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2"
           >
             <motion.article 
               variants={{
@@ -667,36 +635,13 @@ export default function AboutClient() {
         </div>
       </section>
 
-      <section className="px-4 pb-20 pt-10 sm:px-6 lg:pb-24">
+      <section className="px-4 pb-16 pt-8 sm:px-6 lg:pb-24">
         <div className="mx-auto max-w-7xl">
           <h2 className="font-space fluid-title font-bold uppercase">Quick Answers</h2>
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={{
-              hidden: {},
-              visible: {
-                transition: { staggerChildren: 0.1 }
-              }
-            }}
-            className="mt-8 grid gap-4 md:grid-cols-3"
-          >
-            {faqs.map(item => (
-              <motion.article 
-                key={item.q} 
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 15 } }
-                }}
-                whileHover={{ y: -4, scale: 1.02 }}
-                className="scandi-soft-card p-5"
-              >
-                <h3 className="font-space text-xl font-bold uppercase leading-tight">{item.q}</h3>
-                <p className="mt-3 text-sm leading-7 scandi-text-muted">{item.a}</p>
-              </motion.article>
-            ))}
-          </motion.div>
+          <AccordionFAQ
+            items={faqs}
+            className="mt-6"
+          />
         </div>
       </section>
     </main>

@@ -5,7 +5,11 @@ export default function WhatsAppFab() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
-      className="fixed bottom-5 right-5 z-[70] inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#D98928] text-white shadow-[0_14px_32px_rgba(217,137,40,0.42)] transition duration-300 hover:scale-105 hover:bg-[#F2B24D] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D98928]"
+      className="wa-pulse fixed z-[70] inline-flex h-[58px] w-[58px] items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_8px_28px_rgba(37,211,102,0.46)] transition duration-300 hover:scale-110 hover:bg-[#20c05a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25D366]"
+      style={{
+        bottom: "calc(1.25rem + env(safe-area-inset-bottom, 0px))",
+        right: "calc(1.25rem + env(safe-area-inset-right, 0px))"
+      }}
     >
       <svg
         viewBox="0 0 24 24"

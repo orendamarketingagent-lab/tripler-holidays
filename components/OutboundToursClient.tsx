@@ -8,10 +8,12 @@ import {
   ShieldCheck,
   Sparkles,
   Star,
+  X
 } from "lucide-react";
 import { destinations } from "@/lib/content";
 import SiteHeader from "@/components/SiteHeader";
 import HolidayToursHeroShowcase from "@/components/HolidayToursHeroShowcase";
+import AccordionFAQ from "@/components/AccordionFAQ";
 
 const contact = {
   phone: "(011) 293 4924",
@@ -105,7 +107,7 @@ const outboundCategories = [
     title: "Weekend Escapes",
     note: "Fast outbound trips from Sri Lanka",
     image:
-      "https://images.unsplash.com/photo-1501556424050-d4816356b73e?auto=format&fit=crop&w=1300&q=84"
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2600&q=90"
   }
 ];
 
@@ -320,14 +322,77 @@ export default function OutboundToursClient() {
   });
   const [isInquirySubmitting, setIsInquirySubmitting] = useState(false);
   const [inquirySuccess, setInquirySuccess] = useState(false);
+  const [mobilePackageModal, setMobilePackageModal] = useState<null | {
+    title: string;
+    duration?: string;
+    image: string;
+    details?: string[];
+    subtitle?: string;
+  }>(null);
 
   return (
     <main className="holiday-page-bg light-mode-travel min-h-screen text-[#111820] font-manrope">
-      <SiteHeader variant="transparent" ctaLabel="Enquire Now" />
-      <HolidayToursHeroShowcase />
+      <SiteHeader variant="transparent" ctaLabel="Enquire Now" ctaHref="/outbound-tours#outbound-quote" />
+      
+      <section
+        className="photo-text-hero hero-mobile relative w-full overflow-hidden text-white"
+        data-hero-pin
+        data-hero-pin-distance="108"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=2600&q=90"
+          alt="Outbound travel destinations"
+          className="absolute inset-0 h-full w-full object-cover"
+          data-parallax="12"
+          data-hero-media
+        />
+        <div className="absolute inset-0 bg-[#082B49]/55" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#082B49]/34 via-[#082B49]/42 to-[#082B49]/64" />
+        <div className="grain-overlay" />
+
+        <div className="absolute inset-0 z-10 mx-auto flex w-full max-w-7xl items-end justify-center px-6 pb-14 sm:px-8 sm:pb-16 lg:pb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65 }}
+            className="max-w-3xl text-center"
+            data-hero-content
+          >
+            <span className="inline-flex items-center gap-2 rounded-[6px] border border-white/20 bg-white/12 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-[#D98928]">
+              <Sparkles className="h-3.5 w-3.5" />
+              Explore Beyond
+            </span>
+            <h1 className="font-space mt-5 text-3xl font-extrabold uppercase leading-tight text-white drop-shadow-[0_4px_12px_rgba(8,43,73,0.5)] sm:text-4xl lg:text-5xl">
+              Outbound Tours & Packages
+            </h1>
+            <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-[#F5F1E8]/90 sm:text-base sm:leading-8">
+              Explore custom outbound journeys from Sri Lanka to Malaysia, Singapore, Maldives, and Thailand, planned for your comfort.
+            </p>
+            <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+              <a
+                href="#outbound-quote"
+                className="inline-flex items-center gap-3 rounded-full bg-[#D98928] py-2 pl-6 pr-2 text-[11px] font-bold uppercase tracking-wider text-[#111820] shadow-lg transition-all duration-300 hover:bg-[#F2B24D] group"
+              >
+                Get a Quote
+                <span className="grid h-8 w-8 place-items-center rounded-full bg-white text-[#111820] transition-transform duration-300 group-hover:rotate-45">
+                  <ArrowRight className="h-4 w-4" />
+                </span>
+              </a>
+              <a
+                href={contact.whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/25 bg-white/10 px-5 text-[11px] font-bold uppercase tracking-wider text-white transition hover:bg-white hover:text-[#082B49]"
+              >
+                WhatsApp Quote
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
       {/* Travel Styles */}
-      <section className="bg-transparent px-4 py-20 sm:px-6 lg:py-24">
+      <section className="bg-transparent px-4 py-12 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -338,10 +403,10 @@ export default function OutboundToursClient() {
             <div>
               <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D98928]">
                 <span className="h-px w-9 bg-[#D98928]" />
-                Outbound categories
+                Outbound travels
               </span>
               <h2 className="font-space fluid-title mt-4 font-bold uppercase">
-                Outbound Travel Styles
+                Outbound Travel Themes
               </h2>
             </div>
           </motion.div>
@@ -356,7 +421,7 @@ export default function OutboundToursClient() {
                 transition: { staggerChildren: 0.08 }
               }
             }}
-            className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
+            className="hide-scrollbar mt-10 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:pb-0 lg:grid-cols-4"
           >
             {outboundCategories.map(item => (
               <motion.article
@@ -366,7 +431,7 @@ export default function OutboundToursClient() {
                   visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 15 } }
                 }}
                 whileHover={{ y: -4, scale: 1.02 }}
-                className="scandi-soft-card group overflow-hidden"
+                className="scandi-soft-card group min-w-[88vw] snap-start overflow-hidden md:min-w-0"
               >
                 <div className="expand-image relative h-52 overflow-hidden" data-expand-image>
                   <img
@@ -387,7 +452,7 @@ export default function OutboundToursClient() {
       </section>
 
       {/* Malaysia Tours Block */}
-      <section id="malaysia-packages" className="scroll-mt-24 bg-transparent px-4 py-20 sm:px-6 lg:py-24">
+      <section id="malaysia-packages" className="scroll-mt-24 bg-transparent px-4 py-12 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -418,7 +483,7 @@ export default function OutboundToursClient() {
                 transition: { staggerChildren: 0.08, delayChildren: 0.05 }
               }
             }}
-            className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3"
+            className="hide-scrollbar mt-12 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:pb-0 xl:grid-cols-3"
           >
             {malaysiaTourCollection.map(item => (
               <motion.article
@@ -428,7 +493,7 @@ export default function OutboundToursClient() {
                   visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 95, damping: 15 } }
                 }}
                 whileHover={{ y: -5, scale: 1.01 }}
-                className="scandi-soft-card overflow-hidden border border-[#111820]/14 bg-white/60"
+                className="scandi-soft-card min-w-[88vw] snap-start overflow-hidden border border-[#111820]/14 bg-white/60 md:min-w-0"
               >
                 <div className="relative h-56 overflow-hidden">
                   <img
@@ -443,7 +508,22 @@ export default function OutboundToursClient() {
                 </div>
                 <div className="p-5 sm:p-6">
                   <h3 className="font-space text-2xl font-extrabold uppercase text-[#111820]">{item.title}</h3>
-                  <ul className="mt-4 space-y-2">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setMobilePackageModal({
+                        title: item.title,
+                        duration: item.duration,
+                        image: item.image,
+                        details: item.details
+                      })
+                    }
+                    className="mt-4 inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-[#111820] px-5 text-[11px] font-bold uppercase tracking-[0.15em] text-white transition hover:bg-[#D98928] md:hidden"
+                  >
+                    View Details
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </button>
+                  <ul className="mt-4 hidden space-y-2 md:block">
                     {item.details.map(detail => (
                       <li key={detail} className="flex items-start gap-2 text-sm leading-7 text-[#111820]/80">
                         <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#D98928]" />
@@ -455,7 +535,7 @@ export default function OutboundToursClient() {
                     href={contact.whatsappHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-6 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#111820] px-6 text-[11px] font-bold uppercase tracking-[0.15em] text-white transition hover:bg-[#D98928]"
+                    className="mt-6 hidden min-h-11 items-center justify-center gap-2 rounded-full bg-[#111820] px-6 text-[11px] font-bold uppercase tracking-[0.15em] text-white transition hover:bg-[#D98928] md:inline-flex"
                   >
                     Get Quote
                     <ArrowRight className="h-3.5 w-3.5" />
@@ -478,7 +558,7 @@ export default function OutboundToursClient() {
       </section>
 
       {/* Thailand Tours Block */}
-      <section id="thailand-packages" className="scroll-mt-24 bg-transparent px-4 py-20 sm:px-6 lg:py-24">
+      <section id="thailand-packages" className="scroll-mt-24 bg-transparent px-4 py-12 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -509,7 +589,7 @@ export default function OutboundToursClient() {
                 transition: { staggerChildren: 0.08, delayChildren: 0.05 }
               }
             }}
-            className="mt-12 grid gap-5 md:grid-cols-2"
+            className="hide-scrollbar mt-12 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:pb-0"
           >
             {thailandTourCollection.map(item => (
               <motion.article
@@ -519,7 +599,7 @@ export default function OutboundToursClient() {
                   visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 95, damping: 15 } }
                 }}
                 whileHover={{ y: -5, scale: 1.01 }}
-                className="scandi-soft-card overflow-hidden border border-[#111820]/14 bg-white/60"
+                className="scandi-soft-card min-w-[88vw] snap-start overflow-hidden border border-[#111820]/14 bg-white/60 md:min-w-0"
               >
                 <div className="relative h-60 overflow-hidden">
                   <img
@@ -534,7 +614,22 @@ export default function OutboundToursClient() {
                 </div>
                 <div className="p-5 sm:p-6">
                   <h3 className="font-space text-2xl font-extrabold uppercase text-[#111820]">{item.title}</h3>
-                  <ul className="mt-4 space-y-2">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setMobilePackageModal({
+                        title: item.title,
+                        duration: item.duration,
+                        image: item.image,
+                        details: item.details
+                      })
+                    }
+                    className="mt-4 inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-[#111820] px-5 text-[11px] font-bold uppercase tracking-[0.15em] text-white transition hover:bg-[#D98928] md:hidden"
+                  >
+                    View Details
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </button>
+                  <ul className="mt-4 hidden space-y-2 md:block">
                     {item.details.map(detail => (
                       <li key={detail} className="flex items-start gap-2 text-sm leading-7 text-[#111820]/80">
                         <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#D98928]" />
@@ -546,7 +641,7 @@ export default function OutboundToursClient() {
                     href={contact.whatsappHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-6 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#111820] px-6 text-[11px] font-bold uppercase tracking-[0.15em] text-white transition hover:bg-[#D98928]"
+                    className="mt-6 hidden min-h-11 items-center justify-center gap-2 rounded-full bg-[#111820] px-6 text-[11px] font-bold uppercase tracking-[0.15em] text-white transition hover:bg-[#D98928] md:inline-flex"
                   >
                     Get Quote
                     <ArrowRight className="h-3.5 w-3.5" />
@@ -569,7 +664,7 @@ export default function OutboundToursClient() {
       </section>
 
       {/* Singapore Tours Block */}
-      <section id="singapore-packages" className="scroll-mt-24 bg-transparent px-4 py-20 sm:px-6 lg:py-24">
+      <section id="singapore-packages" className="scroll-mt-24 bg-transparent px-4 py-12 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -600,7 +695,7 @@ export default function OutboundToursClient() {
                 transition: { staggerChildren: 0.08, delayChildren: 0.05 }
               }
             }}
-            className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3"
+            className="hide-scrollbar mt-12 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:pb-0 xl:grid-cols-3"
           >
             {singaporeTourCollection.map(item => (
               <motion.article
@@ -610,7 +705,7 @@ export default function OutboundToursClient() {
                   visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 95, damping: 15 } }
                 }}
                 whileHover={{ y: -5, scale: 1.01 }}
-                className="scandi-soft-card overflow-hidden border border-[#111820]/14 bg-white/60"
+                className="scandi-soft-card min-w-[88vw] snap-start overflow-hidden border border-[#111820]/14 bg-white/60 md:min-w-0"
               >
                 <div className="relative h-56 overflow-hidden">
                   <img
@@ -625,7 +720,22 @@ export default function OutboundToursClient() {
                 </div>
                 <div className="p-5 sm:p-6">
                   <h3 className="font-space text-2xl font-extrabold uppercase text-[#111820]">{item.title}</h3>
-                  <ul className="mt-4 space-y-2">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setMobilePackageModal({
+                        title: item.title,
+                        duration: item.duration,
+                        image: item.image,
+                        details: item.details
+                      })
+                    }
+                    className="mt-4 inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-[#111820] px-5 text-[11px] font-bold uppercase tracking-[0.15em] text-white transition hover:bg-[#D98928] md:hidden"
+                  >
+                    View Details
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </button>
+                  <ul className="mt-4 hidden space-y-2 md:block">
                     {item.details.map(detail => (
                       <li key={detail} className="flex items-start gap-2 text-sm leading-7 text-[#111820]/80">
                         <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#D98928]" />
@@ -637,7 +747,7 @@ export default function OutboundToursClient() {
                     href={contact.whatsappHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-6 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#111820] px-6 text-[11px] font-bold uppercase tracking-[0.15em] text-white transition hover:bg-[#D98928]"
+                    className="mt-6 hidden min-h-11 items-center justify-center gap-2 rounded-full bg-[#111820] px-6 text-[11px] font-bold uppercase tracking-[0.15em] text-white transition hover:bg-[#D98928] md:inline-flex"
                   >
                     Get Quote
                     <ArrowRight className="h-3.5 w-3.5" />
@@ -660,7 +770,7 @@ export default function OutboundToursClient() {
       </section>
 
       {/* Maldives Tours Block */}
-      <section id="maldives-packages" className="scroll-mt-24 bg-transparent px-4 py-20 sm:px-6 lg:py-24">
+      <section id="maldives-packages" className="scroll-mt-24 bg-transparent px-4 py-12 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -691,7 +801,7 @@ export default function OutboundToursClient() {
                 transition: { staggerChildren: 0.08, delayChildren: 0.05 }
               }
             }}
-            className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
+            className="hide-scrollbar mt-12 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:pb-0 lg:grid-cols-4"
           >
             {maldivesTourCollection.map(item => (
               <motion.article
@@ -701,7 +811,7 @@ export default function OutboundToursClient() {
                   visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 95, damping: 15 } }
                 }}
                 whileHover={{ y: -5, scale: 1.02 }}
-                className="scandi-soft-card overflow-hidden border border-[#111820]/14 bg-white/60"
+                className="scandi-soft-card min-w-[88vw] snap-start overflow-hidden border border-[#111820]/14 bg-white/60 md:min-w-0"
               >
                 <div className="relative h-60 overflow-hidden">
                   <img
@@ -713,12 +823,26 @@ export default function OutboundToursClient() {
                 </div>
                 <div className="p-5 text-center">
                   <h3 className="font-space text-xl font-extrabold uppercase text-[#111820]">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-7 text-[#111820]/72">{item.subtitle}</p>
+                  <p className="mt-2 hidden text-sm leading-7 text-[#111820]/72 md:block">{item.subtitle}</p>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setMobilePackageModal({
+                        title: item.title,
+                        image: item.image,
+                        subtitle: item.subtitle
+                      })
+                    }
+                    className="mt-4 inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-[#111820] px-5 text-[11px] font-bold uppercase tracking-[0.16em] text-white transition hover:bg-[#D98928] md:hidden"
+                  >
+                    View Details
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </button>
                   <a
                     href={contact.whatsappHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-4 inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-[#D98928] px-5 text-[11px] font-bold uppercase tracking-[0.16em] text-white transition hover:bg-[#F2B24D]"
+                    className="mt-4 hidden min-h-10 items-center justify-center gap-2 rounded-full bg-[#D98928] px-5 text-[11px] font-bold uppercase tracking-[0.16em] text-white transition hover:bg-[#F2B24D] md:inline-flex"
                   >
                     Explore
                     <ArrowRight className="h-3.5 w-3.5" />
@@ -749,7 +873,7 @@ export default function OutboundToursClient() {
       </section>
 
       {/* Expertise & Gallery */}
-      <section className="bg-transparent px-4 py-20 sm:px-6 lg:py-24">
+      <section className="bg-transparent px-4 py-12 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
             <motion.article
@@ -803,7 +927,7 @@ export default function OutboundToursClient() {
       </section>
 
       {/* Testimonials */}
-      <section className="bg-transparent px-4 py-20 sm:px-6 lg:py-24">
+      <section className="bg-transparent px-4 py-12 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -832,7 +956,7 @@ export default function OutboundToursClient() {
                 transition: { staggerChildren: 0.1 }
               }
             }}
-            className="mt-10 grid gap-5 md:grid-cols-3"
+            className="hide-scrollbar mt-10 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:pb-0"
           >
             {outboundReviews.map(item => (
               <motion.article
@@ -842,7 +966,7 @@ export default function OutboundToursClient() {
                   visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 15 } }
                 }}
                 whileHover={{ y: -6, scale: 1.02 }}
-                className="scandi-soft-card p-6"
+                className="scandi-soft-card min-w-[88vw] snap-start p-4 md:min-w-0 md:p-6"
               >
                 <div className="flex items-center gap-1 text-[#D98928]">
                   {Array.from({ length: 5 }).map((_, i) => (
@@ -858,7 +982,7 @@ export default function OutboundToursClient() {
       </section>
 
       {/* Outbound FAQ Section */}
-      <section className="bg-transparent px-4 py-20 sm:px-6 lg:py-24">
+      <section className="bg-transparent px-4 py-12 sm:px-6 lg:py-24">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -873,37 +997,16 @@ export default function OutboundToursClient() {
           <h2 className="font-space fluid-title mt-4 font-bold uppercase">
             Before Your Outbound Trip
           </h2>
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={{
-              hidden: {},
-              visible: {
-                transition: { staggerChildren: 0.08, delayChildren: 0.1 }
-              }
-            }}
-            className="mt-8 grid gap-4 md:grid-cols-3"
-          >
-            {outboundFaqs.map(item => (
-              <motion.article
-                key={item.q}
-                variants={{
-                  hidden: { opacity: 0, y: 20, scale: 0.97 },
-                  visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 100, damping: 15 } }
-                }}
-                className="scandi-soft-card p-5 text-[#111820]"
-              >
-                <h3 className="font-space text-xl font-bold uppercase leading-tight">{item.q}</h3>
-                <p className="mt-3 text-sm leading-7 scandi-text-muted">{item.a}</p>
-              </motion.article>
-            ))}
-          </motion.div>
+          <AccordionFAQ
+            items={outboundFaqs}
+            theme="dark"
+            className="mt-8"
+          />
         </motion.div>
       </section>
 
       {/* Inquiry Form */}
-      <section className="bg-transparent px-4 pb-20 sm:px-6 lg:pb-24">
+      <section id="outbound-quote" className="scroll-mt-28 bg-transparent px-4 pb-20 sm:px-6 lg:pb-24">
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -1137,6 +1240,91 @@ export default function OutboundToursClient() {
           </AnimatePresence>
         </motion.div>
       </section>
+
+      <AnimatePresence>
+        {mobilePackageModal && (
+          <motion.div
+            className="fixed inset-0 z-[85] md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <button
+              type="button"
+              aria-label="Close package details"
+              onClick={() => setMobilePackageModal(null)}
+              className="absolute inset-0 bg-[#020B16]/70 backdrop-blur-[2px]"
+            />
+
+            <div
+              className="absolute inset-0 flex items-center justify-center px-4 py-4"
+              style={{
+                paddingTop: "calc(1rem + env(safe-area-inset-top, 0px))",
+                paddingBottom: "calc(1rem + env(safe-area-inset-bottom, 0px))"
+              }}
+            >
+              <motion.div
+                initial={{ y: 40, opacity: 0, scale: 0.98 }}
+                animate={{ y: 0, opacity: 1, scale: 1 }}
+                exit={{ y: 32, opacity: 0, scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 220, damping: 25 }}
+                className="relative w-full max-w-md max-h-full overflow-hidden rounded-[24px] border border-white/12 bg-[#F5F1E8] shadow-[0_24px_70px_rgba(2,8,23,0.55)]"
+              >
+              <div className="relative h-44 overflow-hidden">
+                <img
+                  src={mobilePackageModal.image}
+                  alt={mobilePackageModal.title}
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/20 to-transparent" />
+                <button
+                  type="button"
+                  onClick={() => setMobilePackageModal(null)}
+                  className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full border border-white/45 bg-black/35 text-white"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+
+              <div className="max-h-[calc(100%-11rem)] overflow-y-auto p-5">
+                <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-[#D98928]">
+                  {mobilePackageModal.duration ?? "Outbound Package"}
+                </p>
+                <h3 className="mt-2 font-space text-2xl font-extrabold uppercase leading-tight text-[#111820]">
+                  {mobilePackageModal.title}
+                </h3>
+
+                {mobilePackageModal.details?.length ? (
+                  <ul className="mt-4 space-y-2">
+                    {mobilePackageModal.details.map(detail => (
+                      <li key={detail} className="flex items-start gap-2 text-sm leading-7 text-[#111820]/82">
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#D98928]" />
+                        <span>{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="mt-4 text-sm leading-7 text-[#111820]/78">
+                    {mobilePackageModal.subtitle}
+                  </p>
+                )}
+
+                <a
+                  href={contact.whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-[#111820] px-6 text-[11px] font-bold uppercase tracking-[0.15em] text-white transition hover:bg-[#D98928]"
+                  onClick={() => setMobilePackageModal(null)}
+                >
+                  Get Quote
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </a>
+              </div>
+            </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }

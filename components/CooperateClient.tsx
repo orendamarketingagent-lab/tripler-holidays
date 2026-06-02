@@ -119,11 +119,11 @@ export default function CooperateClient() {
     <main className="scandi-page min-h-screen text-[#111820] font-manrope">
       <SiteHeader variant="transparent" ctaLabel="Partner With Us" ctaHref="/cooperate#contact" />
 
-      <section className="photo-text-hero hero-screen relative h-[100svh] w-full overflow-hidden text-white">
+      <section className="photo-text-hero hero-mobile relative w-full overflow-hidden text-white">
         <img
-          src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=2200&q=84"
-          alt="Corporate partnership background"
-          className="absolute inset-0 h-full w-full object-cover"
+          src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=2600&q=90"
+          alt="Business partners shaking hands"
+          className="absolute inset-0 h-full w-full object-cover object-center"
           data-hero-media
         />
         <div className="absolute inset-0 bg-[#082B49]/55" />
@@ -131,19 +131,19 @@ export default function CooperateClient() {
         <div className="grain-overlay" />
         <div className="absolute inset-0 z-10 mx-auto flex w-full max-w-7xl items-end justify-center px-6 pb-14 sm:px-8 sm:pb-16 lg:pb-20">
           <div className="max-w-3xl text-center" data-hero-content>
-            <h1 className="font-space text-4xl font-extrabold uppercase leading-tight sm:text-5xl lg:text-6xl">
+            <h1 className="font-space text-3xl font-extrabold uppercase leading-tight sm:text-4xl lg:text-5xl text-white drop-shadow-[0_4px_12px_rgba(8,43,73,0.5)]">
               Partnership & Growth
               <br />
               <span className="text-[#D98928]">Programs</span>
             </h1>
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[#F5F1E8]/92">
+            <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-[#F5F1E8]/90 sm:text-base sm:leading-8">
               Partnership solutions designed for travel professionals, agencies, and corporate teams.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="px-4 py-20 sm:px-6 lg:py-24">
+      <section className="px-4 py-12 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <div className="text-center">
             <h2 className="font-space fluid-title font-bold uppercase text-[#111820]">
@@ -187,8 +187,9 @@ export default function CooperateClient() {
         </div>
       </section>
 
-      <section id="contact" className="px-4 pb-20 sm:px-6 lg:pb-24">
+      <section id="contact" className="px-4 pb-12 sm:px-6 lg:pb-24">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+          {/* Contact info cards — order-2 on mobile (below form), order-1 on desktop (left column) */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -199,7 +200,7 @@ export default function CooperateClient() {
                 transition: { staggerChildren: 0.08 }
               }
             }}
-            className="grid gap-4"
+            className="grid gap-4 order-2 lg:order-1"
           >
             <motion.article
               variants={{
@@ -278,6 +279,7 @@ export default function CooperateClient() {
             </motion.article>
           </motion.div>
 
+          {/* Form — order-1 on mobile (shown first), order-2 on desktop (right column) */}
           <motion.form
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -286,7 +288,7 @@ export default function CooperateClient() {
             action={`mailto:${contact.email}`}
             method="post"
             encType="text/plain"
-            className="scandi-soft-card p-6 sm:p-8"
+            className="scandi-soft-card p-6 sm:p-8 order-1 lg:order-2"
           >
             <h2 className="font-space fluid-title font-bold uppercase">Partner With Us Form</h2>
             <p className="mt-3 text-sm leading-7 scandi-text-muted">
@@ -338,7 +340,7 @@ export default function CooperateClient() {
 
             <button
               type="submit"
-              className="premium-cta mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 px-6 text-sm font-bold uppercase tracking-wide transition"
+              className="premium-cta mt-6 inline-flex min-h-[52px] w-full items-center justify-center gap-2 px-6 text-sm font-bold uppercase tracking-wide transition"
               data-cursor-magnetic
             >
               Send Partnership Inquiry
@@ -348,7 +350,7 @@ export default function CooperateClient() {
         </div>
       </section>
 
-      <section className="px-4 pb-24 sm:px-6 lg:pb-28">
+      <section className="px-4 pb-12 sm:px-6 lg:pb-24">
         <div className="mx-auto max-w-7xl">
           <div className="text-center">
             <h2 className="font-space fluid-title font-bold uppercase text-[#111820]">
@@ -392,7 +394,7 @@ export default function CooperateClient() {
         </div>
       </section>
 
-      <section className="px-4 pb-24 sm:px-6 lg:pb-28">
+      <section className="px-4 pb-12 sm:px-6 lg:pb-28">
         <div className="mx-auto max-w-7xl rounded-[24px] border border-[#111820]/12 bg-white/62 px-6 py-12 shadow-[0_20px_48px_rgba(17,24,32,0.08)] backdrop-blur-sm sm:px-10">
           <div className="text-center">
             <h2 className="font-space text-4xl font-black uppercase text-[#111820] sm:text-5xl">
@@ -427,7 +429,7 @@ export default function CooperateClient() {
                   <span className="mx-auto grid h-14 w-14 place-items-center rounded-full border border-[#D98928]/55 bg-[#D98928] text-2xl font-black text-white shadow-[0_12px_30px_rgba(217,137,40,0.32)]">
                     {index + 1}
                   </span>
-                  <h3 className="mt-5 text-3xl font-extrabold leading-tight text-[#111820]">{step.title}</h3>
+                  <h3 className="mt-5 text-xl font-extrabold leading-tight text-[#111820] sm:text-3xl">{step.title}</h3>
                   <p className="mx-auto mt-3 max-w-[220px] text-sm leading-7 text-[#111820]/72 sm:text-base">
                     {step.description}
                   </p>

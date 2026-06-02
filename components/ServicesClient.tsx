@@ -95,7 +95,7 @@ export default function ServicesClient() {
       <SiteHeader variant="transparent" ctaLabel="Enquire Now" />
 
       <section
-        className="photo-text-hero hero-screen relative h-[100svh] w-full overflow-hidden text-white"
+        className="photo-text-hero hero-mobile relative w-full overflow-hidden text-white"
         data-hero-pin
         data-hero-pin-distance="115"
       >
@@ -118,12 +118,12 @@ export default function ServicesClient() {
             className="max-w-3xl text-center"
             data-hero-content
           >
-            <h1 className="font-space text-4xl font-extrabold uppercase leading-tight sm:text-5xl lg:text-6xl">
+            <h1 className="font-space text-3xl font-extrabold uppercase leading-tight sm:text-4xl lg:text-5xl text-white drop-shadow-[0_4px_12px_rgba(8,43,73,0.5)]">
               Travel Services,
               <br />
               <span className="text-[#D98928]">Built Around You</span>
             </h1>
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[#F5F1E8]/92">
+            <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-[#F5F1E8]/90 sm:text-base sm:leading-8">
               From inbound and outbound tours to hotels, transport, conferences and destination weddings, we coordinate every layer so clients can travel with clarity and comfort.
             </p>
             <p className="mt-4 text-sm font-semibold tracking-[0.08em] text-white/90 sm:text-base">
@@ -173,7 +173,7 @@ export default function ServicesClient() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
-            className="font-space text-5xl font-bold uppercase text-[#111820] sm:text-6xl"
+            className="font-space text-2xl font-bold uppercase text-[#111820] sm:text-4xl lg:text-5xl"
           >
             Our Services
           </motion.h2>
@@ -191,36 +191,59 @@ export default function ServicesClient() {
       </section>
 
       <section id="services-core" className="relative overflow-hidden">
-        <div className="relative mx-auto max-w-7xl px-6 py-24 sm:px-8 lg:py-32">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20 max-w-2xl">
+        <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10 max-w-2xl sm:mb-20">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#D98928]">What we provide</span>
             <h2 className="font-space fluid-title mt-4 font-bold uppercase text-[#111820]">Core Service Portfolio</h2>
-            <p className="mt-5 text-base leading-8 text-[#111820]/65">Each service is delivered through a practical route-first method, keeping logistics clean and the client experience premium.</p>
+            <p className="mt-5 text-sm leading-8 text-[#111820]/65 sm:text-base">Each service is delivered through a practical route-first method, keeping logistics clean and the client experience premium.</p>
           </motion.div>
+          {/* Mobile: simple card stack | Desktop: left/right alternating with vertical line */}
           <div className="relative">
-            <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-[#D98928]/30 via-[#111820]/15 to-transparent lg:left-1/2 lg:-translate-x-1/2" />
+            <div className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-gradient-to-b from-[#D98928]/30 via-[#111820]/15 to-transparent hidden lg:block" />
             {services.map((service, index) => {
               const Icon = service.icon;
               const isEven = index % 2 === 0;
               return (
-                <motion.div key={service.title} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }} className="relative mb-28 last:mb-0 lg:grid lg:grid-cols-2 lg:gap-16">
-                  <div className="absolute left-6 top-2 z-10 lg:left-1/2 lg:-translate-x-1/2">
+                <motion.div key={service.title} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }} className="relative mb-10 last:mb-0 lg:mb-28 lg:grid lg:grid-cols-2 lg:gap-16">
+                  {/* Desktop dot on the line */}
+                  <div className="absolute left-1/2 top-2 z-10 -translate-x-1/2 hidden lg:block">
                     <div className="relative">
                       <span className="block h-3.5 w-3.5 rounded-full bg-[#D98928] shadow-[0_0_12px_rgba(166,94,53,0.4)]" />
                       <span className="absolute inset-0 animate-ping rounded-full bg-[#D98928]/30" style={{ animationDuration: '3s' }} />
                     </div>
                   </div>
-                  <div className={`pl-16 lg:pl-0 ${isEven ? "lg:pr-16 lg:text-right" : "lg:pl-16 lg:col-start-2"}`}>
+                  {/* Mobile: image first, then content */}
+                  <div className="lg:hidden">
+                    <div className="relative overflow-hidden rounded-2xl border border-[#111820]/12 shadow-md">
+                      <img src={service.image} alt={service.title} className="w-full aspect-[16/10] object-cover" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#F5F1E8]/50 via-transparent to-transparent" />
+                      <span className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-xl border border-[#111820]/18 bg-[#F5F1E8]/80 text-[#D98928] backdrop-blur-sm">
+                        <Icon className="h-4 w-4" />
+                      </span>
+                    </div>
+                    <div className="mt-4 scandi-soft-card border border-[#111820]/10 p-4">
+                      <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-[#D98928]">Service {String(index + 1).padStart(2, '0')}</span>
+                      <h3 className="font-space mt-2 text-xl font-bold uppercase tracking-tight text-[#111820]">{service.title}</h3>
+                      <p className="mt-2 text-sm leading-7 text-[#111820]/60">{service.description}</p>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {service.points.map(point => (
+                          <span key={point} className="inline-flex items-center gap-1.5 rounded-full border border-[#111820]/12 bg-[#111820]/5 px-3 py-1.5 text-[11px] font-semibold text-[#111820]/70">{point}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  {/* Desktop: alternating left/right layout */}
+                  <div className={`hidden lg:block ${isEven ? 'lg:pr-16 lg:text-right' : 'lg:pl-16 lg:col-start-2'}`}>
                     <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-[#D98928]">Service {String(index + 1).padStart(2, '0')}</span>
                     <h3 className="font-space mt-3 text-3xl font-bold uppercase tracking-tight text-[#111820] sm:text-4xl">{service.title}</h3>
                     <p className="mt-4 text-sm leading-8 text-[#111820]/60 max-w-md" style={{ marginLeft: isEven ? 'auto' : undefined }}>{service.description}</p>
-                    <div className={`mt-5 flex flex-wrap gap-2 ${isEven ? "lg:justify-end" : ""}`}>
+                    <div className={`mt-5 flex flex-wrap gap-2 ${isEven ? 'lg:justify-end' : ''}`}>
                       {service.points.map(point => (
                         <span key={point} className="inline-flex items-center gap-1.5 rounded-full border border-[#111820]/12 bg-[#111820]/5 px-3 py-1.5 text-[11px] font-semibold text-[#111820]/70">{point}</span>
                       ))}
                     </div>
                   </div>
-                  <div className={`mt-8 pl-16 lg:mt-0 lg:pl-0 ${isEven ? "lg:col-start-2" : "lg:col-start-1 lg:row-start-1 lg:pr-16"}`}>
+                  <div className={`hidden lg:block mt-8 lg:mt-0 ${isEven ? 'lg:col-start-2' : 'lg:col-start-1 lg:row-start-1 lg:pr-16'}`}>
                     <div className="relative">
                       <motion.div whileHover={{ scale: 1.02 }} transition={{ type: "spring", stiffness: 200, damping: 20 }} className="relative overflow-hidden rounded-2xl border border-[#111820]/12 shadow-[0_24px_60px_rgba(17,24,32,0.15)]">
                         <img src={service.image} alt={service.title} className="w-full aspect-[16/10] object-cover" />
@@ -229,7 +252,7 @@ export default function ServicesClient() {
                           <Icon className="h-5 w-5" />
                         </span>
                       </motion.div>
-                      <motion.div initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.3, duration: 0.5 }} className={`absolute -bottom-6 w-28 h-28 overflow-hidden rounded-xl border-4 border-[#F5F1E8] shadow-xl ${isEven ? "-left-4" : "-right-4"}`}>
+                      <motion.div initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.3, duration: 0.5 }} className={`absolute -bottom-6 w-28 h-28 overflow-hidden rounded-xl border-4 border-[#F5F1E8] shadow-xl ${isEven ? '-left-4' : '-right-4'}`}>
                         <img src={service.image} alt="" className="h-full w-full object-cover scale-[1.6]" style={{ objectPosition: index % 3 === 0 ? 'top right' : index % 3 === 1 ? 'center' : 'bottom left' }} />
                       </motion.div>
                     </div>
@@ -244,7 +267,7 @@ export default function ServicesClient() {
         </div>
       </section>
 
-      <section className="relative px-4 py-20 sm:px-6 lg:py-28 overflow-hidden bg-gradient-to-b from-[#F5F1E8] via-[#F5F1E8] to-[#F5F1E8]">
+      <section className="relative px-4 py-12 sm:px-6 lg:py-28 overflow-hidden bg-gradient-to-b from-[#F5F1E8] via-[#F5F1E8] to-[#F5F1E8]">
         <div className="mx-auto max-w-7xl">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#D98928]">Our Process</span>
