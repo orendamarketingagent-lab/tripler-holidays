@@ -38,38 +38,105 @@ const heroStats = [
   { value: "100+", label: "Destination partners" }
 ];
 
+const attractionImages = {
+  galleFort: "/images/attractions/home-carousel/galle-dutch-fort.jpg",
+  royalBotanicalGardens: "/images/attractions/home-carousel/royal-botanical-gardens.jpg",
+  littleAdamsPeak: "/images/attractions/home-carousel/little-adams-peak.jpg",
+  anuradhapura: "/images/attractions/home-carousel/anuradhapura.jpg",
+  gangaramaya: "/images/attractions/home-carousel/gangaramaya-temple.jpg",
+  polonnaruwa: "/images/attractions/home-carousel/polonnaruwa.jpg",
+  yala: "/images/attractions/home-carousel/yala-national-park.jpg",
+  pigeonIsland: "/images/attractions/home-carousel/pigeon-island.jpg",
+  hortonPlains: "/images/attractions/home-carousel/horton-plains.jpg",
+  minneriya: "/images/attractions/home-carousel/minneriya-national-park.jpg",
+  sinharaja: "/images/attractions/home-carousel/sinharaja-rainforest.jpg",
+  sigiriya: "/images/attractions/home-carousel/sigiriya-rock-fortress.jpg"
+};
+
 const hotTours = [
   {
-    title: "Sigiriya Rock Fortress",
+    title: "Galle Dutch Fort",
     tag: "Heritage",
-    nights: "UNESCO Site",
-    price: "Matale District",
-    image: "/images/home/sigiriya-4k.jpg",
-    offsetY: "0px"
+    nights: "Seaside heritage site with scenic views",
+    price: "Galle",
+    image: attractionImages.galleFort
   },
   {
-    title: "Ella Nine Arches Bridge",
-    tag: "Scenic Highlands",
-    nights: "Train Viewpoint",
-    price: "Badulla District",
-    image: "/images/home/ella-nine-arches-4k.jpg",
-    offsetY: "48px"
+    title: "Royal Botanical Gardens",
+    tag: "Gardens",
+    nights: "Scenic garden landscape with tropical flora",
+    price: "Peradeniya",
+    image: attractionImages.royalBotanicalGardens
   },
   {
-    title: "Galle Fort Coastline",
-    tag: "Colonial + Coastal",
-    nights: "UNESCO Site",
-    price: "Southern Province",
-    image: "/images/home/galle-fort-coastline-4k.jpg",
-    offsetY: "-24px"
+    title: "Little Adam's Peak",
+    tag: "Highlands",
+    nights: "Easy trek with stunning mountain scenery",
+    price: "Ella",
+    image: attractionImages.littleAdamsPeak
+  },
+  {
+    title: "Anuradhapura",
+    tag: "Ancient City",
+    nights: "Historic ruins with ancient stupas and temples",
+    price: "North Central",
+    image: attractionImages.anuradhapura
+  },
+  {
+    title: "Gangaramaya Temple",
+    tag: "Culture",
+    nights: "Famous Buddhist temple with cultural museum",
+    price: "Colombo",
+    image: attractionImages.gangaramaya
+  },
+  {
+    title: "Polonnaruwa",
+    tag: "UNESCO",
+    nights: "Historic kingdom with temples and statues",
+    price: "North Central",
+    image: attractionImages.polonnaruwa
   },
   {
     title: "Yala National Park",
-    tag: "Wildlife Safari",
-    nights: "Leopard Habitat",
-    price: "South-East Sri Lanka",
-    image: "/images/wildlife/yala-wildlife-adventure-4k.jpg",
-    offsetY: "32px"
+    tag: "Safari",
+    nights: "Popular safari park with leopard sightings",
+    price: "Southern",
+    image: attractionImages.yala
+  },
+  {
+    title: "Pigeon Island",
+    tag: "Marine",
+    nights: "Snorkeling spot near Trincomalee with coral reefs",
+    price: "Trincomalee",
+    image: attractionImages.pigeonIsland
+  },
+  {
+    title: "Horton Plains",
+    tag: "Nature",
+    nights: "Misty grasslands and dramatic World's End views",
+    price: "Central Highlands",
+    image: attractionImages.hortonPlains
+  },
+  {
+    title: "Minneriya National Park",
+    tag: "Wildlife",
+    nights: "Elephant gathering and open plains safari",
+    price: "Habarana",
+    image: attractionImages.minneriya
+  },
+  {
+    title: "Sinharaja Rainforest",
+    tag: "Rainforest",
+    nights: "Lush UNESCO rainforest with rare wildlife",
+    price: "Sabaragamuwa",
+    image: attractionImages.sinharaja
+  },
+  {
+    title: "Sigiriya Rock Fortress",
+    tag: "Heritage",
+    nights: "UNESCO rock fortress and iconic viewpoint",
+    price: "Matale",
+    image: attractionImages.sigiriya
   }
 ];
 
@@ -102,7 +169,7 @@ const sriLankaTours = [
     subtitle: "Top Attraction",
     duration: "Ideal visit: 3-4 hours",
     route: "Matale District, Central Province",
-    image: "/images/home/sigiriya-4k.jpg",
+    image: attractionImages.sigiriya,
     tags: ["#UNESCO", "#History", "#Must Visit"],
     idealFor: "Culture lovers and first-time visitors",
     href: "/holiday-tours"
@@ -132,7 +199,7 @@ const sriLankaTours = [
     subtitle: "Top Attraction",
     duration: "Ideal visit: Full day safari",
     route: "Southern & Uva Provinces",
-    image: "/images/wildlife/yala-wildlife-adventure-4k.jpg",
+    image: attractionImages.yala,
     tags: ["#Wildlife", "#Safari", "#Leopards"],
     idealFor: "Wildlife and adventure travelers",
     href: "/holiday-tours"
@@ -142,9 +209,59 @@ const sriLankaTours = [
     subtitle: "Top Attraction",
     duration: "Ideal visit: 2-4 hours",
     route: "Galle, Southern Province",
-    image: "/images/home/galle-fort-coastline-4k.jpg",
+    image: attractionImages.galleFort,
     tags: ["#Colonial", "#UNESCO", "#Coastal"],
     idealFor: "Couples and cultural explorers",
+    href: "/holiday-tours"
+  },
+  {
+    title: "Royal Botanical Gardens",
+    subtitle: "Top Attraction",
+    duration: "Ideal visit: 2-3 hours",
+    route: "Peradeniya, Kandy",
+    image: attractionImages.royalBotanicalGardens,
+    tags: ["#Gardens", "#Nature", "#Relaxed"],
+    idealFor: "Families and garden lovers",
+    href: "/holiday-tours"
+  },
+  {
+    title: "Anuradhapura",
+    subtitle: "Top Attraction",
+    duration: "Ideal visit: Full day",
+    route: "North Central Province",
+    image: attractionImages.anuradhapura,
+    tags: ["#Ancient City", "#Stupas", "#Culture"],
+    idealFor: "Heritage travelers and history lovers",
+    href: "/holiday-tours"
+  },
+  {
+    title: "Polonnaruwa",
+    subtitle: "Top Attraction",
+    duration: "Ideal visit: Half to full day",
+    route: "North Central Province",
+    image: attractionImages.polonnaruwa,
+    tags: ["#UNESCO", "#Ruins", "#Kingdom"],
+    idealFor: "Cultural explorers",
+    href: "/holiday-tours"
+  },
+  {
+    title: "Pigeon Island",
+    subtitle: "Top Attraction",
+    duration: "Ideal visit: Half day",
+    route: "Trincomalee, Eastern Province",
+    image: attractionImages.pigeonIsland,
+    tags: ["#Snorkeling", "#Marine", "#Coral Reef"],
+    idealFor: "Beach and ocean lovers",
+    href: "/holiday-tours"
+  },
+  {
+    title: "Sinharaja Rainforest",
+    subtitle: "Top Attraction",
+    duration: "Ideal visit: Full day",
+    route: "Sabaragamuwa & Southern Provinces",
+    image: attractionImages.sinharaja,
+    tags: ["#Rainforest", "#UNESCO", "#Nature"],
+    idealFor: "Nature travelers and birdwatchers",
     href: "/holiday-tours"
   }
 ];
@@ -241,9 +358,14 @@ function SriLankaShowcase() {
 
 export default function TriplerHolidayLanding() {
   const pageRef = useRef<HTMLDivElement>(null);
+  const attractionCardRef = useRef<HTMLElement | null>(null);
   const [customTourForm, setCustomTourForm] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [attractionIndex, setAttractionIndex] = useState(0);
+  const [attractionStep, setAttractionStep] = useState(0);
+  const [isAttractionResetting, setIsAttractionResetting] = useState(false);
+  const attractionLoop = [...hotTours, ...hotTours.slice(0, 4)];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -277,6 +399,40 @@ export default function TriplerHolidayLanding() {
     return () => ctx.revert();
   }, []);
 
+  useEffect(() => {
+    const measureAttractionStep = () => {
+      const card = attractionCardRef.current;
+      if (!card) return;
+      const styles = window.getComputedStyle(card);
+      const gap = window.innerWidth >= 640 ? 28 : 16;
+      setAttractionStep(card.offsetWidth + Number.parseFloat(styles.marginRight || "0") + gap);
+    };
+
+    measureAttractionStep();
+    window.addEventListener("resize", measureAttractionStep);
+    return () => window.removeEventListener("resize", measureAttractionStep);
+  }, []);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setIsAttractionResetting(false);
+      setAttractionIndex(index => index + 1);
+    }, 2600);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    if (attractionIndex !== hotTours.length) return;
+
+    const reset = window.setTimeout(() => {
+      setIsAttractionResetting(true);
+      setAttractionIndex(0);
+    }, 720);
+
+    return () => window.clearTimeout(reset);
+  }, [attractionIndex]);
+
   return (
     <main className="scandi-page light-mode-travel min-h-screen overflow-x-hidden text-[#111820]">
       <div ref={pageRef} className="scandi-panel relative">
@@ -291,10 +447,11 @@ export default function TriplerHolidayLanding() {
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
+            poster="/videos/home-hero-poster.jpg"
             aria-hidden="true"
           >
-            <source src="/videos/home%20hero.mp4" type="video/mp4" />
+            <source src="/videos/home-hero-optimized.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-black/45" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#082B49]/66 via-[#082B49]/50 to-[#082B49]/86" />
@@ -418,61 +575,67 @@ export default function TriplerHolidayLanding() {
               </p>
             </div>
 
-            {/* Collage Grid of Offset Cards */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              variants={{
-                hidden: {},
-                visible: {
-                  transition: { staggerChildren: 0.1 }
-                }
-              }}
-              className="hide-scrollbar snap-carousel mt-16 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-3 sm:grid sm:grid-cols-2 sm:gap-8 sm:overflow-visible sm:pb-0 lg:grid-cols-4"
-            >
-              {hotTours.map((tour, index) => (
-                <motion.article
-                  key={tour.title}
-                  variants={{
-                    hidden: { opacity: 0, y: 36, scale: 0.96 },
-                    visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 85, damping: 14 } }
-                  }}
-                  whileHover={{ y: -4, scale: 1.015 }}
-                  className="group relative aspect-[3/4] min-w-[80vw] snap-start overflow-hidden rounded-[28px] border border-[#111820]/15 bg-[#F5F1E8] shadow-xl sm:min-w-0"
-                >
-                  <div className="absolute inset-0 overflow-hidden">
-                    <img
-                      src={tour.image}
-                      alt={tour.title}
-                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/88 via-black/20 to-transparent" />
-                  </div>
-
-                  {/* Top tag badge */}
-                  <span className="absolute left-4 top-4 rounded-full border border-white/20 bg-black/40 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-[#D98928] backdrop-blur-md">
-                    {tour.tag}
-                  </span>
-
-                  {/* Circle arrow hover overlay */}
-                  <span className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white border border-white/25 scale-90 opacity-0 group-hover:opacity-100 group-hover:scale-100 transition duration-300 z-10">
-                    <ArrowUpRight className="h-5 w-5" />
-                  </span>
-
-                  {/* Bottom Text metadata block */}
-                  <div className="absolute bottom-5 left-5 right-5 text-white">
-                    <div className="flex justify-between items-end">
-                      <div>
-                        <p className="text-[11px] font-bold text-[#D98928] tracking-wider uppercase">{tour.nights}</p>
-                        <h3 className="font-space text-lg font-extrabold uppercase mt-1 leading-tight tracking-wide">{tour.title}</h3>
-                      </div>
-                      <p className="text-sm font-black uppercase text-[#D98928] tracking-wider shrink-0">{tour.price}</p>
+            {/* Auto-scrolling attraction cards */}
+            <div className="mt-10 overflow-hidden pb-4 pt-6 sm:mt-14">
+              <div
+                className="flex gap-4 sm:gap-7"
+                style={{
+                  transform: `translate3d(-${attractionIndex * attractionStep}px, 0, 0)`,
+                  transition: isAttractionResetting ? "none" : "transform 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+                }}
+              >
+                {attractionLoop.map((tour, index) => (
+                  <motion.article
+                    key={`${tour.title}-${index}`}
+                    ref={index === 0 ? attractionCardRef : undefined}
+                    whileHover={{ y: -4, scale: 1.015 }}
+                    className="group relative h-[310px] w-[78vw] shrink-0 overflow-hidden rounded-[22px] border border-[#111820]/12 bg-[#F5F1E8] shadow-[0_18px_36px_rgba(17,24,32,0.18)] ring-1 ring-white/45 sm:h-[318px] sm:w-[292px] lg:w-[300px]"
+                  >
+                    <div className="absolute inset-x-0 top-0 h-[68%] overflow-hidden bg-[#082B49]">
+                      <img
+                        src={tour.image}
+                        alt={tour.title}
+                        className="h-full w-full object-cover contrast-[1.04] saturate-[1.08] transition-transform duration-700 group-hover:scale-105"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-b from-[#082B49]/18 via-transparent to-[#082B49]/22" />
                     </div>
-                  </div>
-                </motion.article>
+
+                    <span className="absolute left-4 top-4 z-10 rounded-full border border-[#D98928]/75 bg-[#082B49] px-3 py-1.5 text-[10px] font-black uppercase tracking-wider text-[#D98928] shadow-[0_8px_20px_rgba(8,43,73,0.34)]">
+                      {tour.tag}
+                    </span>
+
+                    <span className="absolute right-4 top-4 z-10 grid h-9 w-9 place-items-center rounded-full border border-[#F5F1E8]/45 bg-[#D98928] text-[#111820] opacity-0 shadow-lg backdrop-blur-md transition duration-300 group-hover:opacity-100">
+                      <ArrowUpRight className="h-4 w-4" />
+                    </span>
+
+                    <div className="absolute inset-x-0 bottom-0 min-h-[34%] bg-[#F5F1E8] px-4 py-4">
+                      <h3 className="font-space text-lg font-extrabold leading-tight text-[#082B49] sm:text-xl">{tour.title}</h3>
+                      <p className="mt-1.5 min-h-[34px] text-xs font-semibold leading-5 text-[#111820]/76">{tour.nights}</p>
+                      <p className="mt-2 text-[10px] font-black uppercase tracking-[0.18em] text-[#D98928]">{tour.price}</p>
+                    </div>
+                  </motion.article>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-2 flex items-center justify-center gap-2">
+              {hotTours.map((tour, index) => (
+                <button
+                  key={tour.title}
+                  type="button"
+                  onClick={() => {
+                    setIsAttractionResetting(false);
+                    setAttractionIndex(index);
+                  }}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    attractionIndex % hotTours.length === index ? "w-7 bg-[#D98928]" : "w-1.5 bg-[#111820]/18 hover:bg-[#111820]/35"
+                  }`}
+                  aria-label={`Show ${tour.title}`}
+                />
               ))}
-            </motion.div>
+            </div>
 
           </div>
         </section>
@@ -483,6 +646,8 @@ export default function TriplerHolidayLanding() {
             src="/images/home/ella-nine-arches-4k.jpg"
             alt="Sri Lanka scenic travel experience"
             className="absolute inset-y-0 right-0 hidden h-full w-[46%] object-cover opacity-28 lg:block"
+            loading="lazy"
+            decoding="async"
           />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,#082B49_0%,rgba(8,43,73,0.96)_48%,rgba(8,43,73,0.78)_100%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(217,137,40,0.18),transparent_34%),radial-gradient(circle_at_78%_80%,rgba(245,241,232,0.08),transparent_32%)]" />
@@ -503,7 +668,7 @@ export default function TriplerHolidayLanding() {
                 <span className="h-px w-9 bg-[#D98928]" />
                 About Us
               </span>
-              <h2 className="mt-5 font-space text-4xl font-bold uppercase leading-[0.98] text-white sm:text-5xl lg:text-6xl">
+              <h2 style={{ fontFamily: "'Open Sans', sans-serif" }} className="mt-5 text-4xl font-bold uppercase leading-[0.98] text-white sm:text-5xl lg:text-6xl">
                 Crafting Exceptional Travel Experiences
               </h2>
               <p className="mt-6 max-w-xl text-sm leading-8 text-[#F5F1E8]/82 sm:text-base">
@@ -632,7 +797,7 @@ export default function TriplerHolidayLanding() {
           </div>
         </section>
 
-        {/* 10. PAYMENT SECURITY */}
+        {/* 10. Secure Payment Processing */}
         <section className="relative overflow-hidden px-4 py-10 sm:px-6 lg:py-20">
           <div className="relative mx-auto max-w-5xl">
             <motion.div
@@ -645,7 +810,7 @@ export default function TriplerHolidayLanding() {
               <div className="flex items-center justify-center gap-3">
                 <CreditCard className="h-6 w-6 text-[#D98928]" />
                 <h3 className="text-lg font-bold uppercase tracking-wider text-[#111820]">
-                  Payment Security
+                  Secure Payment Processing
                 </h3>
               </div>
             </motion.div>
@@ -698,26 +863,16 @@ export default function TriplerHolidayLanding() {
                     <span className="text-[9px] font-bold uppercase tracking-wider text-[#D98928]">Advance Payment</span>
                   </div>
 
-                  {/* Visa */}
                   <div className="flex h-14 w-20 items-center justify-center rounded-xl border border-[#111820]/10 bg-white p-2 shadow-sm">
-                    <svg viewBox="0 0 780 500" className="h-8 w-auto" aria-label="Visa">
-                      <path d="M293.2 348.7l33.4-195.7h53.4l-33.4 195.7zM540.7 157.2c-10.6-4-27.2-8.3-47.9-8.3-52.8 0-90 26.5-90.2 64.5-.3 28.1 26.5 43.7 46.8 53.1 20.8 9.6 27.8 15.7 27.7 24.3-.1 13.1-16.6 19.1-31.9 19.1-21.4 0-32.7-3-50.3-10.2l-6.9-3.1-7.5 43.8c12.5 5.5 35.6 10.2 59.6 10.5 56.2 0 92.7-26.2 93.1-66.8.2-22.3-14-39.2-44.8-53.2-18.6-9.1-30.1-15.1-30-24.3 0-8.1 9.7-16.8 30.6-16.8 17.4-.3 30.1 3.5 39.9 7.5l4.8 2.3 7.4-42.4zM676 153h-41.3c-12.8 0-22.4 3.5-28 16.3l-79.3 179.4h56.1s9.2-24.1 11.3-29.4c6.1 0 60.7.1 68.5.1 1.6 6.9 6.5 29.3 6.5 29.3H722L676 153zm-65.9 125.9c4.4-11.3 21.4-54.7 21.4-54.7-.3.5 4.4-11.4 7.1-18.7l3.6 16.9s10.3 46.9 12.4 56.5h-44.5zM209.8 153l-52.3 133.5-5.6-27.1c-9.7-31.2-39.9-65.1-73.7-82l47.8 171.2 56.6-.1 84.2-195.5h-57z" fill="#082B49"/>
-                      <path d="M131.9 153H46.5l-.7 4c67 16.2 111.4 55.3 129.7 102.2l-18.7-90c-3.2-12.2-12.6-15.8-24.9-16.2z" fill="#D98928"/>
-                    </svg>
+                    <img src="/images/payment/visa.svg" alt="Visa" className="h-7 w-auto object-contain" />
                   </div>
 
-                  {/* Mastercard */}
                   <div className="flex h-14 w-20 items-center justify-center rounded-xl border border-[#111820]/10 bg-white p-2 shadow-sm">
-                    <svg viewBox="0 0 780 500" className="h-8 w-auto" aria-label="Mastercard">
-                      <circle cx="310" cy="250" r="170" fill="#D98928"/>
-                      <circle cx="470" cy="250" r="170" fill="#F2B24D"/>
-                      <path d="M390 120.8a169.5 169.5 0 0 0-80 129.2 169.5 169.5 0 0 0 80 129.2 169.5 169.5 0 0 0 80-129.2 169.5 169.5 0 0 0-80-129.2z" fill="#A65E35"/>
-                    </svg>
+                    <img src="/images/payment/mastercard.svg" alt="Mastercard" className="h-9 w-auto object-contain" />
                   </div>
 
-                  {/* American Express */}
-                  <div className="flex h-14 w-20 items-center justify-center rounded-xl border border-[#111820]/10 bg-[#082B49] p-2 shadow-sm">
-                    <span className="text-[9px] font-extrabold uppercase leading-tight text-white text-center tracking-wider">American Express</span>
+                  <div className="flex h-14 w-20 items-center justify-center rounded-xl border border-[#111820]/10 bg-white p-2 shadow-sm">
+                    <img src="/images/payment/american-express.svg" alt="American Express" className="h-10 w-auto object-contain" />
                   </div>
                 </div>
               </motion.div>
@@ -1005,11 +1160,22 @@ export default function TriplerHolidayLanding() {
                       onSubmit={(e) => {
                         e.preventDefault();
                         setIsSubmitting(true);
-                        setTimeout(() => {
+                        const subject = "Custom Tour Inquiry - Triple R Holidays";
+                        const body = [
+                          ["Name", customTourForm.name],
+                          ["Email", customTourForm.email],
+                          ["Message", customTourForm.message]
+                        ]
+                          .map(([label, value]) => `${label}: ${value}`)
+                          .join("\n");
+
+                        window.location.href = `mailto:hello@triplerholidays.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+                        window.setTimeout(() => {
                           setIsSubmitting(false);
                           setSubmitSuccess(true);
                           setCustomTourForm({ name: "", email: "", message: "" });
-                        }, 1200);
+                        }, 300);
                       }}
                       className="space-y-5"
                     >

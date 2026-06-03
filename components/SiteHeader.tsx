@@ -162,7 +162,7 @@ export default function SiteHeader({
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", stiffness: 260, damping: 28 }}
-            className="absolute right-0 top-0 bottom-0 w-[min(85vw,360px)] h-full overflow-hidden border-l border-white/10 bg-[#082B49]/98 shadow-[-10px_0_40px_rgba(2,8,23,0.45)] backdrop-blur-2xl flex flex-col justify-between"
+            className="absolute right-0 top-0 bottom-0 flex h-full w-[min(74vw,300px)] flex-col justify-between overflow-hidden border-l border-white/10 bg-[#082B49]/98 shadow-[-10px_0_40px_rgba(2,8,23,0.45)] backdrop-blur-2xl"
           >
             {/* Ambient glows inside drawer */}
             <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#D98928]/14 blur-[80px]" />
@@ -170,18 +170,18 @@ export default function SiteHeader({
             <div className="grain-overlay opacity-30" />
 
             {/* Header part */}
-            <div className="relative flex items-center justify-between border-b border-white/10 px-6 py-5">
+            <div className="relative flex items-center justify-between border-b border-white/10 px-5 py-4">
               <div className="flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#D98928]" />
-                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#F5F1E8]/75">TRIPLE R HOLIDAYS</p>
+                <p className="text-[8.5px] font-bold uppercase tracking-[0.2em] text-[#F5F1E8]/70">TRIPLE R HOLIDAYS</p>
               </div>
               <button
                 type="button"
                 aria-label="Close mobile menu"
                 onClick={() => setOpen(false)}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white transition hover:bg-white/15"
+                className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white transition hover:bg-white/15"
               >
-                <X className="h-4 w-4" />
+                <X className="h-3.5 w-3.5" />
               </button>
             </div>
 
@@ -193,7 +193,7 @@ export default function SiteHeader({
                 hidden: {},
                 visible: { transition: { staggerChildren: 0.05, delayChildren: 0.05 } }
               }}
-              className="relative flex-1 overflow-y-auto px-6 py-8"
+              className="relative flex-1 overflow-y-auto px-5 py-6"
             >
               {navItems.map(item => {
                 const active = isItemActive(item);
@@ -205,11 +205,11 @@ export default function SiteHeader({
                         hidden: { opacity: 0, x: 16 },
                         visible: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 120, damping: 20 } }
                       }}
-                      className="mb-5"
+                      className="mb-3"
                     >
                       <Link
                         href={item.href}
-                        className="group flex items-center justify-between py-2 text-xl font-bold uppercase tracking-[0.08em] transition-colors duration-300"
+                        className="group flex items-center justify-between py-1.5 text-[15px] font-bold uppercase tracking-[0.08em] transition-colors duration-300"
                         onClick={() => setOpen(false)}
                       >
                         <span className={`transition-colors duration-300 ${active ? "text-[#F2B24D]" : "text-white/90 group-hover:text-[#D98928]"}`}>
@@ -218,7 +218,7 @@ export default function SiteHeader({
                         {active ? (
                           <span className="h-2 w-2 rounded-full bg-[#D98928]" />
                         ) : (
-                          <ChevronRight className="h-4 w-4 text-white/30 group-hover:text-[#D98928] group-hover:translate-x-1 transition duration-300" />
+                          <ChevronRight className="h-3.5 w-3.5 text-white/30 transition duration-300 group-hover:translate-x-1 group-hover:text-[#D98928]" />
                         )}
                       </Link>
                     </motion.div>
@@ -232,11 +232,11 @@ export default function SiteHeader({
                       hidden: { opacity: 0, x: 16 },
                       visible: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 120, damping: 20 } }
                     }}
-                    className="mb-5"
+                    className="mb-3"
                   >
                     <button
                       type="button"
-                      className="flex w-full items-center justify-between py-2 text-xl font-bold uppercase tracking-[0.08em] transition-colors duration-300 text-left"
+                      className="flex w-full items-center justify-between py-1.5 text-left text-[15px] font-bold uppercase tracking-[0.08em] transition-colors duration-300"
                       onClick={() => setMobileToursOpen(c => !c)}
                     >
                       <span className={`${active || mobileToursOpen ? "text-[#F2B24D]" : "text-white/90 hover:text-[#D98928]"}`}>
@@ -246,7 +246,7 @@ export default function SiteHeader({
                         animate={{ rotate: mobileToursOpen ? 90 : 0 }}
                         transition={{ duration: 0.18 }}
                       >
-                        <ChevronRight className="h-4 w-4 text-white/30" />
+                        <ChevronRight className="h-3.5 w-3.5 text-white/30" />
                       </motion.span>
                     </button>
 
@@ -257,7 +257,7 @@ export default function SiteHeader({
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
                           transition={{ duration: 0.25, ease: "easeOut" }}
-                          className="overflow-hidden mt-1 pl-4 border-l border-[#D98928]/30 space-y-2.5"
+                          className="mt-1 space-y-2 overflow-hidden border-l border-[#D98928]/30 pl-3"
                         >
                           {item.children?.map(child => {
                             const childActive = normalizedPathname === normalizePath(child.href);
@@ -265,7 +265,7 @@ export default function SiteHeader({
                               <Link
                                 key={child.href}
                                 href={child.href}
-                                className={`flex items-center gap-3 py-1.5 text-xs font-bold uppercase tracking-[0.12em] transition-colors duration-300 ${
+                                className={`flex items-center gap-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.1em] transition-colors duration-300 ${
                                   childActive ? "text-[#F2B24D]" : "text-white/70 hover:text-[#D98928]"
                                 }`}
                                 onClick={() => setOpen(false)}
@@ -288,27 +288,27 @@ export default function SiteHeader({
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15, duration: 0.25 }}
-              className="relative border-t border-white/10 px-6 py-6 space-y-3 bg-[#061F35]/45"
-              style={{ paddingBottom: "calc(1.5rem + env(safe-area-inset-bottom, 0px))" }}
+              className="relative space-y-2.5 border-t border-white/10 bg-[#061F35]/45 px-5 py-3.5"
+              style={{ paddingBottom: "calc(0.875rem + env(safe-area-inset-bottom, 0px))" }}
             >
               <Link
                 href={ctaHref}
-                className="flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-[#D98928] px-6 text-xs font-bold uppercase tracking-[0.16em] text-[#111820] shadow-lg transition duration-300 hover:bg-[#F2B24D]"
+                className="flex min-h-10 w-full items-center justify-center gap-2 rounded-full bg-[#D98928] px-5 text-[9.5px] font-bold uppercase tracking-[0.15em] text-[#111820] shadow-lg transition duration-300 hover:bg-[#F2B24D]"
                 onClick={() => setOpen(false)}
               >
                 {ctaLabel}
-                <ArrowUpRight className="h-4 w-4" />
+                <ArrowUpRight className="h-3.5 w-3.5" />
               </Link>
               
               <Link
                 href="/about#contact"
-                className="flex min-h-[46px] w-full items-center justify-center rounded-full border border-white/20 bg-white/5 px-6 text-xs font-bold uppercase tracking-[0.16em] text-white transition duration-300 hover:bg-white/10"
+                className="flex min-h-9 w-full items-center justify-center rounded-full border border-white/20 bg-white/5 px-5 text-[9.5px] font-bold uppercase tracking-[0.15em] text-white transition duration-300 hover:bg-white/10"
                 onClick={() => setOpen(false)}
               >
                 Contact Us
               </Link>
 
-              <div className="pt-4 flex items-center justify-center gap-1.5 text-[9px] font-bold uppercase tracking-widest text-white/40">
+              <div className="flex items-center justify-center gap-1.5 pt-2 text-[8px] font-bold uppercase tracking-[0.16em] text-white/35">
                 <span>Hotline:</span>
                 <span className="text-white/60">(011) 293 4924</span>
               </div>
@@ -354,14 +354,16 @@ export default function SiteHeader({
                     key={item.href}
                     href={item.href}
                     aria-current={active ? "page" : undefined}
-                    className={`relative pb-0.5 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors duration-200 ${
+                    className={`group relative pb-1 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors duration-200 ${
                       active ? "text-[#F2B24D]" : "text-white/90 hover:text-white"
                     }`}
                   >
-                    {active && (
-                      <span className="absolute -bottom-1 left-0 h-[2px] w-full rounded-full bg-[#F2B24D]" />
-                    )}
                     {item.label}
+                    <span
+                      className={`absolute -bottom-1 left-0 h-[2px] w-full origin-left rounded-full bg-[#F2B24D] transition-transform duration-300 ease-out ${
+                        active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                      }`}
+                    />
                   </Link>
                 );
               }
@@ -371,15 +373,17 @@ export default function SiteHeader({
                     type="button"
                     aria-haspopup="menu"
                     aria-label={`${item.label} menu`}
-                    className={`relative inline-flex items-center gap-1 pb-0.5 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors duration-200 ${
+                    className={`relative inline-flex items-center gap-1 pb-1 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors duration-200 ${
                       active ? "text-[#F2B24D]" : "text-white/90 hover:text-white"
                     }`}
                   >
-                    {active && (
-                      <span className="absolute -bottom-1 left-0 h-[calc(100%-14px)] w-[2px] rounded-full bg-[#F2B24D]" />
-                    )}
                     {item.label}
                     <ChevronDown className="h-3 w-3 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180" />
+                    <span
+                      className={`absolute -bottom-1 left-0 h-[2px] w-full origin-left rounded-full bg-[#F2B24D] transition-transform duration-300 ease-out ${
+                        active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100 group-focus-within:scale-x-100"
+                      }`}
+                    />
                   </button>
                   <div className="pointer-events-none invisible absolute left-1/2 top-[calc(100%+4px)] z-50 w-56 -translate-x-1/2 translate-y-2 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
                     <div className="rounded-2xl border border-white/20 bg-[rgba(8,43,73,0.96)] p-2 shadow-xl backdrop-blur-xl">

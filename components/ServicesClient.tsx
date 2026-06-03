@@ -22,15 +22,15 @@ const services = [
   {
     title: "Inbound Tours",
     description:
-      "Private and group programs across Sri Lanka with heritage, wildlife, hill country and coastal highlights.",
+      "Private and group journeys across Sri Lanka, planned around culture, wildlife, highlands, beaches and comfortable travel pace.",
     icon: Compass,
-    image: "/images/services/inbound-tours-sri-lanka.jpg",
+    image: "/images/attractions/home-carousel/sigiriya-rock-fortress.jpg",
     points: ["Islandwide route planning", "Comfortable pacing", "On-tour support"]
   },
   {
     title: "Outbound Tours",
     description:
-      "International holiday planning to Kuala Lumpur, Singapore, Maldives and Thailand with practical execution.",
+      "Outbound holiday planning for Malaysia, Singapore, Thailand and the Maldives with clear routes, hotels and transfers.",
     icon: PlaneTakeoff,
     image: "/images/services/core/outbound-asia.jpg",
     points: ["Destination combinations", "Flight + transfer flow", "Family and group support"]
@@ -38,7 +38,7 @@ const services = [
   {
     title: "Hotel Bookings",
     description:
-      "Hotel recommendations matched to route, comfort level and travel style for consistent journey quality.",
+      "Stay recommendations matched to route, comfort level, budget and travel style so each night supports the journey.",
     icon: Hotel,
     image: "/images/services/core/hotel-bookings.jpg",
     points: ["City and resort options", "Flexible room categories", "Route-aware suggestions"]
@@ -46,7 +46,7 @@ const services = [
   {
     title: "Conference & Events",
     description:
-      "Travel logistics for meetings, conferences and business gatherings with reliable guest movement.",
+      "Guest movement, accommodation and transport planning for meetings, conferences and business gatherings.",
     icon: BriefcaseBusiness,
     image: "/images/services/core/conference-events.jpg",
     points: ["Venue travel coordination", "Group transport flow", "Clear timeline planning"]
@@ -54,7 +54,7 @@ const services = [
   {
     title: "Destination Weddings",
     description:
-      "Travel execution for wedding celebrations including guest stays, transfer schedules and trip comfort.",
+      "Travel coordination for wedding celebrations, including guest stays, airport transfers and celebration-day logistics.",
     icon: Heart,
     image: "/images/services/core/destination-weddings.jpg",
     points: ["Guest travel setup", "Hotel room blocks", "Celebration logistics"]
@@ -62,9 +62,9 @@ const services = [
   {
     title: "Transportation",
     description:
-      "Cars, vans and coaches for airport transfers, tours and events from arrival to departure.",
+      "Cars, vans and coaches for airport pickups, islandwide tours, corporate travel and event transport.",
     icon: Car,
-    image: "/images/services-hero-fleet.jpg",
+    image: "/images/services/services-hero-fleet.jpg",
     points: ["Airport pickup", "Private vehicles", "Islandwide transfers"]
   }
 ];
@@ -75,18 +75,9 @@ const process = [
   "Confirm and travel with a single coordination point."
 ];
 
-const serviceHighlights = [
-  "Unified planning from inquiry to return transfer",
-  "Professional support for leisure and business travel",
-  "Flexible service combinations for every group size"
-];
-
-const heroHookSentence = "One Team. Every Detail. Zero Stress.";
+const heroHookSentence = "Driven by experience. Defined by service.";
 const servicesHeroImage =
-  "/images/services-hero-fleet.jpg";
-
-const serviceOverviewParagraph =
-  "With strong local travel experience in Sri Lanka, Triple R Holidays delivers professionally curated, tailor-made services for travelers from around the world. Our service range covers bespoke tour planning, handpicked stays, guided cultural and wildlife excursions, reliable transport, and practical support for business and event travel. Whether you travel solo, as a couple, with family, or in a larger group, each journey is designed to showcase Sri Lanka's rich heritage and landscapes with comfort, clarity, and responsible travel practices.";
+  "/images/services/services-hero-fleet.jpg";
 
 export default function ServicesClient() {
 
@@ -103,6 +94,8 @@ export default function ServicesClient() {
           src={servicesHeroImage}
           alt="Triple R Holidays transport fleet"
           className="absolute inset-0 h-full w-full object-cover"
+          decoding="async"
+          fetchPriority="high"
           data-parallax="12"
           data-hero-media
         />
@@ -119,13 +112,10 @@ export default function ServicesClient() {
             data-hero-content
           >
             <h1 className="font-space text-3xl font-extrabold uppercase leading-tight sm:text-4xl lg:text-5xl text-white drop-shadow-[0_4px_12px_rgba(8,43,73,0.5)]">
-              Travel Services,
+             WHERE EVERY
               <br />
-              <span className="text-[#D98928]">Built Around You</span>
+              <span className="text-[#D98928]">JOURNEY BEGINS</span>
             </h1>
-            <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-[#F5F1E8]/90 sm:text-base sm:leading-8">
-              From inbound and outbound tours to hotels, transport, conferences and destination weddings, we coordinate every layer so clients can travel with clarity and comfort.
-            </p>
             <p className="mt-4 text-sm font-semibold tracking-[0.08em] text-white/90 sm:text-base">
               {heroHookSentence}
             </p>
@@ -133,69 +123,12 @@ export default function ServicesClient() {
         </div>
       </section>
 
-      <section className="px-4 py-8 sm:px-6 lg:py-10">
-        <div className="mx-auto max-w-7xl">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={{
-              hidden: {},
-              visible: {
-                transition: { staggerChildren: 0.1 }
-              }
-            }}
-            className="grid rounded-[18px] border border-[#111820]/12 bg-white/62 shadow-[0_20px_48px_rgba(17,24,32,0.08)] backdrop-blur-sm md:grid-cols-3"
-          >
-            {serviceHighlights.map(item => (
-              <motion.article
-                key={item}
-                variants={{
-                  hidden: { opacity: 0, y: 16 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-                }}
-                className="border-b border-[#111820]/12 px-6 py-5 md:border-b-0 md:border-r md:last:border-r-0"
-              >
-                <p className="text-sm leading-7 text-[#111820]/74">{item}</p>
-                <span className="mt-3 inline-flex text-[11px] font-bold uppercase tracking-[0.16em] text-[#D98928]">
-                  More Details
-                </span>
-              </motion.article>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="px-4 py-16 sm:px-6 lg:py-20">
-        <div className="mx-auto max-w-5xl text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
-            className="font-space text-2xl font-bold uppercase text-[#111820] sm:text-4xl lg:text-5xl"
-          >
-            Our Services
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: 0.08 }}
-            className="mx-auto mt-10 max-w-4xl text-base leading-9 text-[#111820]/72"
-          >
-            {serviceOverviewParagraph}
-          </motion.p>
-        </div>
-      </section>
-
       <section id="services-core" className="relative overflow-hidden">
-        <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
+        <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10 max-w-2xl sm:mb-20">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#D98928]">What we provide</span>
-            <h2 className="font-space fluid-title mt-4 font-bold uppercase text-[#111820]">Core Service Portfolio</h2>
-            <p className="mt-5 text-sm leading-8 text-[#111820]/65 sm:text-base">Each service is delivered through a practical route-first method, keeping logistics clean and the client experience premium.</p>
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#D98928]">TRIPLE R HOLIDAYS</span>
+            <h2 className="font-space fluid-title mt-4 font-bold uppercase text-[#111820]">What We Offer</h2>
+            <p className="mt-5 text-sm leading-8 text-[#111820]/65 sm:text-base">From Sri Lanka tours to outbound holidays, hotel stays, transport and event travel, our team keeps every detail practical, personal and easy to follow.</p>
           </motion.div>
           {/* Mobile: simple card stack | Desktop: left/right alternating with vertical line */}
           <div className="relative">
@@ -215,7 +148,7 @@ export default function ServicesClient() {
                   {/* Mobile: image first, then content */}
                   <div className="lg:hidden">
                     <div className="relative overflow-hidden rounded-2xl border border-[#111820]/12 shadow-md">
-                      <img src={service.image} alt={service.title} className="w-full aspect-[16/10] object-cover" />
+                      <img src={service.image} alt={service.title} className="w-full aspect-[16/10] object-cover" loading="lazy" decoding="async" />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#F5F1E8]/50 via-transparent to-transparent" />
                       <span className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-xl border border-[#111820]/18 bg-[#F5F1E8]/80 text-[#D98928] backdrop-blur-sm">
                         <Icon className="h-4 w-4" />
@@ -246,14 +179,14 @@ export default function ServicesClient() {
                   <div className={`hidden lg:block mt-8 lg:mt-0 ${isEven ? 'lg:col-start-2' : 'lg:col-start-1 lg:row-start-1 lg:pr-16'}`}>
                     <div className="relative">
                       <motion.div whileHover={{ scale: 1.02 }} transition={{ type: "spring", stiffness: 200, damping: 20 }} className="relative overflow-hidden rounded-2xl border border-[#111820]/12 shadow-[0_24px_60px_rgba(17,24,32,0.15)]">
-                        <img src={service.image} alt={service.title} className="w-full aspect-[16/10] object-cover" />
+                        <img src={service.image} alt={service.title} className="w-full aspect-[16/10] object-cover" loading="lazy" decoding="async" />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#F5F1E8]/50 via-transparent to-transparent" />
                         <span className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-xl border border-[#111820]/18 bg-[#F5F1E8]/80 text-[#D98928] backdrop-blur-sm">
                           <Icon className="h-5 w-5" />
                         </span>
                       </motion.div>
                       <motion.div initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.3, duration: 0.5 }} className={`absolute -bottom-6 w-28 h-28 overflow-hidden rounded-xl border-4 border-[#F5F1E8] shadow-xl ${isEven ? '-left-4' : '-right-4'}`}>
-                        <img src={service.image} alt="" className="h-full w-full object-cover scale-[1.6]" style={{ objectPosition: index % 3 === 0 ? 'top right' : index % 3 === 1 ? 'center' : 'bottom left' }} />
+                        <img src={service.image} alt="" className="h-full w-full object-cover scale-[1.6]" style={{ objectPosition: index % 3 === 0 ? 'top right' : index % 3 === 1 ? 'center' : 'bottom left' }} loading="lazy" decoding="async" />
                       </motion.div>
                     </div>
                   </div>

@@ -11,6 +11,7 @@ const contact = {
   phoneHref: "tel:+94112934924",
   email: "hello@triplerholidays.com",
   address: "128/7 A.S.P Liyanage Mawatha, Royal Pearl Garden, Wattala",
+  facebookHref: "https://www.facebook.com/share/18yLyfMD4H/?mibextid=wwXIfr",
   instagramHref: "https://www.instagram.com/triplerholidays.lk?igsh=MXFpcWt4ZTliYjdwbw=="
 };
 
@@ -160,7 +161,23 @@ export default function SiteFooter() {
             <p className="font-bold uppercase tracking-widest text-[#D98928]">Our Office</p>
             <p className="mt-2 font-semibold">{contact.address}</p>
           </div>
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center gap-3">
+            <a
+              href={contact.facebookHref}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Facebook"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/25 text-white/85 transition hover:border-[#D98928] hover:text-[#D98928]"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="h-5 w-5"
+                aria-hidden="true"
+              >
+                <path d="M13.9 21.5v-8.7h2.9l.4-3.4h-3.3V7.3c0-1 .3-1.7 1.7-1.7h1.8v-3a24 24 0 0 0-2.7-.1c-2.7 0-4.5 1.6-4.5 4.6v2.6H7.2v3.4h3v8.7h3.7Z" />
+              </svg>
+            </a>
             <a
               href={contact.instagramHref}
               target="_blank"

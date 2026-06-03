@@ -121,7 +121,7 @@ export default function CooperateClient() {
 
       <section className="photo-text-hero hero-mobile relative w-full overflow-hidden text-white">
         <img
-          src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=2600&q=90"
+          src="/images/cooperate/handshake-linkedin-article.jpg"
           alt="Business partners shaking hands"
           className="absolute inset-0 h-full w-full object-cover object-center"
           data-hero-media

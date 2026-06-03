@@ -1,0 +1,12 @@
+galle-dutch-fort.jpg	https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Galle_Fort.jpg/1280px-Galle_Fort.jpg
+royal-botanical-gardens.jpg	https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Botanical_Garden_of_Peradeniya_03.jpg/1280px-Botanical_Garden_of_Peradeniya_03.jpg
+little-adams-peak.jpg	https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/SL_Ella_asv2020-01_img16_Little_Adams_Peak.jpg/1280px-SL_Ella_asv2020-01_img16_Little_Adams_Peak.jpg
+anuradhapura.jpg	https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/SL_Anuradhapura_asv2020-01_img11_Ruwanwelisaya_Stupa.jpg/1280px-SL_Anuradhapura_asv2020-01_img11_Ruwanwelisaya_Stupa.jpg
+gangaramaya-temple.jpg	https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Gangaramaya_Temple.JPG/1280px-Gangaramaya_Temple.JPG
+polonnaruwa.jpg	https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Polonnaruwa_01.jpg/1280px-Polonnaruwa_01.jpg
+yala-national-park.jpg	https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Sri_Lankan_Leopard_yala.jpg/1280px-Sri_Lankan_Leopard_yala.jpg
+pigeon-island.jpg	https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Pigeon_Island_National_Park%2C_Trincomalee.jpg/1280px-Pigeon_Island_National_Park%2C_Trincomalee.jpg
+horton-plains.jpg	https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Horton_Plains_National_Park_in_Sri_Lanka.jpg/1280px-Horton_Plains_National_Park_in_Sri_Lanka.jpg
+minneriya-national-park.jpg	https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Elephants_at_Minneriya_National_Park%2C_Sri_Lanka.jpg/1280px-Elephants_at_Minneriya_National_Park%2C_Sri_Lanka.jpg
+sinharaja-rainforest.jpg	https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/20160128_Sri_Lanka_4132_Sinharaja_Forest_Preserve_sRGB_%2825674474901%29.jpg/1280px-20160128_Sri_Lanka_4132_Sinharaja_Forest_Preserve_sRGB_%2825674474901%29.jpg
+sigiriya-rock-fortress.jpg	https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Sigiriya_%28141688197%29.jpeg/1280px-Sigiriya_%28141688197%29.jpeg

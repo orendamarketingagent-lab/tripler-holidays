@@ -7,7 +7,9 @@ import {
   Car,
   CheckCircle2,
   Compass,
+  CreditCard,
   Hotel,
+  Lock,
   Mail,
   MapPin,
   MessageCircle,
@@ -22,11 +24,9 @@ import CountUpStat from "@/components/CountUpStat";
 import AccordionFAQ from "@/components/AccordionFAQ";
 
 const heroImage =
-  "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=2600&q=90";
+  "/images/about/triple-r-office-consultation-clean-optimized.jpg";
 const storyImage =
-  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=84";
-const approachImage =
-  "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1400&q=84";
+  "/images/about/triple-r-office-consultation-clean-optimized.jpg";
 
 const contact = {
   phone: "(011) 293 4924",
@@ -183,8 +183,10 @@ export default function AboutClient() {
       >
         <img
           src={heroImage}
-          alt="Professional travel planning team"
+          alt="Triple R Holidays branded consultation folder in the company office"
           className="absolute inset-0 h-full w-full object-cover"
+          decoding="async"
+          fetchPriority="high"
           data-parallax="12"
           data-hero-media
         />
@@ -223,79 +225,67 @@ export default function AboutClient() {
       </section>
 
       <section className="px-4 py-8 sm:px-6 lg:py-12">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="grid gap-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="font-['Playfair_Display'] fluid-title font-bold text-[#111820]">
-                Who We Are
-              </h2>
-              <div className="mt-4 max-w-3xl space-y-4 text-sm leading-8 text-[#111820]/76 sm:text-base">
-                <p>
-                  Triple R Holidays is a team with over 20 years of expertise in the travel industry, specializing in Sri Lanka and key destinations across Asia. Built on strong destination knowledge and hands-on experience, we are committed to delivering reliable and well-crafted travel solutions.
-                </p>
-                <p>
-                  We operate across all major destinations in Sri Lanka, offering carefully curated tour packages, quality hotel selections, and reliable transport services.
-                </p>
-                <p>
-                  From planning to execution, we focus on making every journey smooth, simple, and memorable with end-to-end travel support you can trust.
-                </p>
-              </div>
-            </motion.div>
+        <div className="mx-auto max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+            className="mx-auto max-w-5xl rounded-[20px] border border-[#111820]/12 bg-white/86 px-6 py-8 text-center shadow-[0_24px_60px_rgba(17,24,32,0.12)] backdrop-blur-md sm:px-10 sm:py-10 lg:px-14"
+          >
+            <span className="inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.24em] text-[#D98928]">
+              <span className="h-px w-8 bg-[#D98928]" />
+              Company Profile
+              <span className="h-px w-8 bg-[#D98928]" />
+            </span>
+            <h2 className="font-['Playfair_Display'] fluid-title font-bold text-[#111820]">
+              Who We Are
+            </h2>
+            <div className="mx-auto mt-5 max-w-3xl space-y-4 text-center text-sm leading-8 text-[#111820]/78 sm:text-base">
+              <p>
+                Triple R Holidays is a team with over 20 years of expertise in the travel industry, specializing in Sri Lanka and key destinations across Asia. Built on strong destination knowledge and hands-on experience, we are committed to delivering reliable and well-crafted travel solutions.
+              </p>
+              <p>
+                We operate across all major destinations in Sri Lanka, offering carefully curated tour packages, quality hotel selections, and reliable transport services.
+              </p>
+              <p>
+                From planning to execution, we focus on making every journey smooth, simple, and memorable with end-to-end travel support you can trust.
+              </p>
+            </div>
+          </motion.div>
 
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.96, y: 20 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ type: "spring", stiffness: 90, damping: 15 }}
-              whileHover={{ y: -4, scale: 1.015 }}
-              className="overflow-hidden rounded-[20px] border border-[#111820]/16 bg-[#F5F1E8]/90"
-            >
-              <div className="expand-image relative h-[250px] sm:h-[300px]" data-expand-image>
-                <img
-                  src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&w=1400&q=84"
-                  alt="Happy travelers exploring together"
-                  className="h-full w-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#F5F1E8]/74 via-[#F5F1E8]/10 to-transparent" />
-                <div className="absolute bottom-5 left-5 right-5">
-               
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-          <motion.article 
+          <motion.article
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ type: "spring", stiffness: 80, damping: 15 }}
-            className="rounded-[20px] border border-[#111820]/16 bg-[#F5F1E8]/90 p-6 shadow-[0_20px_46px_rgba(17,24,32,0.14)] sm:p-8"
+            className="mt-10 rounded-[20px] border border-[#111820]/16 bg-[#F5F1E8]/90 p-6 shadow-[0_20px_46px_rgba(17,24,32,0.14)] sm:p-8"
           >
-            <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#D98928]">Why Clients Trust Us</span>
-            <div className="mt-5 space-y-3">
-              {trustPoints.map(point => (
-                <div
-                  key={point}
-                  className="flex items-start gap-3 border-b border-[#111820]/12 pb-3 last:border-b-0 last:pb-0"
-                >
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#D98928]" />
-                  <p className="text-sm leading-7 text-[#111820]/84">{point}</p>
+            <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+              <div>
+                <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#D98928]">Why Clients Trust Us</span>
+                <div className="mt-5 space-y-3">
+                  {trustPoints.map(point => (
+                    <div
+                      key={point}
+                      className="flex items-start gap-3 border-b border-[#111820]/12 pb-3 last:border-b-0 last:pb-0"
+                    >
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#D98928]" />
+                      <p className="text-sm leading-7 text-[#111820]/84">{point}</p>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
 
-            <div className="mt-7 grid gap-3 sm:grid-cols-2">
-              <CountUpStat value={72} suffix="+" label="Destinations" />
-              <CountUpStat value={10} suffix="+" label="Daily Tours" delay={0.05} />
-              <CountUpStat value={20} suffix="+" label="Events Per Month" delay={0.1} />
-              <CountUpStat value={10000} suffix="+" label="Happy Customers" delay={0.15} />
+              <div className="grid gap-3 sm:grid-cols-2">
+                <CountUpStat value={72} suffix="+" label="Destinations" />
+                <CountUpStat value={10} suffix="+" label="Daily Tours" delay={0.05} />
+                <CountUpStat value={20} suffix="+" label="Events Per Month" delay={0.1} />
+                <CountUpStat value={10000} suffix="+" label="Happy Customers" delay={0.15} />
+              </div>
             </div>
           </motion.article>
+
         </div>
       </section>
 
@@ -444,6 +434,85 @@ export default function AboutClient() {
               </div>
             </div>
           </motion.article>
+
+          <section className="relative mt-12 overflow-hidden">
+            <div className="relative mx-auto max-w-5xl">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ type: "spring", stiffness: 80, damping: 15 }}
+                className="mb-10 text-center"
+              >
+                <div className="flex items-center justify-center gap-3">
+                  <CreditCard className="h-6 w-6 text-[#D98928]" />
+                  <h3 className="text-lg font-bold uppercase tracking-wider text-[#111820]">
+                    Secure Payment Processing
+                  </h3>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={{
+                  hidden: {},
+                  visible: { transition: { staggerChildren: 0.1 } }
+                }}
+                className="grid items-center gap-8 md:grid-cols-2"
+              >
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, x: -24 },
+                    visible: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 90, damping: 15 } }
+                  }}
+                  className="space-y-4"
+                >
+                  <div className="scandi-soft-card flex items-center gap-4 border border-[#111820]/14 p-5">
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#2F5D50]/15 text-[#2F5D50]">
+                      <CheckCircle2 className="h-5 w-5" />
+                    </span>
+                    <p className="text-sm font-bold text-[#111820]">100% Secure Online Payments</p>
+                  </div>
+                  <div className="scandi-soft-card flex items-center gap-4 border border-[#111820]/14 p-5">
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#D98928]/15 text-[#D98928]">
+                      <Lock className="h-5 w-5" />
+                    </span>
+                    <p className="text-sm font-bold text-[#111820]">SSL Encrypted Transactions</p>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, x: 24 },
+                    visible: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 90, damping: 15 } }
+                  }}
+                  className="text-center"
+                >
+                  <p className="mb-5 text-base font-bold text-[#111820]">We Are Accepting</p>
+                  <div className="flex flex-wrap items-center justify-center gap-5">
+                    <div className="flex flex-col items-center gap-1.5 rounded-xl border border-[#D98928]/30 bg-[#D98928]/10 px-4 py-3">
+                      <span className="text-lg font-extrabold text-[#D98928]">40%</span>
+                      <span className="text-[9px] font-bold uppercase tracking-wider text-[#D98928]">Advance Payment</span>
+                    </div>
+
+                    <div className="flex h-14 w-20 items-center justify-center rounded-xl border border-[#111820]/10 bg-white p-2 shadow-sm">
+                      <img src="/images/payment/visa.svg" alt="Visa" className="h-7 w-auto object-contain" />
+                    </div>
+
+                    <div className="flex h-14 w-20 items-center justify-center rounded-xl border border-[#111820]/10 bg-white p-2 shadow-sm">
+                      <img src="/images/payment/mastercard.svg" alt="Mastercard" className="h-9 w-auto object-contain" />
+                    </div>
+
+                    <div className="flex h-14 w-20 items-center justify-center rounded-xl border border-[#111820]/10 bg-white p-2 shadow-sm">
+                      <img src="/images/payment/american-express.svg" alt="American Express" className="h-10 w-auto object-contain" />
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            </div>
+          </section>
         </div>
       </section>
 
@@ -537,7 +606,13 @@ export default function AboutClient() {
             </a>
           </div>
           <div className="expand-image overflow-hidden rounded-[18px] border border-[#111820]/12" data-expand-image>
-            <img src={storyImage} alt="Travel experience visual" className="h-[300px] w-full object-cover sm:h-[360px]" />
+            <img
+              src={storyImage}
+              alt="Triple R Holidays branded consultation folder in the company office"
+              className="h-[300px] w-full object-cover sm:h-[360px]"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         </motion.div>
       </section>

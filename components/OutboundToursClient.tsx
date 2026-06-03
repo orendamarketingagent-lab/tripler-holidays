@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
+  MapPin,
   ShieldCheck,
   Sparkles,
   Star,
@@ -21,6 +22,15 @@ const contact = {
   email: "hello@triplerholidays.com"
 };
 
+const buildMailtoHref = (subject: string, fields: Array<[string, string]>) => {
+  const body = fields
+    .filter(([, value]) => value.trim().length > 0)
+    .map(([label, value]) => `${label}: ${value}`)
+    .join("\n");
+
+  return `mailto:${contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+};
+
 const outboundPackageVoice: Record<
   string,
   {
@@ -33,33 +43,33 @@ const outboundPackageVoice: Record<
   }
 > = {
   "Kuala Lumpur": {
-    title: "Kuala Lumpur Skyline Escape",
+    title: "Malaysia - City Lights & Highland Nights",
     duration: "3 Nights 4 Days",
-    teaser: "A polished city break with skyline views, shopping boulevards and easy day flow.",
+    teaser: "Kuala Lumpur city lights, shopping streets and cooler highland moments arranged into a smooth short-haul escape.",
     location: "Malaysia",
     audience: "Ideal for couples, friends and first-time outbound travellers",
     quoteStart: "From flexible seasonal rates"
   },
   Singapore: {
-    title: "Singapore City Delights",
+    title: "Singapore - Skyline & City Lights",
     duration: "3 Nights 4 Days",
-    teaser: "Iconic attractions, efficient routes and family-friendly experiences in one seamless plan.",
+    teaser: "A sleek city holiday with skyline views, iconic attractions, family-friendly fun and clean transfer planning.",
     location: "Singapore",
     audience: "Ideal for families, professionals and compact premium trips",
     quoteStart: "Quote on request"
   },
   Maldives: {
-    title: "Maldives Blue Horizon Retreat",
+    title: "Maldives - Ocean Dreams & Island Escape",
     duration: "4 Nights 5 Days",
-    teaser: "Luxury island downtime with handpicked stays, lagoon views and resort comfort.",
+    teaser: "Blue lagoons, soft beaches and resort stays shaped for honeymoons, celebrations and quiet island rest.",
     location: "Maldives",
     audience: "Ideal for honeymooners and celebration travel",
     quoteStart: "From resort-led seasonal rates"
   },
   Thailand: {
-    title: "Bangkok & Phuket Signature Escape",
+    title: "Thailand - Night Pulse & Tropical Escape",
     duration: "4 Nights 5 Days",
-    teaser: "A vibrant Thailand combination with Bangkok city highlights and Phuket island experiences in one smooth route.",
+    teaser: "Bangkok nights, cultural stops and Phuket island time combined with practical guidance from start to return.",
     location: "Thailand",
     audience: "Ideal for groups, young couples and fun-first departures",
     quoteStart: "Quote on request"
@@ -86,28 +96,28 @@ const internationalPackages = destinations.map(destination => ({
 
 const outboundCategories = [
   {
-    title: "City Breaks",
-    note: "Kuala Lumpur and Singapore short-haul trips",
+    title: "City Lights",
+    note: "Kuala Lumpur and Singapore escapes with skyline views, shopping stops and smooth transfers",
     image:
-      "https://images.unsplash.com/photo-1474181487882-5abf3f0ba6c2?auto=format&fit=crop&w=1300&q=84"
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1600&q=88"
   },
   {
-    title: "Island Luxury",
-    note: "Maldives private and premium resort plans",
+    title: "Ocean Dreams",
+    note: "Maldives resort holidays for honeymoons, celebrations and peaceful island stays",
     image:
-      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1300&q=84"
+      "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1600&q=88"
   },
   {
-    title: "Family Discovery",
-    note: "Thailand and Singapore fun-first itineraries",
+    title: "Tropical Escapes",
+    note: "Thailand beach routes, island days and nightlife plans with guided coordination",
     image:
-      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1300&q=84"
+      "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1600&q=88"
   },
   {
-    title: "Weekend Escapes",
-    note: "Fast outbound trips from Sri Lanka",
+    title: "Highland Nights",
+    note: "Short Malaysia getaways with city energy, Genting cool weather and family attractions",
     image:
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2600&q=90"
+      "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1800&q=88"
   }
 ];
 
@@ -122,7 +132,7 @@ const maldivesTourCopy = {
   pretitle: "Island Journeys",
   title: "Maldives Tours",
   description:
-    "Escape to the Maldives, where crystal-clear waters meet powdery white sands and luxurious overwater villas await. Explore vibrant coral reefs, indulge in world-class spa treatments, and savor fresh seafood under starry skies. Whether it’s a romantic getaway or a peaceful retreat, the Maldives offers serenity, beauty, and unforgettable memories. Perfect for honeymooners, solo travelers, or families seeking paradise just a short flight away."
+    "Choose the Maldives for lagoon-blue water, quiet beaches and resort stays that feel effortless from arrival to return. We match the island, room style and meal plan to your budget, travel dates and occasion, whether it is a honeymoon, family break or peaceful reset."
 };
 
 const thailandTourCollection = [
@@ -130,7 +140,7 @@ const thailandTourCollection = [
     title: "Explore Bangkok",
     duration: "3 Nights 4 Days",
     image:
-      "https://travelco.lk/wp-content/uploads/2023/03/thailand-1.jpg",
+      "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1800&q=88",
     details: [
       "3 nights accommodation",
       "All transfers",
@@ -144,7 +154,7 @@ const thailandTourCollection = [
     title: "Bangkok & Phuket",
     duration: "4 Nights 5 Days",
     image:
-      "https://travelco.lk/wp-content/uploads/2023/01/Thailand.jpg",
+      "https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?auto=format&fit=crop&w=1800&q=88",
     details: [
       "2 nights in Bangkok",
       "2 nights in Phuket",
@@ -163,7 +173,7 @@ const singaporeTourCollection = [
     title: "Exciting Singapore",
     duration: "3 Nights 4 Days",
     image:
-      "https://travelco.lk/wp-content/uploads/2023/01/Singapore-2.jpg",
+      "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1800&q=88",
     details: [
       "3 nights accommodation",
       "All transfers",
@@ -176,7 +186,7 @@ const singaporeTourCollection = [
     title: "Amazing Singapore",
     duration: "4 Nights 5 Days",
     image:
-      "https://travelco.lk/wp-content/uploads/2022/06/Singapore.png",
+      "https://images.unsplash.com/photo-1496939376851-89342e90adcd?auto=format&fit=crop&w=2400&q=90",
     details: [
       "3 nights accommodation",
       "All transfers",
@@ -192,7 +202,7 @@ const singaporeTourCollection = [
     title: "Singapore & Malaysia",
     duration: "5 Nights 6 Days",
     image:
-      "https://travelco.lk/wp-content/uploads/2023/01/Singapore-1.jpg",
+      "https://images.unsplash.com/photo-1508964942454-1a56651d54ac?auto=format&fit=crop&w=1800&q=88",
     details: [
       "2 nights in Singapore",
       "3 nights in Malaysia",
@@ -210,7 +220,7 @@ const malaysiaTourCollection = [
     title: "KL + Cameron Highlands",
     duration: "4 Days 3 Nights",
     image:
-      "https://oscarholidays.com.my/wp-content/uploads/2024/05/1-52-900x600.jpg",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1800&q=88",
     details: [
       "Shared accommodation in selected hotels",
       "Daily breakfast",
@@ -224,7 +234,7 @@ const malaysiaTourCollection = [
     title: "KL + Sunway Lagoon + Genting",
     duration: "4 Days 3 Nights",
     image:
-      "https://oscarholidays.com.my/wp-content/uploads/2024/05/2-49-900x600.jpg",
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1800&q=88",
     details: [
       "Shared accommodation in selected hotels",
       "Daily breakfast",
@@ -238,7 +248,7 @@ const malaysiaTourCollection = [
     title: "Malaysia Grand Discovery",
     duration: "14 Days 13 Nights",
     image:
-      "https://oscarholidays.com.my/wp-content/uploads/2024/05/4-48-900x600.jpg",
+      "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1800&q=88",
     details: [
       "Shared accommodation in selected hotels",
       "Daily breakfast",
@@ -255,29 +265,34 @@ const maldivesTourCollection = [
     title: "Maldives Luxe Escape",
     subtitle: "For the Ultimate Indulgence",
     image:
-      "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?auto=format&fit=crop&w=1200&q=82"
+      "https://images.unsplash.com/photo-1540202404-a2f29016b523?auto=format&fit=crop&w=1600&q=88"
   },
   {
     title: "Maldives Explorer",
     subtitle: "For the Adventurous Soul",
     image:
-      "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=82"
+      "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1600&q=88"
   },
   {
     title: "Maldives Serenity Retreat",
     subtitle: "For Wellness & Rejuvenation",
     image:
-      "https://images.unsplash.com/photo-1578922746465-3a80a228f223?auto=format&fit=crop&w=1200&q=82"
+      "https://images.unsplash.com/photo-1578922746465-3a80a228f223?auto=format&fit=crop&w=1600&q=88"
   },
   {
     title: "Maldives Family Fun",
     subtitle: "For All Ages",
     image:
-      "https://images.unsplash.com/photo-1540202404-a2f29016b523?auto=format&fit=crop&w=1200&q=82"
+      "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1600&q=88"
   }
 ];
 
-const outboundGallery = internationalPackages.slice(0, 4).map(pkg => pkg.image);
+const outboundGallery = [
+  "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=84",
+  "https://images.unsplash.com/photo-1496939376851-89342e90adcd?auto=format&fit=crop&w=1200&q=84",
+  "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=84",
+  "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1200&q=84"
+];
 
 const outboundReviews = [
   {
@@ -333,63 +348,7 @@ export default function OutboundToursClient() {
   return (
     <main className="holiday-page-bg light-mode-travel min-h-screen text-[#111820] font-manrope">
       <SiteHeader variant="transparent" ctaLabel="Enquire Now" ctaHref="/outbound-tours#outbound-quote" />
-      
-      <section
-        className="photo-text-hero hero-mobile relative w-full overflow-hidden text-white"
-        data-hero-pin
-        data-hero-pin-distance="108"
-      >
-        <img
-          src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=2600&q=90"
-          alt="Outbound travel destinations"
-          className="absolute inset-0 h-full w-full object-cover"
-          data-parallax="12"
-          data-hero-media
-        />
-        <div className="absolute inset-0 bg-[#082B49]/55" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#082B49]/34 via-[#082B49]/42 to-[#082B49]/64" />
-        <div className="grain-overlay" />
-
-        <div className="absolute inset-0 z-10 mx-auto flex w-full max-w-7xl items-end justify-center px-6 pb-14 sm:px-8 sm:pb-16 lg:pb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65 }}
-            className="max-w-3xl text-center"
-            data-hero-content
-          >
-            <span className="inline-flex items-center gap-2 rounded-[6px] border border-white/20 bg-white/12 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-[#D98928]">
-              <Sparkles className="h-3.5 w-3.5" />
-              Explore Beyond
-            </span>
-            <h1 className="font-space mt-5 text-3xl font-extrabold uppercase leading-tight text-white drop-shadow-[0_4px_12px_rgba(8,43,73,0.5)] sm:text-4xl lg:text-5xl">
-              Outbound Tours & Packages
-            </h1>
-            <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-[#F5F1E8]/90 sm:text-base sm:leading-8">
-              Explore custom outbound journeys from Sri Lanka to Malaysia, Singapore, Maldives, and Thailand, planned for your comfort.
-            </p>
-            <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-              <a
-                href="#outbound-quote"
-                className="inline-flex items-center gap-3 rounded-full bg-[#D98928] py-2 pl-6 pr-2 text-[11px] font-bold uppercase tracking-wider text-[#111820] shadow-lg transition-all duration-300 hover:bg-[#F2B24D] group"
-              >
-                Get a Quote
-                <span className="grid h-8 w-8 place-items-center rounded-full bg-white text-[#111820] transition-transform duration-300 group-hover:rotate-45">
-                  <ArrowRight className="h-4 w-4" />
-                </span>
-              </a>
-              <a
-                href={contact.whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/25 bg-white/10 px-5 text-[11px] font-bold uppercase tracking-wider text-white transition hover:bg-white hover:text-[#082B49]"
-              >
-                WhatsApp Quote
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <HolidayToursHeroShowcase />
 
       {/* Travel Styles */}
       <section className="bg-transparent px-4 py-12 sm:px-6 lg:py-24">
@@ -438,6 +397,8 @@ export default function OutboundToursClient() {
                     src={item.image}
                     alt={item.title}
                     className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#111820]/92 via-[#111820]/20 to-transparent" />
                 </div>
@@ -462,14 +423,14 @@ export default function OutboundToursClient() {
             className="text-center max-w-4xl mx-auto"
           >
             <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D98928]">
-              <span className="h-px w-9 bg-[#D98928]" />
-              Malaysia Tours
+              <MapPin className="h-3.5 w-3.5" />
+              Malaysia
             </span>
             <h2 className="font-space fluid-title mt-4 font-bold uppercase text-[#111820]">
               Malaysia Packages
             </h2>
             <p className="mt-5 text-sm leading-8 text-[#111820]/76 sm:text-base">
-              Curated Malaysia journeys that blend city energy, mountain escapes and family-friendly attractions into one smooth travel flow.
+              Malaysia plans shaped around Kuala Lumpur city lights, Genting highland air, shopping time and family-friendly attractions, with transfers arranged clearly from arrival to return.
             </p>
           </motion.div>
 
@@ -500,6 +461,8 @@ export default function OutboundToursClient() {
                     src={item.image}
                     alt={item.title}
                     className="h-full w-full object-cover transition duration-700 hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/20 to-transparent" />
                   <span className="absolute left-4 top-4 rounded-full bg-[#D98928] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[#111820]">
@@ -552,7 +515,7 @@ export default function OutboundToursClient() {
             transition={{ delay: 0.1 }}
             className="mx-auto mt-8 max-w-3xl text-center text-sm leading-8 text-[#111820]/78 sm:text-base"
           >
-            Need something more tailored? We can customize your Malaysia holiday based on your preferences and travel style.
+            Prefer a slower pace, extra shopping time or a different hotel style? We can tailor your Malaysia holiday around your dates, budget and travel rhythm.
           </motion.p>
         </div>
       </section>
@@ -568,14 +531,14 @@ export default function OutboundToursClient() {
             className="text-center max-w-4xl mx-auto"
           >
             <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D98928]">
-              <span className="h-px w-9 bg-[#D98928]" />
-              Thailand Tours
+              <MapPin className="h-3.5 w-3.5" />
+              Thailand
             </span>
             <h2 className="font-space fluid-title mt-4 font-bold uppercase text-[#111820]">
               Bangkok + Phuket Packages
             </h2>
             <p className="mt-5 text-sm leading-8 text-[#111820]/76 sm:text-base">
-              Flexible Thailand outbound plans built around popular Bangkok and Phuket routes, with curated inclusions and easy support.
+              Thailand holidays that balance Bangkok's night energy with Phuket's tropical coastline, curated activities and dependable support throughout the trip.
             </p>
           </motion.div>
 
@@ -606,6 +569,8 @@ export default function OutboundToursClient() {
                     src={item.image}
                     alt={item.title}
                     className="h-full w-full object-cover transition duration-700 hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/20 to-transparent" />
                   <span className="absolute left-4 top-4 rounded-full bg-[#D98928] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[#111820]">
@@ -658,7 +623,7 @@ export default function OutboundToursClient() {
             transition={{ delay: 0.1 }}
             className="mx-auto mt-8 max-w-3xl text-center text-sm leading-8 text-[#111820]/78 sm:text-base"
           >
-            Or we can customize your holiday based on your preferences, travel pace and stay style.
+            We can also adjust the route for nightlife, beaches, shopping, family attractions or a quieter resort pace.
           </motion.p>
         </div>
       </section>
@@ -674,14 +639,14 @@ export default function OutboundToursClient() {
             className="text-center max-w-4xl mx-auto"
           >
             <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D98928]">
-              <span className="h-px w-9 bg-[#D98928]" />
-              Singapore Tours
+              <MapPin className="h-3.5 w-3.5" />
+              Singapore
             </span>
             <h2 className="font-space fluid-title mt-4 font-bold uppercase text-[#111820]">
               Singapore Package Collection
             </h2>
             <p className="mt-5 text-sm leading-8 text-[#111820]/76 sm:text-base">
-              Smart Singapore itineraries designed for easy sightseeing, family-friendly attractions and smooth transfers from start to return.
+              Singapore packages built for clean city movement, skyline highlights, Sentosa fun and family-friendly attractions without rushed travel days.
             </p>
           </motion.div>
 
@@ -712,6 +677,8 @@ export default function OutboundToursClient() {
                     src={item.image}
                     alt={item.title}
                     className="h-full w-full object-cover transition duration-700 hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/20 to-transparent" />
                   <span className="absolute left-4 top-4 rounded-full bg-[#D98928] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[#111820]">
@@ -764,7 +731,7 @@ export default function OutboundToursClient() {
             transition={{ delay: 0.1 }}
             className="mx-auto mt-8 max-w-3xl text-center text-sm leading-8 text-[#111820]/78 sm:text-base"
           >
-            Or we can customize your Singapore holiday based on your preferences, travel pace and activity interests.
+            Your Singapore plan can be tuned for theme parks, shopping, premium hotels, business travel or a compact family break.
           </motion.p>
         </div>
       </section>
@@ -780,8 +747,8 @@ export default function OutboundToursClient() {
             className="text-center max-w-4xl mx-auto"
           >
             <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D98928]">
-              <span className="h-px w-9 bg-[#D98928]" />
-              {maldivesTourCopy.pretitle}
+              <MapPin className="h-3.5 w-3.5" />
+              Maldives
             </span>
             <h2 className="font-space fluid-title mt-4 font-bold uppercase text-[#111820]">
               {maldivesTourCopy.title}
@@ -818,6 +785,8 @@ export default function OutboundToursClient() {
                     src={item.image}
                     alt={item.title}
                     className="h-full w-full object-cover transition duration-700 hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
                 </div>
@@ -838,15 +807,6 @@ export default function OutboundToursClient() {
                     View Details
                     <ArrowRight className="h-3.5 w-3.5" />
                   </button>
-                  <a
-                    href={contact.whatsappHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-4 hidden min-h-10 items-center justify-center gap-2 rounded-full bg-[#D98928] px-5 text-[11px] font-bold uppercase tracking-[0.16em] text-white transition hover:bg-[#F2B24D] md:inline-flex"
-                  >
-                    Explore
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </a>
                 </div>
               </motion.article>
             ))}
@@ -917,7 +877,13 @@ export default function OutboundToursClient() {
               <div className="mt-5 grid grid-cols-2 gap-3">
                 {outboundGallery.map(image => (
                   <div key={image} className="expand-image overflow-hidden rounded-[12px] border border-white/14" data-expand-image>
-                    <img src={image} alt="Outbound travel scene" className="h-32 w-full object-cover md:h-36" />
+                    <img
+                      src={image}
+                      alt="Outbound travel scene"
+                      className="h-32 w-full object-cover md:h-36"
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </div>
                 ))}
               </div>
@@ -1055,7 +1021,18 @@ export default function OutboundToursClient() {
                 onSubmit={(e) => {
                   e.preventDefault();
                   setIsInquirySubmitting(true);
-                  setTimeout(() => {
+                  window.location.href = buildMailtoHref("Outbound Holiday Inquiry - Triple R Holidays", [
+                    ["Full Name", inquiryForm.fullName],
+                    ["Email", inquiryForm.email],
+                    ["Mobile Number", inquiryForm.mobileNumber],
+                    ["Travel Type", inquiryForm.travelType],
+                    ["Travel Category", inquiryForm.travelCategory],
+                    ["Number of Days", inquiryForm.numberOfDays],
+                    ["Preferred Activities", inquiryForm.preferredActivities],
+                    ["Additional Notes", inquiryForm.additionalNotes]
+                  ]);
+
+                  window.setTimeout(() => {
                     setIsInquirySubmitting(false);
                     setInquirySuccess(true);
                     setInquiryForm({
@@ -1068,7 +1045,7 @@ export default function OutboundToursClient() {
                       preferredActivities: "",
                       additionalNotes: ""
                     });
-                  }, 1200);
+                  }, 300);
                 }}
                 className="space-y-6"
               >
@@ -1275,6 +1252,8 @@ export default function OutboundToursClient() {
                   src={mobilePackageModal.image}
                   alt={mobilePackageModal.title}
                   className="h-full w-full object-cover"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/20 to-transparent" />
                 <button

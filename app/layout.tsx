@@ -7,7 +7,24 @@ import WhatsAppFab from "@/components/WhatsAppFab";
 export const metadata: Metadata = {
   title: "Triple R Holidays | Sri Lanka Tours & Holiday Packages",
   description:
-    "Triple R Holidays creates seamless Sri Lanka tours, outbound holiday packages, hotel bookings, events, destination weddings and transportation."
+    "Triple R Holidays creates seamless Sri Lanka tours, outbound holiday packages, hotel bookings, events, destination weddings and transportation.",
+  icons: {
+    icon: [
+      {
+        url: "/favicon.png",
+        sizes: "512x512",
+        type: "image/png"
+      }
+    ],
+    apple: [
+      {
+        url: "/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png"
+      }
+    ],
+    shortcut: "/favicon.png"
+  }
 };
 
 export const viewport: Viewport = {

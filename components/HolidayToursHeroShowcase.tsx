@@ -29,10 +29,10 @@ const slides: ShowcaseSlide[] = [
     country: "MALDIVES",
     regionAbove: "THAILAND",
     regionBelow: "MALAYSIA",
-    description: "An overwater island escape featuring crystal clear coral reefs, white sand beaches, and luxury resort stays under one flow.",
+    description: "A calm ocean escape with turquoise lagoons, resort comfort, coral-life moments, and smooth island transfers.",
     cardTitle: "Fihalhohi, Maldives",
-    cardSubtitle: "Maldives Blue Horizon",
-    image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1200&q=84",
+    cardSubtitle: "Ocean Dreams & Island Escape",
+    image: "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?auto=format&fit=crop&w=1200&q=84",
     exploreHref: "#maldives-packages"
   },
   {
@@ -40,10 +40,10 @@ const slides: ShowcaseSlide[] = [
     country: "MALAYSIA",
     regionAbove: "MALDIVES",
     regionBelow: "SINGAPORE",
-    description: "Outbound city escapes featuring Kuala Lumpur skyline tours, dining, shopping, and comfortable pace transfers.",
+    description: "A balanced Malaysia route with Kuala Lumpur city energy, Genting cool weather, family attractions, and easy transfer planning.",
     cardTitle: "Kuala Lumpur, Malaysia",
-    cardSubtitle: "Kuala Lumpur City Skyline",
-    image: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=84",
+    cardSubtitle: "City Lights & Highland Nights",
+    image: "https://images.unsplash.com/photo-1508964942454-1a56651d54ac?auto=format&fit=crop&w=1200&q=84",
     exploreHref: "#malaysia-packages"
   },
   {
@@ -51,10 +51,10 @@ const slides: ShowcaseSlide[] = [
     country: "SINGAPORE",
     regionAbove: "MALAYSIA",
     regionBelow: "THAILAND",
-    description: "Outbound family-friendly breaks with shopping hubs, botanical gardens, and scenic city skyline transfers.",
+    description: "A polished Singapore city break with iconic skyline stops, Gardens by the Bay, Sentosa fun, and family-friendly pacing.",
     cardTitle: "Sentosa, Singapore",
-    cardSubtitle: "Singapore Gardens Escape",
-    image: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=84",
+    cardSubtitle: "Skyline & City Lights",
+    image: "https://images.unsplash.com/photo-1496939376851-89342e90adcd?auto=format&fit=crop&w=1200&q=84",
     exploreHref: "#singapore-packages"
   },
   {
@@ -62,13 +62,16 @@ const slides: ShowcaseSlide[] = [
     country: "THAILAND",
     regionAbove: "SINGAPORE",
     regionBelow: "MALDIVES",
-    description: "Outbound beach and night escapes covering Bangkok and island clusters with full travel support.",
+    description: "A lively Thailand plan combining Bangkok nightlife, cultural stops, Phuket beaches, and tropical island experiences.",
     cardTitle: "Bangkok, Thailand",
-    cardSubtitle: "Thailand Night Pulse",
-    image: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=84",
+    cardSubtitle: "Night Pulse & Tropical Escape",
+    image: "https://images.unsplash.com/photo-1534008897995-27a23e859048?auto=format&fit=crop&w=1200&q=84",
     exploreHref: "#thailand-packages"
   }
 ];
+
+const scrollDistanceMultiplier = 4.2;
+const mobileScrollDistanceMultiplier = 5.6;
 
 export default function HolidayToursHeroShowcase() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -82,9 +85,13 @@ export default function HolidayToursHeroShowcase() {
     if (typeof window === "undefined" || !containerRef.current || !trackRef.current) return;
 
     let pinTrigger: ScrollTrigger | null = null;
+    let timeline: gsap.core.Timeline | null = null;
+    let resizeFrame = 0;
+    let lastMeasuredWidth = 0;
 
     const createTrigger = () => {
       if (pinTrigger) pinTrigger.kill();
+      if (timeline) timeline.kill();
 
       const bgBanners = gsap.utils.toArray<HTMLElement>(".bg-banner-image", containerRef.current);
       const textBlocks = gsap.utils.toArray<HTMLElement>(".text-details-block", containerRef.current);
@@ -106,6 +113,9 @@ export default function HolidayToursHeroShowcase() {
       const positions = slides.map((_, i) => {
         return alignOffset - i * (cardWidth + gap);
       });
+      const viewportHeight = document.documentElement.clientHeight || window.innerHeight;
+      const scrollDistance =
+        viewportHeight * (isMobile ? mobileScrollDistanceMultiplier : scrollDistanceMultiplier);
 
       // Set initial state
       gsap.set(bgBanners, { opacity: 0 });
@@ -120,25 +130,27 @@ export default function HolidayToursHeroShowcase() {
       gsap.set(trackEl, { x: positions[0] });
 
       const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
+      timeline = tl;
       const snapStep = 1 / (total - 1);
 
       pinTrigger = ScrollTrigger.create({
         trigger: containerRef.current,
         start: "top top",
-        end: () => `+=${window.innerHeight * 3.6}`,
+        end: `+=${scrollDistance}`,
         pin: true,
-        scrub: 1.1,
+        scrub: isMobile ? 0.35 : 0.65,
         animation: tl,
         anticipatePin: 1,
-        invalidateOnRefresh: true,
-        fastScrollEnd: true,
-        snap: {
-          snapTo: snapStep,
-          duration: { min: 0.2, max: 0.55 },
-          delay: 0.05,
-          directional: true,
-          ease: "power2.out"
-        },
+        invalidateOnRefresh: false,
+        snap: isMobile
+          ? undefined
+          : {
+              snapTo: snapStep,
+              duration: { min: 0.22, max: 0.42 },
+              delay: 0.05,
+              directional: false,
+              ease: "power2.out"
+            },
         onUpdate: (self) => {
           const currentIndex = Math.min(total - 1, Math.max(0, Math.round(self.progress * (total - 1))));
           setActiveIndex(previous => (previous === currentIndex ? previous : currentIndex));
@@ -173,17 +185,30 @@ export default function HolidayToursHeroShowcase() {
       }
     };
 
-    // Use ResizeObserver to monitor actual rendering layout changes dynamically
+    createTrigger();
+
+    // Rebuild only for meaningful width changes. Mobile browser chrome can change height while
+    // scrolling, and rebuilding on those changes is what makes the pinned showcase appear to skip.
     const resizeObserver = new ResizeObserver(() => {
-      createTrigger();
+      if (!trackRef.current?.parentElement) return;
+
+      const nextWidth = trackRef.current.parentElement.offsetWidth;
+      if (Math.abs(nextWidth - lastMeasuredWidth) < 8) return;
+      lastMeasuredWidth = nextWidth;
+
+      cancelAnimationFrame(resizeFrame);
+      resizeFrame = requestAnimationFrame(createTrigger);
     });
 
     if (trackRef.current && trackRef.current.parentElement) {
+      lastMeasuredWidth = trackRef.current.parentElement.offsetWidth;
       resizeObserver.observe(trackRef.current.parentElement);
     }
 
     return () => {
+      cancelAnimationFrame(resizeFrame);
       if (pinTrigger) pinTrigger.kill();
+      if (timeline) timeline.kill();
       pinTriggerRef.current = null;
       resizeObserver.disconnect();
     };
@@ -193,15 +218,15 @@ export default function HolidayToursHeroShowcase() {
     if (typeof window === "undefined" || !containerRef.current) return;
     const pinTrigger = pinTriggerRef.current;
     const startScroll = pinTrigger?.start ?? containerRef.current.offsetTop;
-    const endScroll = pinTrigger?.end ?? startScroll + window.innerHeight * 3.6;
+    const endScroll = pinTrigger?.end ?? startScroll + window.innerHeight * scrollDistanceMultiplier;
     const scrollHeight = Math.max(1, endScroll - startScroll);
     const targetScroll = startScroll + (index / (total - 1)) * scrollHeight;
 
     const lenisScroll = (window as any).__lenis;
     if (lenisScroll && typeof lenisScroll.scrollTo === "function") {
       lenisScroll.scrollTo(targetScroll, {
-        duration: 0.9,
-        lerp: 0.1
+        duration: 0.55,
+        lerp: 0.14
       });
       return;
     }
@@ -210,18 +235,18 @@ export default function HolidayToursHeroShowcase() {
   };
 
   const nextSlide = () => {
-    const nextIdx = (activeIndex + 1) % total;
+    const nextIdx = Math.min(activeIndex + 1, total - 1);
     scrollToSlide(nextIdx);
   };
 
   const prevSlide = () => {
-    const prevIdx = (activeIndex - 1 + total) % total;
+    const prevIdx = Math.max(activeIndex - 1, 0);
     scrollToSlide(prevIdx);
   };
 
   return (
     <div ref={containerRef} className="relative w-full bg-[#082B49]">
-      <div ref={stickyRef} className="hero-screen header-safe-top relative w-full overflow-hidden font-jakarta flex items-center">
+      <div ref={stickyRef} className="hero-screen header-safe-top relative flex w-full items-start overflow-hidden font-jakarta lg:items-center">
         
         {/* Background Slide Images Stack */}
         <div className="absolute inset-0 z-0">
@@ -271,43 +296,43 @@ export default function HolidayToursHeroShowcase() {
         </div>
 
         {/* Inner Content Grid */}
-        <div className="relative z-20 mx-auto w-full max-w-7xl px-8 md:pl-28 md:pr-12 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
+        <div className="relative z-20 mx-auto grid w-full max-w-7xl grid-cols-1 items-start gap-7 px-5 pb-[250px] pt-9 min-[380px]:pb-[280px] min-[380px]:pt-12 sm:px-8 sm:pb-[330px] sm:pt-14 md:pl-28 md:pr-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-12 lg:p-0 lg:px-8 lg:pl-28 lg:pr-12">
           
           {/* Left Columns Destination Text Details Stack */}
-          <div className="relative min-h-[360px] w-full flex items-center max-w-[460px]">
+          <div className="relative flex min-h-[270px] w-full max-w-[330px] items-start min-[380px]:min-h-[300px] min-[380px]:max-w-[360px] sm:min-h-[330px] sm:max-w-[430px] lg:min-h-[360px] lg:max-w-[460px] lg:items-center">
             {slides.map((slide) => (
               <div
                 key={slide.id}
-                className="text-details-block absolute inset-x-0 flex flex-col justify-center text-white"
+                className="text-details-block absolute inset-x-0 flex flex-col justify-start text-white lg:justify-center"
               >
                 {/* Region Above Indicator */}
-                <span className="block text-xs font-extrabold uppercase tracking-[0.25em] text-white/40">
+                <span className="block text-[10px] font-extrabold uppercase tracking-[0.26em] text-white/40 min-[380px]:text-[11px] lg:text-xs">
                   {slide.regionAbove}
                 </span>
 
                 {/* Active Destination Headline */}
-                <h1 className="font-space font-black text-4xl sm:text-6xl lg:text-7xl uppercase tracking-tighter mt-1 lg:mt-2 leading-none">
+                <h1 className="font-space mt-1 text-[2.65rem] font-black uppercase leading-[0.88] tracking-normal min-[380px]:text-5xl sm:text-6xl lg:mt-2 lg:text-7xl">
                   {slide.country}
                 </h1>
 
                 {/* Description Text */}
-                <p className="mt-3 lg:mt-4 max-w-md text-xs sm:text-sm lg:text-base leading-relaxed text-[#F5F1E8] font-medium opacity-80">
+                <p className="mt-3 max-w-[300px] text-[13px] font-medium leading-6 text-[#F5F1E8] opacity-80 min-[380px]:max-w-[340px] min-[380px]:text-sm min-[380px]:leading-7 sm:max-w-md lg:mt-4 lg:text-base lg:leading-relaxed">
                   {slide.description}
                 </p>
 
                 {/* Explore Teal CTA Button */}
-                <div className="mt-5 lg:mt-8">
+                <div className="relative z-30 mt-4 lg:mt-8">
                   <Link
                     href={slide.exploreHref}
-                    className="inline-flex items-center gap-3 bg-[#D98928] hover:bg-[#D98928] text-white px-5 py-2.5 lg:px-7 lg:py-3.5 rounded-[8px] font-bold uppercase tracking-wide text-xs transition duration-300 shadow-xl group pointer-events-auto"
+                    className="group pointer-events-auto inline-flex min-h-10 items-center gap-2 rounded-[8px] bg-[#D98928] px-4 py-2 text-[11px] font-bold uppercase tracking-wide text-white shadow-xl transition duration-300 hover:bg-[#D98928] min-[380px]:min-h-11 min-[380px]:px-5 min-[380px]:text-xs lg:px-7 lg:py-3.5"
                   >
                     Explore
-                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1 lg:h-4 lg:w-4" />
                   </Link>
                 </div>
 
                 {/* Region Below Indicator */}
-                <span className="block text-xs font-extrabold uppercase tracking-[0.25em] text-white/40 mt-8">
+                <span className="mt-8 hidden text-xs font-extrabold uppercase tracking-[0.25em] text-white/40 lg:block">
                   {slide.regionBelow}
                 </span>
               </div>
@@ -315,23 +340,23 @@ export default function HolidayToursHeroShowcase() {
           </div>
 
           {/* Spacer to reserve vertical space for mobile layout stacking and desktop column spacing */}
-          <div className="h-[250px] lg:h-[450px]" />
+          <div className="h-[130px] min-[380px]:h-[160px] sm:h-[210px] lg:h-[450px]" />
 
         </div>
 
         {/* Right Horizontal Cards Viewport (stretching from center to screen edge) */}
         <div 
-          className="absolute left-0 lg:left-[50%] right-0 bottom-24 lg:bottom-auto lg:top-1/2 lg:-translate-y-1/2 h-[340px] lg:h-[450px] overflow-hidden block z-20 pointer-events-none destinations-viewport-mask"
+          className="destinations-viewport-mask absolute bottom-[9.75rem] left-0 right-0 z-20 block h-[205px] overflow-hidden pointer-events-none min-[380px]:bottom-[10.25rem] min-[380px]:h-[245px] sm:bottom-32 sm:h-[300px] lg:bottom-auto lg:left-[50%] lg:top-1/2 lg:h-[450px] lg:-translate-y-1/2"
         >
           <div ref={trackRef} className="flex gap-4 lg:gap-6 items-center pointer-events-auto h-full">
             {slides.map((slide, i) => (
               <div key={slide.id} className="destination-card-item flex flex-col gap-2 lg:gap-3 shrink-0">
-                <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-wider text-white/50 pl-2">
+                <span className="hidden pl-2 text-[11px] font-bold uppercase tracking-wider text-white/50 lg:block">
                   {slide.cardTitle}
                 </span>
                 <motion.div
                   onClick={() => scrollToSlide(i)}
-                  className="relative w-[220px] h-[290px] lg:w-[280px] lg:h-[370px] rounded-[20px] lg:rounded-[24px] overflow-hidden border border-white/10 bg-[#082B49]/80 text-left pointer-events-auto shrink-0 transition cursor-pointer"
+                  className="relative h-[180px] w-[140px] shrink-0 cursor-pointer overflow-hidden rounded-[16px] border border-white/10 bg-[#082B49]/80 text-left transition pointer-events-auto min-[380px]:h-[210px] min-[380px]:w-[164px] sm:h-[260px] sm:w-[200px] lg:h-[370px] lg:w-[280px] lg:rounded-[24px]"
                 >
                   <img
                     src={slide.image}
@@ -344,15 +369,15 @@ export default function HolidayToursHeroShowcase() {
                     onClick={(e) => {
                       e.stopPropagation();
                     }}
-                    className="absolute top-3 right-3 lg:top-4 lg:right-4 h-8 w-8 lg:h-9 lg:w-9 rounded-full bg-white/10 border border-white/20 backdrop-blur-md grid place-items-center text-white hover:bg-white hover:text-black transition"
+                    className="absolute right-3 top-3 grid h-7 w-7 place-items-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-md transition hover:bg-white hover:text-black lg:right-4 lg:top-4 lg:h-9 lg:w-9"
                   >
-                    <Bookmark className="h-4 w-4" />
+                    <Bookmark className="h-3.5 w-3.5 lg:h-4 lg:w-4" />
                   </button>
-                  <div className="absolute bottom-4 left-4 right-4 lg:bottom-5 lg:left-5 lg:right-5 text-white">
-                    <p className="text-[10px] lg:text-xs font-bold uppercase tracking-wider text-[#D98928]">
+                  <div className="absolute bottom-3 left-3 right-3 text-white lg:bottom-5 lg:left-5 lg:right-5">
+                    <p className="text-[9px] font-bold uppercase tracking-wider text-[#D98928] min-[380px]:text-[10px] lg:text-xs">
                       {slide.cardSubtitle}
                     </p>
-                    <p className="font-space text-base lg:text-lg font-extrabold uppercase mt-0.5 lg:mt-1 leading-tight">
+                    <p className="font-space mt-0.5 text-sm font-extrabold uppercase leading-tight min-[380px]:text-base lg:mt-1 lg:text-lg">
                       {slide.country}
                     </p>
                   </div>
@@ -363,26 +388,28 @@ export default function HolidayToursHeroShowcase() {
         </div>
 
         {/* Bottom Bar Controls & Progress */}
-        <div className="absolute bottom-10 left-8 right-8 md:left-28 md:right-12 z-20 flex items-center justify-between pointer-events-none">
-          <div className="flex items-center gap-3 pointer-events-auto">
+        <div className="absolute bottom-5 left-5 right-5 z-20 flex items-center gap-3 pointer-events-none min-[380px]:bottom-8 sm:bottom-10 sm:left-8 sm:right-8 md:left-28 md:right-12">
+          <div className="flex shrink-0 items-center gap-2 pointer-events-auto sm:gap-3">
             <button
               onClick={prevSlide}
-              className="grid h-10 w-10 place-items-center rounded-full border border-white/20 bg-white/5 text-white hover:bg-white hover:text-black transition"
+              disabled={activeIndex === 0}
+              className="grid h-8 w-8 place-items-center rounded-full border border-white/20 bg-white/5 text-white transition hover:bg-white hover:text-black disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:bg-white/5 disabled:hover:text-white min-[380px]:h-9 min-[380px]:w-9 sm:h-10 sm:w-10"
               aria-label="Previous slide"
             >
-              <ChevronLeft className="h-5 w-5" />
+              <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
             </button>
             <button
               onClick={nextSlide}
-              className="grid h-10 w-10 place-items-center rounded-full border border-white/20 bg-white/5 text-white hover:bg-white hover:text-black transition"
+              disabled={activeIndex === total - 1}
+              className="grid h-8 w-8 place-items-center rounded-full border border-white/20 bg-white/5 text-white transition hover:bg-white hover:text-black disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:bg-white/5 disabled:hover:text-white min-[380px]:h-9 min-[380px]:w-9 sm:h-10 sm:w-10"
               aria-label="Next slide"
             >
-              <ChevronRight className="h-5 w-5" />
+              <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
             </button>
           </div>
 
-          <div className="flex items-center gap-4 w-72">
-            <span className="text-xs font-extrabold text-white/50 tracking-wider">0{activeIndex + 1}</span>
+          <div className="flex min-w-0 flex-1 items-center gap-2 sm:gap-4 md:max-w-72 md:flex-none md:basis-72">
+            <span className="min-w-5 text-center text-[11px] font-extrabold leading-none tracking-wider text-white/60 [font-variant-numeric:tabular-nums] sm:text-xs">0{activeIndex + 1}</span>
             <div className="relative flex-1 h-0.5 bg-white/15 rounded-full overflow-hidden">
               <motion.div
                 className="absolute inset-y-0 left-0 bg-[#D98928] rounded-full"
@@ -390,7 +417,7 @@ export default function HolidayToursHeroShowcase() {
                 transition={{ duration: 0.3 }}
               />
             </div>
-            <span className="text-xs font-extrabold text-white/50 tracking-wider">0{total}</span>
+            <span className="min-w-5 text-center text-[11px] font-extrabold leading-none tracking-wider text-white/60 [font-variant-numeric:tabular-nums] sm:text-xs">0{total}</span>
           </div>
         </div>
 
